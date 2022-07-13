@@ -12,15 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:text="To Map"
-        android:layout_marginTop="25dp"/>
+        android:layout_margin="25dp"
+        android:text="To Map" />
 
     <ImageView
         android:id="@+id/ivImageAnimation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_baseline_animation"/>
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_baseline_animation" />
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_margin="30dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Next" />
+
 
 </LinearLayout>

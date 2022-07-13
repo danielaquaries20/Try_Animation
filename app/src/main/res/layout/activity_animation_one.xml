@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/scrollRootLayout"
+    android:background="@color/purple_transparent_20"
+    tools:context=".AnimationOneActivity">
+
+    <LinearLayout
+        android:id="@+id/linearBiodata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivTop"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/anime_girl"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bella Antrifosa"
+            android:textSize="20sp"
+            android:fontFamily="monospace"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum ut sem in imperdiet. Mauris dapibus, odio eget sodales auctor, quam libero ultricies ipsum, condimentum fermentum enim dolor nec metus. Aliquam bibendum metus eleifend, faucibus turpis luctus, euismod justo. Sed et magna non sem eleifend sagittis sed commodo ex. Donec sed bibendum massa, vitae semper enim. Suspendisse nunc mauris, sollicitudin vitae convallis sed, pellentesque ac felis. Suspendisse id nisi fringilla, feugiat libero auctor, luctus risus. In sed iaculis leo. Etiam dictum feugiat tortor vitae lacinia. Aenean eget enim mattis nulla pulvinar consequat eu et metus. Praesent pulvinar viverra convallis."
+            android:textSize="15sp"
+            android:fontFamily="monospace"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:textStyle="normal"/>
+
+        <Button
+            android:id="@+id/btnClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_transparent_70"
+            android:text="Click"
+            android:layout_margin="15dp"
+            android:textAllCaps="false"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-medium"/>
+
+    </LinearLayout>
+
+
+
+</ScrollView>
