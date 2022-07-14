@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var ivAnimation: ImageView
     private lateinit var btnToMap: Button
     private lateinit var btnNext: Button
+    private lateinit var btnMotionLayout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +21,17 @@ class MainActivity : AppCompatActivity() {
         ivAnimation = findViewById(R.id.ivImageAnimation)
         btnToMap = findViewById(R.id.btnShow)
         btnNext = findViewById(R.id.btnNext)
+        btnMotionLayout = findViewById(R.id.btnMotionLayout)
 
         btnNext.setOnClickListener {
             startActivity(Intent(this,AnimationOneActivity::class.java))
         }
+
+        btnMotionLayout.setOnClickListener {
+            startActivity(Intent(this,MotionLayoutOneActivity::class.java))
+        }
+
+
 
 //        var runnable: Runnable? = null
 //        runnable = Runnable {

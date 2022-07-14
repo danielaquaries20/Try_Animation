@@ -37,7 +37,7 @@
             android:id="@+id/tvDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum ut sem in imperdiet. Mauris dapibus, odio eget sodales auctor, quam libero ultricies ipsum, condimentum fermentum enim dolor nec metus. Aliquam bibendum metus eleifend, faucibus turpis luctus, euismod justo. Sed et magna non sem eleifend sagittis sed commodo ex. Donec sed bibendum massa, vitae semper enim. Suspendisse nunc mauris, sollicitudin vitae convallis sed, pellentesque ac felis. Suspendisse id nisi fringilla, feugiat libero auctor, luctus risus. In sed iaculis leo. Etiam dictum feugiat tortor vitae lacinia. Aenean eget enim mattis nulla pulvinar consequat eu et metus. Praesent pulvinar viverra convallis."
+            android:text="@string/lorem_ipsum_dolor___"
             android:textSize="15sp"
             android:fontFamily="monospace"
             android:textColor="@color/black"

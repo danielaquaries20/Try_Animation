@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple_transparent_20">#349C27B0</color>
     <color name="orange_transparent_70">#B3FFC107</color>
+    <color name="yellow">#DDC875</color>
+
 </resources>

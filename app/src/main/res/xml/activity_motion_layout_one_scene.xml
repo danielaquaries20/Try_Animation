@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="40"
+                motion:motionTarget="@+id/ivPhoto" />
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="60"
+                motion:motionTarget="@+id/vBackgroundTop" />
+            <KeyAttribute
+                android:alpha="0.5"
+                motion:framePosition="60"
+                motion:motionTarget="@+id/tvDescription" />
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="60"
+                motion:motionTarget="@+id/tvName" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="65"
+                motion:motionTarget="@+id/tvNameWhite" />
+        </KeyFrameSet>
+        <OnSwipe
+            motion:dragDirection="dragDown"
+            motion:touchAnchorId="@+id/vBackgroundTop"
+            motion:touchAnchorSide="bottom" />
+        <OnClick motion:targetId="@+id/ivLogo" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start"/>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/vBackgroundBottom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="@id/vBackgroundTop"
+            motion:layout_constraintStart_toStartOf="@id/vBackgroundTop"
+            motion:layout_constraintBottom_toBottomOf="@id/vBackgroundBottom"/>
+        <Constraint
+            android:id="@+id/vBackgroundTop"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:alpha="1"
+            motion:layout_constraintBottom_toTopOf="@+id/vBackgroundBottom"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="1.0" />
+        <Constraint
+            android:id="@+id/ivPhoto"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="@id/vBackgroundTop"
+            motion:layout_constraintStart_toStartOf="@id/vBackgroundTop"
+            motion:layout_constraintTop_toTopOf="@id/vBackgroundTop" />
+        <Constraint
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:layout_constraintBottom_toBottomOf="@id/vBackgroundTop"
+            motion:layout_constraintEnd_toEndOf="@id/vBackgroundTop"
+            motion:layout_constraintHorizontal_bias="0.13"
+            motion:layout_constraintStart_toEndOf="@id/ivPhoto"
+            motion:layout_constraintTop_toTopOf="@id/vBackgroundTop" />
+        <Constraint
+            android:id="@+id/tvNameWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="@id/vBackgroundTop"
+            motion:layout_constraintEnd_toEndOf="@id/vBackgroundTop"
+            motion:layout_constraintHorizontal_bias="0.13"
+            motion:layout_constraintStart_toEndOf="@id/ivPhoto"
+            motion:layout_constraintTop_toTopOf="@id/vBackgroundTop" />
+
+        <Constraint
+            android:id="@+id/tvTryMotionOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="@id/vBackgroundBottom"
+            motion:layout_constraintEnd_toEndOf="@id/vBackgroundBottom"
+            motion:layout_constraintStart_toStartOf="@+id/vBackgroundBottom"
+            motion:layout_constraintTop_toTopOf="@id/vBackgroundBottom" />
+        <Constraint
+            android:id="@+id/vBackgroundYellow"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toTopOf="@id/vBackgroundTop"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/ivLogo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="@id/vBackgroundYellow"
+            motion:layout_constraintEnd_toEndOf="@id/vBackgroundYellow"
+            motion:layout_constraintStart_toStartOf="@id/vBackgroundYellow"
+            motion:layout_constraintTop_toTopOf="@id/vBackgroundYellow" />
+
+
+    </ConstraintSet>
+</MotionScene>

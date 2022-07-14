@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/activity_motion_layout_one_scene"
+    tools:context=".MotionLayoutOneActivity">
+
+
+    <View
+        android:id="@+id/vBackgroundYellow"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/background_round_yellow"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/vBackgroundTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/icon_note"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/vBackgroundYellow"
+        app:layout_constraintEnd_toEndOf="@id/vBackgroundYellow"
+        app:layout_constraintStart_toStartOf="@id/vBackgroundYellow"
+        app:layout_constraintTop_toTopOf="@id/vBackgroundYellow" />
+
+
+    <View
+        android:id="@+id/vBackgroundTop"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:alpha="0.2"
+        android:background="#CCFF9800"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivPhoto"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/anime_girl"
+        app:layout_constraintBottom_toBottomOf="@id/vBackgroundTop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="@id/vBackgroundTop"
+        app:layout_constraintTop_toTopOf="@id/vBackgroundTop" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Bella Antrifosa"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/vBackgroundTop"
+        app:layout_constraintEnd_toEndOf="@id/vBackgroundTop"
+        app:layout_constraintStart_toEndOf="@id/ivPhoto"
+        app:layout_constraintTop_toTopOf="@id/vBackgroundTop" />
+
+    <TextView
+        android:id="@+id/tvNameWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:ellipsize="end"
+        android:fontFamily="monospace"
+        android:maxLines="1"
+        android:text="Bella Antrifosa"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/vBackgroundTop"
+        app:layout_constraintEnd_toEndOf="@id/vBackgroundTop"
+        app:layout_constraintStart_toEndOf="@id/ivPhoto"
+        app:layout_constraintTop_toTopOf="@id/vBackgroundTop" />
+
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="5dp"
+        android:text="@string/lorem_ipsum_dolor___"
+        app:layout_constraintEnd_toEndOf="@id/vBackgroundTop"
+        app:layout_constraintStart_toStartOf="@id/vBackgroundTop"
+        app:layout_constraintTop_toBottomOf="@id/vBackgroundTop" />
+
+
+    <View
+        android:id="@+id/vBackgroundBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0"
+        android:background="#CCFF9800"
+        android:backgroundTint="#FF9800"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTryMotionOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:fontFamily="monospace"
+        android:text="This is Try Motion One"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/vBackgroundBottom"
+        app:layout_constraintEnd_toEndOf="@id/vBackgroundBottom"
+        app:layout_constraintStart_toStartOf="@+id/vBackgroundBottom"
+        app:layout_constraintTop_toTopOf="@id/vBackgroundBottom" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
