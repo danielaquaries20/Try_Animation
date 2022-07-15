@@ -27,14 +27,17 @@ class MainActivity : AppCompatActivity() {
 
         btnNext.setOnClickListener {
             startActivity(Intent(this,AnimationOneActivity::class.java))
+            overridePendingTransition(R.anim.transition_from_bottom, R.anim.transition_to_top)
         }
 
         btnMotionLayout.setOnClickListener {
             startActivity(Intent(this,MotionLayoutOneActivity::class.java))
+            overridePendingTransition(R.anim.transition_from_right,R.anim.transition_to_left)
         }
 
         btnCoordinatorLayout.setOnClickListener {
             startActivity(Intent(this,CoordinatorActivity::class.java))
+            overridePendingTransition(R.anim.transition_zoom_in,R.anim.transition_state)
         }
 
 

@@ -8,4 +8,10 @@ class CoordinatorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coordinator)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.transition_state,R.anim.transition_zoom_out)
+    }
+
 }

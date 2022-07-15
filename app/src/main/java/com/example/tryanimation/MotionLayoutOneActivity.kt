@@ -8,4 +8,10 @@ class MotionLayoutOneActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_motion_layout_one)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.transition_from_left,R.anim.transition_to_right)
+    }
+
 }
