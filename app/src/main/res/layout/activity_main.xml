@@ -1,46 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnShow"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_margin="25dp"
-        android:text="To Map" />
-
-    <ImageView
-        android:id="@+id/ivImageAnimation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/ic_baseline_animation" />
-
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_margin="30dp"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:text="Next" />
-
-    <Button
-        android:id="@+id/btnMotionLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:text="MotionLayout" />
+        android:orientation="vertical">
 
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnShow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_margin="25dp"
+            android:text="To Map"
+            android:textAllCaps="false" />
+
+        <ImageView
+            android:id="@+id/ivImageAnimation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_baseline_animation" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_margin="30dp"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="Next"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnMotionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Motion Layout"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnCoordinatorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:text="Coordinator Layout"
+            android:textAllCaps="false" />
+
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

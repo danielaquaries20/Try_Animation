@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnToMap: Button
     private lateinit var btnNext: Button
     private lateinit var btnMotionLayout: Button
+    private lateinit var btnCoordinatorLayout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         btnToMap = findViewById(R.id.btnShow)
         btnNext = findViewById(R.id.btnNext)
         btnMotionLayout = findViewById(R.id.btnMotionLayout)
+        btnCoordinatorLayout = findViewById(R.id.btnCoordinatorLayout)
 
         btnNext.setOnClickListener {
             startActivity(Intent(this,AnimationOneActivity::class.java))
@@ -31,6 +33,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,MotionLayoutOneActivity::class.java))
         }
 
+        btnCoordinatorLayout.setOnClickListener {
+            startActivity(Intent(this,CoordinatorActivity::class.java))
+        }
 
 
 //        var runnable: Runnable? = null
