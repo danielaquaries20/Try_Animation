@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TryCenterViewActivity">
+
+    <TextView
+        android:id="@+id/tvTryCenterHello"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        android:padding="15dp"
+        android:text="Hello World!"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tvTryCenterHello"
+        app:layout_constraintStart_toStartOf="@id/tvTryCenterHello"
+        app:layout_constraintTop_toBottomOf="@id/tvTryCenterHello">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/vTryCenter1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_orange_dark"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/holo_blue_dark"
+                    android:text="Hello World!"
+                    android:textColor="@color/white"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/vTryCenter2"
+                    app:layout_constraintEnd_toEndOf="@id/vTryCenter2"
+                    app:layout_constraintStart_toStartOf="@id/vTryCenter1"
+                    app:layout_constraintTop_toTopOf="@id/vTryCenter1" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/vTryCenter2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vTryCenter1">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/holo_blue_dark"
+                    android:text="Hello World!"
+                    android:textColor="@color/white"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/vTryCenter2"
+                    app:layout_constraintEnd_toEndOf="@id/vTryCenter2"
+                    app:layout_constraintStart_toStartOf="@id/vTryCenter1"
+                    app:layout_constraintTop_toTopOf="@id/vTryCenter1" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnTryCenterHello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:text="Hello World!"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/vTryCenter2"
+                app:layout_constraintEnd_toEndOf="@id/vTryCenter2"
+                app:layout_constraintStart_toStartOf="@id/vTryCenter1"
+                app:layout_constraintTop_toTopOf="@id/vTryCenter1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

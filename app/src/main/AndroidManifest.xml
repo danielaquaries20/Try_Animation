@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".TryCenterViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".CoordinatorActivity"
             android:exported="false" />
         <activity
