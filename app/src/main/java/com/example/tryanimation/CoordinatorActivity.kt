@@ -11,7 +11,7 @@ class CoordinatorActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.transition_state,R.anim.transition_zoom_out)
+        overridePendingTransition(R.anim.transition_from_right, R.anim.transition_zoom_out)
     }
 
 }

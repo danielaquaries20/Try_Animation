@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         btnCoordinatorLayout.setOnClickListener {
             startActivity(Intent(this, CoordinatorActivity::class.java))
-            overridePendingTransition(R.anim.transition_zoom_in, R.anim.transition_state)
+            overridePendingTransition(R.anim.transition_zoom_in, R.anim.transition_to_right)
         }
 
         btnBtmSheetShow.setOnClickListener {
