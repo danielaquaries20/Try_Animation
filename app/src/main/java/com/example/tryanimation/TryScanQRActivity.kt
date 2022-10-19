@@ -3,7 +3,6 @@ package com.example.tryanimation
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -45,12 +44,27 @@ class TryScanQRActivity : AppCompatActivity() {
         codeScanner.isFlashEnabled = false // Whether to enable flash or not
 
         // Callbacks
-        codeScanner.decodeCallback = DecodeCallback {
+        /*codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
                 Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
+            runOnUiThread {
+                Toast.makeText(
+                    this, "Camera initialization error: ${it.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }*/
+
+        codeScanner.setDecodeCallback {
+            runOnUiThread {
+                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        codeScanner.setErrorCallback {
             runOnUiThread {
                 Toast.makeText(
                     this, "Camera initialization error: ${it.message}",
