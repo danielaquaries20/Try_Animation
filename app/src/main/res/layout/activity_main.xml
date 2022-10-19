@@ -93,6 +93,17 @@
             android:text="Try Center Constraint Layout"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btnTryScanQR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/background_dark"
+            android:text="Try Scan QR Code"
+            android:textAllCaps="false" />
+
 
     </LinearLayout>
 
