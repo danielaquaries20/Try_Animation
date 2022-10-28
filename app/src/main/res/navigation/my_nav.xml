@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/my_nav">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/firstNavComponentFragment">
+
+    <fragment
+        android:id="@+id/firstNavComponentFragment"
+        android:name="com.example.tryanimation.FirstNavComponentFragment"
+        android:label="fragment_first_nav_component"
+        tools:layout="@layout/fragment_first_nav_component">
+
+        <action
+            android:id="@+id/action_firstNavComponentFragment_to_secondNavComponentFragment"
+            app:destination="@id/secondNavComponentFragment"
+            app:enterAnim="@anim/bounce"
+            app:exitAnim="@anim/fadeout"
+            app:popEnterAnim="@anim/bounce"
+            app:popExitAnim="@anim/fadeout"
+            app:popUpTo="@anim/zoomin"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/secondNavComponentFragment"
+        android:name="com.example.tryanimation.SecondNavComponentFragment"
+        android:label="fragment_second_nav_component"
+        tools:layout="@layout/fragment_second_nav_component">
+
+        <action
+            android:id="@+id/action_secondNavComponentFragment_to_firstNavComponentFragment"
+            app:destination="@id/firstNavComponentFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@anim/zoomin"/>
+
+    </fragment>
 
 </navigation>
