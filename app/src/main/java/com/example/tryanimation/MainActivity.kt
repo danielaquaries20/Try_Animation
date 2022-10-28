@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnAlerDialogShow: Button
     private lateinit var btnTryCenterConstraint: Button
     private lateinit var btnTryScannQRCOde: Button
+    private lateinit var btnTryNavigationComponent: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         btnAlerDialogShow = findViewById(R.id.btnAlertDialogShow)
         btnTryCenterConstraint = findViewById(R.id.btnTryCenterConstraintLayout)
         btnTryScannQRCOde = findViewById(R.id.btnTryScanQR)
+        btnTryNavigationComponent = findViewById(R.id.btnTryNavigationComponent)
         /*endregion*/
 
         /*region Action*/
@@ -89,6 +91,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryScannQRCOde.setOnClickListener {
             startActivity(Intent(this, TryScanQRActivity::class.java))
+        }
+
+        btnTryNavigationComponent.setOnClickListener {
+            startActivity(Intent(this, TryNavigationComponentActivity::class.java))
         }
 
         /*endregion*/
