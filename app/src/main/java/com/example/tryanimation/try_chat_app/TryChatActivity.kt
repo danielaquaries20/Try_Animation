@@ -1,8 +1,12 @@
 package com.example.tryanimation.try_chat_app
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +16,7 @@ class TryChatActivity : AppCompatActivity() {
 
     private lateinit var rvChat: RecyclerView
     private lateinit var ivBack: ImageView
+    private lateinit var cardSendMessage: CardView
 
     private var chatArray: ArrayList<PersonModel> = ArrayList()
     private var chatAdapter: ChatAdapter? = null
@@ -19,11 +24,23 @@ class TryChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_try_chat)
+        /*window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.statusBarColor = Color.TRANSPARENT*/
+
 
         rvChat = findViewById(R.id.rvChat)
         ivBack = findViewById(R.id.ivBack)
+        cardSendMessage = findViewById(R.id.cardSendMessage)
 
         ivBack.setOnClickListener { onBackPressed() }
+        cardSendMessage.setOnClickListener {
+            Toast.makeText(
+                this,
+                "Send Message",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         dummyData()
         initView()
@@ -31,6 +48,16 @@ class TryChatActivity : AppCompatActivity() {
 
     private fun dummyData() {
         val dummyData = arrayOf(
+            PersonModel(
+                id = 0,
+                nama = null,
+                nomer = null,
+                panggilan = null,
+                date = "10-November-2022",
+                type = 0,
+                chat = null,
+                time = null
+            ),
             PersonModel(
                 id = 1,
                 nama = "Daniel Aquaries Pratama",

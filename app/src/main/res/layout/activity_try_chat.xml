@@ -7,11 +7,23 @@
     android:background="@color/white"
     tools:context=".try_chat_app.TryChatActivity">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:scaleY="3"
+        android:scaleX="1.1"
+        android:background="@drawable/shadow_bottom"
+        app:layout_constraintTop_toTopOf="@id/constraintStatusBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintBottom_toBottomOf="@id/constraintStatusBar"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintStatusBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@android:color/holo_green_dark"
+        android:background="@drawable/background_layout_round_dark_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

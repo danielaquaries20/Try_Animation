@@ -13,25 +13,80 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
 
     private val VIEW_TYPE_CHAT_ME = R.layout.item_rv_chat_from_me
     private val VIEW_TYPE_CHAT_OPPONENT = R.layout.item_rv_chat_from_opponent
+    private val VIEW_TYPE_CHAT_DATE = R.layout.item_rv_chat_date
 
     override fun getItemViewType(position: Int): Int {
-        return if (items[position].type == 1) {
-            VIEW_TYPE_CHAT_ME
-        } else {
-            VIEW_TYPE_CHAT_OPPONENT
+        val theView = when (items[position].type) {
+            1 -> {
+                VIEW_TYPE_CHAT_ME
+            }
+            2 -> {
+                VIEW_TYPE_CHAT_OPPONENT
+            }
+            else -> {
+                VIEW_TYPE_CHAT_DATE
+            }
         }
+
+        return theView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == VIEW_TYPE_CHAT_ME) {
+        val theViewHolder = when (viewType) {
+            VIEW_TYPE_CHAT_ME -> {
+                ChatFromMe(LayoutInflater.from(context).inflate(viewType, parent, false))
+            }
+            VIEW_TYPE_CHAT_OPPONENT -> {
+                ChatFromOpponent(LayoutInflater.from(context).inflate(viewType, parent, false))
+            }
+            else -> {
+                ChatDate(LayoutInflater.from(context).inflate(viewType, parent, false))
+            }
+        }
+
+        /*if (viewType == VIEW_TYPE_CHAT_ME) {
             ChatFromMe(LayoutInflater.from(context).inflate(viewType, parent, false))
         } else {
             ChatFromOpponent(LayoutInflater.from(context).inflate(viewType, parent, false))
-        }
+        }*/
+
+        return theViewHolder
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (items[position].type == 1) {
+        when (items[position].type) {
+            1 -> {
+                val holderItem = ChatFromMe(holder.itemView)
+
+                try {
+                    holderItem.tvChatMe.text = items[position].chat
+                    holderItem.tvTimeMe.text = items[position].time
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            2 -> {
+                val holderItem = ChatFromOpponent(holder.itemView)
+
+                try {
+                    holderItem.tvChatOpponent.text = items[position].chat
+                    holderItem.tvTimeOpponent.text = items[position].time
+                    holderItem.tvNameOpponent.text = "From ${items[position].panggilan}"
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            else -> {
+                val holderItem = ChatDate(holder.itemView)
+
+                try {
+                   holderItem.tvDate.text = items[position].date
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        /*if (items[position].type == 1) {
             val holderItem = ChatFromMe(holder.itemView)
 
             try {
@@ -50,7 +105,7 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-        }
+        }*/
     }
 
     override fun getItemCount(): Int {
@@ -72,6 +127,12 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
             val tvTimeOpponent: TextView = view.findViewById(R.id.tvTimeFromOpponent)
             val tvNameOpponent: TextView = view.findViewById(R.id.tvNameFromOpponent)
         }
+
+        class ChatDate(view: View) : RecyclerView.ViewHolder(view) {
+            // Holds the TextView that will add each animal to
+            val tvDate: TextView = view.findViewById(R.id.tvDate)
+        }
+
     }
 
 }

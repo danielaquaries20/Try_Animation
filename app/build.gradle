@@ -46,6 +46,9 @@ dependencies {
     implementation 'com.github.mreram:showcaseview:1.4.0'
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
 
+    //Sticky ScrollView
+//    implementation 'com.github.nitrico.stickyscrollview:stickyscrollview:1.0.2'
+
     //Navigation Component
     //    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     //    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'

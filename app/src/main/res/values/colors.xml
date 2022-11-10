@@ -17,4 +17,8 @@
     <color name="green_transparent_50">#8052EC2B</color>
     <color name="green_transparent_70">#B31F5C10</color>
 
+    <color name="black_transparent_20">#332D3224</color>
+    <color name="black_transparent_40">#662D3224</color>
+    <color name="transparent">#000B0B0B</color>
+
 </resources>
