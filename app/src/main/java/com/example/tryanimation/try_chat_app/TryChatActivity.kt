@@ -53,7 +53,7 @@ class TryChatActivity : AppCompatActivity() {
                 nama = null,
                 nomer = null,
                 panggilan = null,
-                date = "10-November-2022",
+                date = "10 November 2022",
                 type = 0,
                 chat = null,
                 time = null
