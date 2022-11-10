@@ -1,6 +1,7 @@
 package com.example.tryanimation.try_chat_app
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,8 @@ import com.example.tryanimation.R
 class TryChatActivity : AppCompatActivity() {
 
     private lateinit var rvChat: RecyclerView
+    private lateinit var ivBack: ImageView
+
     private var chatArray: ArrayList<PersonModel> = ArrayList()
     private var chatAdapter: ChatAdapter? = null
 
@@ -18,6 +21,10 @@ class TryChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_try_chat)
 
         rvChat = findViewById(R.id.rvChat)
+        ivBack = findViewById(R.id.ivBack)
+
+        ivBack.setOnClickListener { onBackPressed() }
+
         dummyData()
         initView()
     }

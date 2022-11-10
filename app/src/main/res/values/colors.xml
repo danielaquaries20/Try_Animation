@@ -11,4 +11,10 @@
     <color name="orange_transparent_70">#B3FFC107</color>
     <color name="yellow">#DDC875</color>
 
+
+    <color name="white_transparent_50">#80C1CDBE</color>
+    <color name="white_transparent_70">#B3C1CDBE</color>
+    <color name="green_transparent_50">#8052EC2B</color>
+    <color name="green_transparent_70">#B31F5C10</color>
+
 </resources>

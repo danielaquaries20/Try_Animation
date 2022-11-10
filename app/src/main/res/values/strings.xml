@@ -4,4 +4,7 @@
     <string name="bella_antrifosa">Bella Antrifosa</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="icon_image">Icon Image</string>
+    <string name="elysia">Elysia</string>
+    <string name="message">Message..</string>
 </resources>
