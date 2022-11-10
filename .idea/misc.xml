@@ -11,12 +11,15 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_motion_layout_one.xml" value="0.22" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_splashscreen.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_center_view.xml" value="0.25" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_chat.xml" value="0.20615384615384616" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_navigation_component.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_scan_qractivity.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/alert_dialog_try.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/bottom_sheet_try.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_first_nav_component.xml" value="0.1953125" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_second_nav_component.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_from_me.xml" value="0.25" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_from_opponent.xml" value="0.209375" />
       </map>
     </option>
   </component>

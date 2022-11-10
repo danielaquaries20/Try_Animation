@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tryanimation.try_chat_app.TryChatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
 import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryCenterConstraint: Button
     private lateinit var btnTryScannQRCOde: Button
     private lateinit var btnTryNavigationComponent: Button
+    private lateinit var btnTryChat: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         btnTryCenterConstraint = findViewById(R.id.btnTryCenterConstraintLayout)
         btnTryScannQRCOde = findViewById(R.id.btnTryScanQR)
         btnTryNavigationComponent = findViewById(R.id.btnTryNavigationComponent)
+        btnTryChat = findViewById(R.id.btnTryChatApp)
         /*endregion*/
 
         /*region Action*/
@@ -95,6 +98,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryNavigationComponent.setOnClickListener {
             startActivity(Intent(this, TryNavigationComponentActivity::class.java))
+        }
+
+        btnTryChat.setOnClickListener {
+            startActivity(Intent(this, TryChatActivity::class.java))
         }
 
         /*endregion*/
