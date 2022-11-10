@@ -31,7 +31,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Daniel",
                 date = "10-November-2022",
                 type = 1,
-                chat = "Hallo, apa kabar?"
+                chat = "Hallo, apa kabar?",
+                time = "10.00"
             ),
             PersonModel(
                 id = 2,
@@ -40,7 +41,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Elysia",
                 date = "10-November-2022",
                 type = 2,
-                chat = "Hai, kabarku baik\nKalau kamu dan?"
+                chat = "Hai, kabarku baik\nKalau kamu dan?",
+                time = "10.01"
             ),
             PersonModel(
                 id = 3,
@@ -49,7 +51,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Daniel",
                 date = "10-November-2022",
                 type = 1,
-                chat = "Baik juga kok El.\nEl, kamu tau nggak hari ini hari apa?"
+                chat = "Baik juga kok El.\nEl, kamu tau nggak hari ini hari apa?",
+                time = "10.02"
             ),
             PersonModel(
                 id = 4,
@@ -58,7 +61,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Elysia",
                 date = "10-November-2022",
                 type = 2,
-                chat = "Lha emang hari apa?"
+                chat = "Lha emang hari apa?",
+                time = "10.03"
             ),
             PersonModel(
                 id = 5,
@@ -67,7 +71,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Daniel",
                 date = "10-November-2022",
                 type = 1,
-                chat = "Hari ini hari pahlawan lho.\nKamu ikut lomba nggak?"
+                chat = "Hari ini hari pahlawan lho.\nKamu ikut lomba nggak?",
+                time = "10.04"
             ),
             PersonModel(
                 id = 6,
@@ -76,7 +81,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Elysia",
                 date = "10-November-2022",
                 type = 2,
-                chat = "Oh iya, tak kira apa lho dan. hehehehehe, Kalau lomba aku nggak ikut sih.\nLha ada apa dan?"
+                chat = "Oh iya, tak kira apa lho dan. hehehehehe, Kalau lomba aku nggak ikut sih.\nLha ada apa dan?",
+                time = "10.05"
             ),
             PersonModel(
                 id = 7,
@@ -85,7 +91,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Daniel",
                 date = "10-November-2022",
                 type = 1,
-                chat = "Hmm, gimana kalau kita jalan jalan di domain mu? (Elysian Realm)"
+                chat = "Hmm, gimana kalau kita jalan jalan di domain mu? (Elysian Realm)",
+                time = "10.05"
             ),
             PersonModel(
                 id = 8,
@@ -94,7 +101,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Elysia",
                 date = "10-November-2022",
                 type = 2,
-                chat = "Boleh boleh, jam 2 siang ya aku tak kerumahmu terus tak ajak ke duniaku. Okey?"
+                chat = "Boleh boleh, jam 2 siang ya aku tak kerumahmu terus tak ajak ke duniaku. Okey?",
+                time = "10.06"
             ),
             PersonModel(
                 id = 9,
@@ -103,7 +111,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Daniel",
                 date = "10-November-2022",
                 type = 1,
-                chat = "Okey."
+                chat = "Okey.",
+                time = "10.06"
             ),
             PersonModel(
                 id = 10,
@@ -112,7 +121,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Daniel",
                 date = "10-November-2022",
                 type = 1,
-                chat = "JABCbcknckjdncjkdnsjkvkjancsukvfbsdncjsdnvjknskjvndsjcnajkncvbaxmqoiwifncrwibvqcnvnuksmxdbwbvuwjdcnwbvwjdcnubvnwicunrwuinwjucnufnchwnvwijcnvbnwjnceuvnwdjnceyvbjsdcnwjkenvuwnackjqneivnqkjxnajkncewbajkncywbvjksncuivnkjdcnyrvnkdcnuifvnksjdcnvbskjdcnfdvbjksdnvjfvnsjkvndjsvdvnsdjkdnhkjndv"
+                chat = "JABCbcknckjdncjkdnsjkvkjancsukvfbsdncjsdnvjknskjvndsjcnajkncvbaxmqoiwifncrwibvqcnvnuksmxdbwbvuwjdcnwbvwjdcnubvnwicunrwuinwjucnufnchwnvwijcnvbnwjnceuvnwdjnceyvbjsdcnwjkenvuwnackjqneivnqkjxnajkncewbajkncywbvjksncuivnkjdcnyrvnkdcnuifvnksjdcnvbskjdcnfdvbjksdnvjfvnsjkvndjsvdvnsdjkdnhkjndv",
+                time = "10.20"
             ),
             PersonModel(
                 id = 10,
@@ -121,7 +131,9 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Daniel",
                 date = "10-November-2022",
                 type = 1,
-                chat = "Sorry, typo El. Hehehehehehe"
+                chat = "Sorry, typo El. Hehehehehehe",
+                time = "10.20"
+
             ),
             PersonModel(
                 id = 11,
@@ -130,7 +142,8 @@ class TryChatActivity : AppCompatActivity() {
                 panggilan = "Elysia",
                 date = "10-November-2022",
                 type = 2,
-                chat = "Hehehehhe, ok nggak papa kok"
+                chat = "Hehehehhe, ok nggak papa kok",
+                time = "10.25"
             ),
         )
 

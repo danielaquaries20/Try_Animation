@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="10dp"
     android:layout_marginTop="5dp"
     android:layout_marginEnd="70dp"
@@ -9,18 +10,52 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tvChatFromOpponent"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
-        android:padding="5dp"
-        android:paddingStart="10dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="10dp"
-        android:text="Chat From Opponent"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/tvTimeFromOpponent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:paddingStart="7dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="7dp"
+            android:paddingBottom="2dp"
+            android:text="00.00"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNameFromOpponent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:text="From Opponent"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/tvTimeFromOpponent"
+            app:layout_constraintTop_toTopOf="@id/tvTimeFromOpponent"
+            app:layout_constraintBottom_toBottomOf="@id/tvTimeFromOpponent"/>
+
+        <TextView
+            android:id="@+id/tvChatFromOpponent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:text="Chat From Opponent"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/tvTimeFromOpponent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

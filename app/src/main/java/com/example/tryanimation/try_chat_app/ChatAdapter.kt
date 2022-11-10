@@ -36,6 +36,7 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
 
             try {
                 holderItem.tvChatMe.text = items[position].chat
+                holderItem.tvTimeMe.text = items[position].time
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -44,6 +45,8 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
 
             try {
                 holderItem.tvChatOpponent.text = items[position].chat
+                holderItem.tvTimeOpponent.text = items[position].time
+                holderItem.tvNameOpponent.text = "From ${items[position].panggilan}"
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -58,12 +61,16 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
         class ChatFromMe(view: View) : RecyclerView.ViewHolder(view) {
             // Holds the TextView that will add each animal to
             val tvChatMe: TextView = view.findViewById(R.id.tvChatFromMe)
+            val tvTimeMe: TextView = view.findViewById(R.id.tvTimeFromMe)
+            val tvNameFromMe: TextView = view.findViewById(R.id.tvNameFromMe)
 
         }
 
         class ChatFromOpponent(view: View) : RecyclerView.ViewHolder(view) {
             // Holds the TextView that will add each animal to
             val tvChatOpponent: TextView = view.findViewById(R.id.tvChatFromOpponent)
+            val tvTimeOpponent: TextView = view.findViewById(R.id.tvTimeFromOpponent)
+            val tvNameOpponent: TextView = view.findViewById(R.id.tvNameFromOpponent)
         }
     }
 

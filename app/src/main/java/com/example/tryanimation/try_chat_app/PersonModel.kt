@@ -8,4 +8,5 @@ data class PersonModel(
     val date: String?,
     val type: Int?,
     val chat: String?,
+    val time: String?,
 )
