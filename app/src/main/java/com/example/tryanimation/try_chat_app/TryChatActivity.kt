@@ -13,6 +13,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tryanimation.R
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TryChatActivity : AppCompatActivity() {
 
@@ -40,7 +43,7 @@ class TryChatActivity : AppCompatActivity() {
         etTypeMessage = findViewById(R.id.etTypeMessage)
 
         initView()
-//        dummyData()
+        dummyData()
 
         initOnClick()
     }
@@ -70,10 +73,10 @@ class TryChatActivity : AppCompatActivity() {
                     nama = "Daniel Aquaries Pratama",
                     nomer = "098765237642",
                     panggilan = "Daniel",
-                    date = "11 November 2022",
+                    date = dateNow(),
                     type = 1,
                     chat = message,
-                    time = "00.00"
+                    time = timeNow()
                 )
             )
             setChat()
@@ -118,10 +121,10 @@ class TryChatActivity : AppCompatActivity() {
                 nama = "Elysia",
                 nomer = "8905627482",
                 panggilan = "Elysia",
-                date = "11 November 2022",
+                date = dateNow(),
                 type = 2,
                 chat = pesan,
-                time = "00.00"
+                time = timeNow()
             )
         )
         setChat()
@@ -343,4 +346,16 @@ class TryChatActivity : AppCompatActivity() {
         chatAdapter?.notifyDataSetChanged()
         /*chatArray.addAll(dummyData)*/
     }
+
+    private fun dateNow(): String {
+        val formatter = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
+        return formatter.format(Date())
+    }
+
+    private fun timeNow(): String {
+        val formatter = SimpleDateFormat("HH.mm", Locale("id", "ID"))
+        return formatter.format(Date())
+    }
+
+
 }
