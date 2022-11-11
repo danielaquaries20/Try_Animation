@@ -1,8 +1,11 @@
 package com.example.tryanimation.try_chat_app
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
@@ -37,7 +40,7 @@ class TryChatActivity : AppCompatActivity() {
         etTypeMessage = findViewById(R.id.etTypeMessage)
 
         initView()
-        dummyData()
+//        dummyData()
 
         initOnClick()
     }
@@ -56,6 +59,7 @@ class TryChatActivity : AppCompatActivity() {
 
     private fun sendMessageFromMe() {
         val message = etTypeMessage.text.trim().toString()
+        messageFromMe = message
         val chatLastIndex = if (chatArray.lastIndex == -1) null else chatArray.lastIndex
         val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
         val newId = lastChatId?.plus(1)
@@ -76,7 +80,53 @@ class TryChatActivity : AppCompatActivity() {
             chatAdapter?.itemCount?.let { chatAdapter?.notifyItemInserted(it) }
             etTypeMessage.setText("")
 //            Log.d("Chat", "data: $chatArray")
+            sendMessageFromOpponent()
+        } else {
+            Toast.makeText(this, "Tidak bisa mengirim pesan kosong", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun sendMessageFromOpponent() {
+        val chatLastIndex = if (chatArray.lastIndex == -1) null else chatArray.lastIndex
+        val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
+        val newId = lastChatId?.plus(1)
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (messageFromMe == "") {
+                setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
+            } else if (messageFromMe.contains("Halo") || messageFromMe.contains("Hallo") || messageFromMe.contains(
+                    "Helo"
+                ) || messageFromMe.contains("Hello") || messageFromMe.contains("halo") || messageFromMe.contains(
+                    "hallo"
+                ) || messageFromMe.contains("helo") || messageFromMe.contains("hello") || messageFromMe.contains(
+                    "HALLO"
+                ) || messageFromMe.contains("HALO") || messageFromMe.contains("HELLO") || messageFromMe.contains(
+                    "HELO"
+                )
+            ) {
+                setResponseBot(newId, "Hai dan, gimana kabarmu?")
+            } else {
+                setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
+            }
+        }, 500)
+
+    }
+
+    private fun setResponseBot(id: Int? = 0, pesan: String) {
+        dummyChatArray.add(
+            PersonModel(
+                id = id,
+                nama = "Elysia",
+                nomer = "8905627482",
+                panggilan = "Elysia",
+                date = "11 November 2022",
+                type = 2,
+                chat = pesan,
+                time = "00.00"
+            )
+        )
+        setChat()
+        chatAdapter?.itemCount?.let { chatAdapter?.notifyItemInserted(it) }
+
     }
 
     private fun setChat() {
@@ -84,7 +134,10 @@ class TryChatActivity : AppCompatActivity() {
         for (data in dummyChatArray.withIndex()) {
             if (data.index == 0) {
                 chatArray.add(PersonModel(type = 0, date = data.value.date))
-            } else if (data.value.date?.substring(0, 10) != dummyChatArray[data.index - 1].date?.substring(0, 10)
+            } else if (data.value.date?.substring(
+                    0,
+                    10
+                ) != dummyChatArray[data.index - 1].date?.substring(0, 10)
             ) {
                 chatArray.add(PersonModel(type = 0, date = data.value.date))
             }
