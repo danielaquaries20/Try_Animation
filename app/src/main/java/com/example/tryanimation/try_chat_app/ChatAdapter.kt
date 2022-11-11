@@ -112,6 +112,22 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
         return items.size
     }
 
+   /* fun addLoading() {
+        if (!items.contains(PersonModel(type = 4))) {
+            items.add(PersonModel(type = 4))
+            notifyDataSetChanged()
+            //notifyItemInserted(items.lastIndex)
+        }
+    }
+
+    fun removeLoading() {
+        if (items.contains(PersonModel(type = 4))) {
+            items.remove(PersonModel(type = 4))
+            notifyDataSetChanged()
+            //notifyItemRemoved(items.size)
+        }
+    }*/
+
     companion object {
         class ChatFromMe(view: View) : RecyclerView.ViewHolder(view) {
             // Holds the TextView that will add each animal to
