@@ -7,6 +7,15 @@
     android:background="@color/white"
     tools:context=".try_chat_app.TryChatActivity">
 
+    <ImageView
+        android:id="@+id/ivBackgroundChat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_chat"
+        android:contentDescription="@string/icon_image" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp"
@@ -148,6 +157,9 @@
             android:layout_marginEnd="17dp"
             android:layout_marginBottom="10dp"
             android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
             android:visibility="visible"
             app:cardCornerRadius="999dp"
             app:cardElevation="6dp"
