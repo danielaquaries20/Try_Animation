@@ -86,9 +86,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.core.widget.NestedScrollView
+   <!-- <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollChat"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,26 +101,28 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvChat"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none"
-                android:scrollIndicators="none"
-                android:overScrollMode="never"
-                android:padding="5dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="10"
-                tools:listitem="@layout/item_rv_chat_from_me" />
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="100dp" />
 
         </LinearLayout>
 
+    </androidx.core.widget.NestedScrollView>-->
 
-    </androidx.core.widget.NestedScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_rv_chat_from_me"
+        app:layout_constraintBottom_toTopOf="@id/constraintTypeMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintStatusBar"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintTypeMessage"

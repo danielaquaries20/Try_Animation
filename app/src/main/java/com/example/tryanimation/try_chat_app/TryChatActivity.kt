@@ -1,12 +1,12 @@
 package com.example.tryanimation.try_chat_app
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tryanimation.R
@@ -22,6 +22,8 @@ class TryChatActivity : AppCompatActivity() {
     private var dummyChatArray: ArrayList<PersonModel> = ArrayList()
     private var chatAdapter: ChatAdapter? = null
 
+    private var messageFromMe: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_try_chat)
@@ -34,7 +36,6 @@ class TryChatActivity : AppCompatActivity() {
         cardSendMessage = findViewById(R.id.cardSendMessage)
         etTypeMessage = findViewById(R.id.etTypeMessage)
 
-
         initView()
         dummyData()
 
@@ -43,9 +44,8 @@ class TryChatActivity : AppCompatActivity() {
 
     private fun initOnClick() {
         ivBack.setOnClickListener { onBackPressed() }
-
         cardSendMessage.setOnClickListener {
-            sendMessage()
+            sendMessageFromMe()
             /*Toast.makeText(
                 this,
                 "Send Message",
@@ -54,7 +54,7 @@ class TryChatActivity : AppCompatActivity() {
         }
     }
 
-    private fun sendMessage() {
+    private fun sendMessageFromMe() {
         val message = etTypeMessage.text.trim().toString()
         val chatLastIndex = if (chatArray.lastIndex == -1) null else chatArray.lastIndex
         val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
@@ -90,6 +90,7 @@ class TryChatActivity : AppCompatActivity() {
             }
             chatArray.add(data.value)
         }
+        rvChat.adapter?.let { rvChat.smoothScrollToPosition(it.itemCount) }
     }
 
     private fun initView() {
@@ -97,6 +98,10 @@ class TryChatActivity : AppCompatActivity() {
         rvChat.layoutManager = LinearLayoutManager(this)
         rvChat.adapter = chatAdapter
         ViewCompat.setNestedScrollingEnabled(rvChat, false)
+
+        etTypeMessage.doOnTextChanged { text, start, before, count ->
+            rvChat.adapter?.let { rvChat.smoothScrollToPosition(it.itemCount) }
+        }
     }
 
     private fun dummyData() {
