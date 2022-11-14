@@ -29,6 +29,7 @@ class TryChatActivity : AppCompatActivity() {
 
     private var messageFromMe: String = ""
     private var messageFromBotBefore: String = ""
+    private var memoryFromBotBefore: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -194,6 +195,29 @@ class TryChatActivity : AppCompatActivity() {
             } else {
                 setResponseBot(newId, "Ya, ada apa dan?\nApa ada yang bisa tak bantu?")
             }
+        } else if (messageFromMe.contains("Tanyain kabar") || messageFromMe.contains("tanyain kabar") || messageFromMe.contains(
+                "Tanyain Kabar"
+            ) || messageFromMe.contains("TANYAIN KABAR") || messageFromMe.contains("Tanya kabar") || messageFromMe.contains(
+                "Tanya Kabar"
+            ) || messageFromMe.contains("tanya kabar") || messageFromMe.contains("TANYA KABAR")
+        ) {
+            if (messageFromBotBefore == "" || messageFromBotBefore.isEmpty()) {
+                setResponseBot(newId, "Halo dan, gimana kabarmu?")
+            } else {
+                if (memoryFromBotBefore.contains("Baik")) {
+                    setResponseBot(
+                        newId,
+                        "Okey, kabarmu gimana dan?\nBukannya tadi kabarmu baik ya? Hehehehehehe"
+                    )
+                } else if (memoryFromBotBefore.contains("Buruk")) {
+                    setResponseBot(
+                        newId,
+                        "Okey, kabarmu gimana dan?\nBukannya tadi kabarmu buruk ya, sebenarnya masalahmu serumit apa?\nSampe butuh pertahian banget sama aku."
+                    )
+                } else {
+                    setResponseBot(newId, "Okey, kabarmu gimana dan?")
+                }
+            }
         } else if (messageFromMe.contains("Kabarku baik") || messageFromMe.contains("Kabarku Baik") || messageFromMe.contains(
                 "kabarku baik"
             ) || messageFromMe.contains("Baik kok") || messageFromMe.contains("baik kok") || messageFromMe.contains(
@@ -207,6 +231,7 @@ class TryChatActivity : AppCompatActivity() {
                 ) || messageFromBotBefore.contains("Kalau kabarmu")
             ) {
                 setResponseBot(newId, "Syukurlah kalau baik\nAku jadi tenang")
+                memoryFromBotBefore = "Baik"
             } else {
                 setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
             }
@@ -227,6 +252,7 @@ class TryChatActivity : AppCompatActivity() {
                 ) || messageFromBotBefore.contains("Kalau kabarmu")
             ) {
                 setResponseBot(newId, "Waduhh, kenapa dan?\nKalau mau cerita, cerita aja")
+                memoryFromBotBefore = "Buruk"
             } else {
                 setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
             }
@@ -266,6 +292,29 @@ class TryChatActivity : AppCompatActivity() {
                 setResponseBot(newId, "Okey")
             } else {
                 setResponseBot(newId, "Maaf, aku tidak tau apa yang kamu maksud")
+            }
+        } else if (messageFromMe.contains("hehe") || messageFromMe.contains("HEHE") || messageFromMe.contains(
+                "Hehe"
+            ) || messageFromMe.contains("wkwk") || messageFromMe.contains("Wkwk") || messageFromMe.contains(
+                "WKWK"
+            )
+        ) {
+            if (messageFromMe.substring(0, 4).contains("hehe") || messageFromMe.substring(0, 4)
+                    .contains("HEHE") || messageFromMe.substring(0, 4)
+                    .contains("Hehe") || messageFromMe.substring(0, 4)
+                    .contains("wkwk") || messageFromMe.substring(0, 4)
+                    .contains("Wkwk") || messageFromMe.substring(0, 4)
+                    .contains("WKWK") || messageFromMe.substring(0, 4)
+                    .contains("HAHA") || messageFromMe.substring(0, 4)
+                    .contains("haha") || messageFromMe.substring(0, 4)
+                    .contains("Haha") || messageFromMe.substring(0, 4)
+                    .contains("HIHI") || messageFromMe.substring(0, 4)
+                    .contains("hihi") || messageFromMe.substring(0, 4)
+                    .contains("Hihi")
+            ) {
+                setResponseBot(newId, messageFromMe.substring(0, 4))
+            } else {
+                setResponseBot(newId, "Aku nggak paham dan")
             }
         } else {
             if (messageFromBotBefore.contains("Maaf dan, aku nggak ngerti apa yang kamu maksud")) {
