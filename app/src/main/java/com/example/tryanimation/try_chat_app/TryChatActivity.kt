@@ -89,12 +89,13 @@ class TryChatActivity : AppCompatActivity() {
     }
 
     private fun sendMessageFromOpponent() {
-//        chatAdapter?.addLoading()
+        chatAdapter?.addLoading()
         val chatLastIndex = if (chatArray.lastIndex == -1) null else chatArray.lastIndex
         val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
         val newId = lastChatId?.plus(1)
         Handler(Looper.getMainLooper()).postDelayed({
             if (messageFromMe == "") {
+                chatAdapter?.removeLoading()
                 setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
             } else if (messageFromMe.contains("Halo") || messageFromMe.contains("Hallo") || messageFromMe.contains(
                     "Helo"
@@ -106,6 +107,7 @@ class TryChatActivity : AppCompatActivity() {
                     "HELO"
                 )
             ) {
+                chatAdapter?.removeLoading()
                 setResponseBot(newId, "Hai dan, gimana kabarmu?")
             } else if (messageFromMe.contains("Hai") || messageFromMe.contains("hai") || messageFromMe.contains(
                     "HAI"
@@ -113,6 +115,7 @@ class TryChatActivity : AppCompatActivity() {
                     "HI"
                 )
             ) {
+                chatAdapter?.removeLoading()
                 setResponseBot(newId, "Halo dan, gimana kabarmu?")
             } else if (messageFromMe.contains("Kabarku baik") || messageFromMe.contains("Kabarku Baik") || messageFromMe.contains(
                     "kabarku baik"
@@ -122,11 +125,12 @@ class TryChatActivity : AppCompatActivity() {
                     "Syukurlah, baik"
                 ) || messageFromMe.contains("Puji Tuhan, baik") || messageFromMe.contains("Alhamdulilah, baik")
             ) {
+                chatAdapter?.removeLoading()
                 setResponseBot(newId, "Syukurlah kalau baik\nAku jadi tenang")
             } else {
+                chatAdapter?.removeLoading()
                 setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
             }
-//            chatAdapter?.removeLoading()
         }, 500)
 
     }

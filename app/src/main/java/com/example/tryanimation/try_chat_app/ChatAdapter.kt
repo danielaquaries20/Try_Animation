@@ -13,6 +13,8 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
 
     private val VIEW_TYPE_CHAT_ME = R.layout.item_rv_chat_from_me
     private val VIEW_TYPE_CHAT_OPPONENT = R.layout.item_rv_chat_from_opponent
+    private val VIEW_TYPE_LOADING = R.layout.item_rv_chat_loading
+
     private val VIEW_TYPE_CHAT_DATE = R.layout.item_rv_chat_date
 
     override fun getItemViewType(position: Int): Int {
@@ -22,6 +24,9 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
             }
             2 -> {
                 VIEW_TYPE_CHAT_OPPONENT
+            }
+            3 -> {
+                VIEW_TYPE_LOADING
             }
             else -> {
                 VIEW_TYPE_CHAT_DATE
@@ -38,6 +43,9 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
             }
             VIEW_TYPE_CHAT_OPPONENT -> {
                 ChatFromOpponent(LayoutInflater.from(context).inflate(viewType, parent, false))
+            }
+            VIEW_TYPE_LOADING -> {
+                ChatLoading(LayoutInflater.from(context).inflate(viewType, parent, false))
             }
             else -> {
                 ChatDate(LayoutInflater.from(context).inflate(viewType, parent, false))
@@ -72,6 +80,15 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
                     holderItem.tvChatOpponent.text = items[position].chat
                     holderItem.tvTimeOpponent.text = items[position].time
                     holderItem.tvNameOpponent.text = "From ${items[position].panggilan}"
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            3 -> {
+                val holderItem = ChatLoading(holder.itemView)
+
+                try {
+                    holderItem.tvSedangMengetik.text = "Sedang mengetik.."
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -112,21 +129,21 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
         return items.size
     }
 
-   /* fun addLoading() {
-        if (!items.contains(PersonModel(type = 4))) {
-            items.add(PersonModel(type = 4))
+    fun addLoading() {
+        if (!items.contains(PersonModel(type = 3))) {
+            items.add(PersonModel(type = 3))
             notifyDataSetChanged()
             //notifyItemInserted(items.lastIndex)
         }
     }
 
     fun removeLoading() {
-        if (items.contains(PersonModel(type = 4))) {
-            items.remove(PersonModel(type = 4))
+        if (items.contains(PersonModel(type = 3))) {
+            items.remove(PersonModel(type = 3))
             notifyDataSetChanged()
             //notifyItemRemoved(items.size)
         }
-    }*/
+    }
 
     companion object {
         class ChatFromMe(view: View) : RecyclerView.ViewHolder(view) {
@@ -142,6 +159,11 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
             val tvChatOpponent: TextView = view.findViewById(R.id.tvChatFromOpponent)
             val tvTimeOpponent: TextView = view.findViewById(R.id.tvTimeFromOpponent)
             val tvNameOpponent: TextView = view.findViewById(R.id.tvNameFromOpponent)
+        }
+
+        class ChatLoading(view: View) : RecyclerView.ViewHolder(view) {
+            // Holds the TextView that will add each animal to
+            val tvSedangMengetik: TextView = view.findViewById(R.id.tvLoadingSedangMengetik)
         }
 
         class ChatDate(view: View) : RecyclerView.ViewHolder(view) {
