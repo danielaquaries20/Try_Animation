@@ -3,8 +3,10 @@ package com.example.tryanimation.try_chat_app
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -22,10 +24,16 @@ class TryChatActivity : AppCompatActivity() {
     private lateinit var ivBack: ImageView
     private lateinit var cardSendMessage: CardView
     private lateinit var etTypeMessage: EditText
+    private lateinit var ivSettings: ImageView
+    private lateinit var cardSettings: CardView
+    private lateinit var tvBotStart: TextView
+    private lateinit var tvBotEnd: TextView
 
     private var chatArray: ArrayList<PersonModel> = ArrayList()
     private var dummyChatArray: ArrayList<PersonModel> = ArrayList()
     private var chatAdapter: ChatAdapter? = null
+    private var settingsShow = false
+    private var statusBot = 0
 
     private var messageFromMe: String = ""
     private var messageFromBotBefore: String = ""
@@ -42,11 +50,24 @@ class TryChatActivity : AppCompatActivity() {
         ivBack = findViewById(R.id.ivBack)
         cardSendMessage = findViewById(R.id.cardSendMessage)
         etTypeMessage = findViewById(R.id.etTypeMessage)
+        ivSettings = findViewById(R.id.ivSettings)
+        cardSettings = findViewById(R.id.cardSettings)
+        tvBotStart = findViewById(R.id.tvStartBot)
+        tvBotEnd = findViewById(R.id.tvEndBot)
 
         initView()
 //        dummyData()
 
         initOnClick()
+    }
+
+    override fun onBackPressed() {
+        if (settingsShow) {
+            settingsShow = false
+            cardSettings.visibility = View.GONE
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun initOnClick() {
@@ -58,6 +79,25 @@ class TryChatActivity : AppCompatActivity() {
                 "Send Message",
                 Toast.LENGTH_SHORT
             ).show()*/
+        }
+        ivSettings.setOnClickListener {
+            if (settingsShow) {
+                settingsShow = false
+                cardSettings.visibility = View.GONE
+            } else {
+                settingsShow = true
+                cardSettings.visibility = View.VISIBLE
+            }
+        }
+        tvBotStart.setOnClickListener {
+            statusBot = 1
+            cardSettings.visibility = View.GONE
+            settingsShow = false
+        }
+        tvBotEnd.setOnClickListener {
+            statusBot = 0
+            cardSettings.visibility = View.GONE
+            settingsShow = false
         }
     }
 
@@ -91,13 +131,17 @@ class TryChatActivity : AppCompatActivity() {
     }
 
     private fun sendMessageFromOpponent() {
-        chatAdapter?.addLoading("Elysia")
-        val chatLastIndex = if (chatArray.lastIndex == -1) null else chatArray.lastIndex
-        val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
-        val newId = lastChatId?.plus(1)
-        Handler(Looper.getMainLooper()).postDelayed({
-            responseFromBot(newId)
-        }, 500)
+        if (statusBot == 1) {
+            chatAdapter?.addLoading("Elysia")
+            val chatLastIndex = if (chatArray.lastIndex == -1) null else chatArray.lastIndex
+            val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
+            val newId = lastChatId?.plus(1)
+            Handler(Looper.getMainLooper()).postDelayed({
+                responseFromBot(newId)
+            }, 500)
+        } else {
+            Toast.makeText(this, "Aktifkan Bot terlebih dahulu", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setResponseBot(id: Int? = 0, pesan: String) {
