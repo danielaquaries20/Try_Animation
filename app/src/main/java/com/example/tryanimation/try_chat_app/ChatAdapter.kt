@@ -86,9 +86,9 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
             }
             3 -> {
                 val holderItem = ChatLoading(holder.itemView)
-
                 try {
-                    holderItem.tvSedangMengetik.text = "Sedang mengetik.."
+                    val typed = "${items[position].nama} sedang mengetik..."
+                    holderItem.tvSedangMengetik.text = typed
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -129,9 +129,9 @@ class ChatAdapter(private val context: Context?, private val items: ArrayList<Pe
         return items.size
     }
 
-    fun addLoading() {
+    fun addLoading(who: String? = "") {
         if (!items.contains(PersonModel(type = 3))) {
-            items.add(PersonModel(type = 3))
+            items.add(PersonModel(type = 3, nama = who))
             notifyDataSetChanged()
             //notifyItemInserted(items.lastIndex)
         }

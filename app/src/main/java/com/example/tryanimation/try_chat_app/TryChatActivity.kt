@@ -89,7 +89,7 @@ class TryChatActivity : AppCompatActivity() {
     }
 
     private fun sendMessageFromOpponent() {
-        chatAdapter?.addLoading()
+        chatAdapter?.addLoading("Elysia")
         val chatLastIndex = if (chatArray.lastIndex == -1) null else chatArray.lastIndex
         val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
         val newId = lastChatId?.plus(1)
