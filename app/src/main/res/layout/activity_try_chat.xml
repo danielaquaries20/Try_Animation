@@ -178,6 +178,34 @@
                 android:text="End Bot Program"
                 android:textColor="@color/black" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvSayHay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="?selectableItemBackground"
+                android:text="Say Hay to Bot"
+                android:textColor="@color/black" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvAskYourCondition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="?selectableItemBackground"
+                android:text="Ask your Condition"
+                android:textColor="@color/black" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

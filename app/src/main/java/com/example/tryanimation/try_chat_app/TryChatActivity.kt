@@ -28,6 +28,8 @@ class TryChatActivity : AppCompatActivity() {
     private lateinit var cardSettings: CardView
     private lateinit var tvBotStart: TextView
     private lateinit var tvBotEnd: TextView
+    private lateinit var tvSayHay: TextView
+    private lateinit var tvAskYourCondition: TextView
 
     private var chatArray: ArrayList<PersonModel> = ArrayList()
     private var dummyChatArray: ArrayList<PersonModel> = ArrayList()
@@ -54,6 +56,8 @@ class TryChatActivity : AppCompatActivity() {
         cardSettings = findViewById(R.id.cardSettings)
         tvBotStart = findViewById(R.id.tvStartBot)
         tvBotEnd = findViewById(R.id.tvEndBot)
+        tvSayHay = findViewById(R.id.tvSayHay)
+        tvAskYourCondition = findViewById(R.id.tvAskYourCondition)
 
         initView()
 //        dummyData()
@@ -91,13 +95,49 @@ class TryChatActivity : AppCompatActivity() {
         }
         tvBotStart.setOnClickListener {
             statusBot = 1
+            Toast.makeText(this, "Bot Activated", Toast.LENGTH_SHORT).show()
             cardSettings.visibility = View.GONE
             settingsShow = false
         }
         tvBotEnd.setOnClickListener {
             statusBot = 0
+            Toast.makeText(this, "Bot Diactivated", Toast.LENGTH_SHORT).show()
             cardSettings.visibility = View.GONE
             settingsShow = false
+        }
+        tvSayHay.setOnClickListener {
+            statusBot = 1
+            cardSettings.visibility = View.GONE
+            settingsShow = false
+            val chatLastIndex = if (chatArray.lastIndex == -1) null else chatArray.lastIndex
+            val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
+            val newId = lastChatId?.plus(1)
+            dummyChatArray.add(
+                PersonModel(
+                    id = newId,
+                    nama = "Daniel Aquaries Pratama",
+                    nomer = "098765237642",
+                    panggilan = "Daniel",
+                    date = dateNow(),
+                    type = 1,
+                    chat = "Hay Elysia",
+                    time = timeNow()
+                )
+            )
+            messageFromMe = "Hay Elysia"
+            setChat()
+            chatAdapter?.itemCount?.let { chatAdapter?.notifyItemInserted(it) }
+            etTypeMessage.setText("")
+            sendMessageFromOpponent()
+        }
+        tvAskYourCondition.setOnClickListener {
+            statusBot = 1
+            cardSettings.visibility = View.GONE
+            settingsShow = false
+            val chatLastIndex = if (chatArray.lastIndex == -1) null else chatArray.lastIndex
+            val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
+            val newId = lastChatId?.plus(1)
+            setResponseBot(newId, "Halo dan, gimana kabarmu?")
         }
     }
 
