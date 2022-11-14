@@ -28,6 +28,7 @@ class TryChatActivity : AppCompatActivity() {
     private var chatAdapter: ChatAdapter? = null
 
     private var messageFromMe: String = ""
+    private var messageFromBotBefore: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,45 +95,8 @@ class TryChatActivity : AppCompatActivity() {
         val lastChatId = if (chatLastIndex == null) 0 else chatArray[chatLastIndex].id
         val newId = lastChatId?.plus(1)
         Handler(Looper.getMainLooper()).postDelayed({
-            if (messageFromMe == "") {
-                chatAdapter?.removeLoading()
-                setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
-            } else if (messageFromMe.contains("Halo") || messageFromMe.contains("Hallo") || messageFromMe.contains(
-                    "Helo"
-                ) || messageFromMe.contains("Hello") || messageFromMe.contains("halo") || messageFromMe.contains(
-                    "hallo"
-                ) || messageFromMe.contains("helo") || messageFromMe.contains("hello") || messageFromMe.contains(
-                    "HALLO"
-                ) || messageFromMe.contains("HALO") || messageFromMe.contains("HELLO") || messageFromMe.contains(
-                    "HELO"
-                )
-            ) {
-                chatAdapter?.removeLoading()
-                setResponseBot(newId, "Hai dan, gimana kabarmu?")
-            } else if (messageFromMe.contains("Hai") || messageFromMe.contains("hai") || messageFromMe.contains(
-                    "HAI"
-                ) || messageFromMe.contains("Hi") || messageFromMe.contains("hi") || messageFromMe.contains(
-                    "HI"
-                )
-            ) {
-                chatAdapter?.removeLoading()
-                setResponseBot(newId, "Halo dan, gimana kabarmu?")
-            } else if (messageFromMe.contains("Kabarku baik") || messageFromMe.contains("Kabarku Baik") || messageFromMe.contains(
-                    "kabarku baik"
-                ) || messageFromMe.contains("Baik kok") || messageFromMe.contains("baik kok") || messageFromMe.contains(
-                    "baik"
-                ) || messageFromMe.contains("Baik") || messageFromMe.contains("Syukurlah baik") || messageFromMe.contains(
-                    "Syukurlah, baik"
-                ) || messageFromMe.contains("Puji Tuhan, baik") || messageFromMe.contains("Alhamdulilah, baik")
-            ) {
-                chatAdapter?.removeLoading()
-                setResponseBot(newId, "Syukurlah kalau baik\nAku jadi tenang")
-            } else {
-                chatAdapter?.removeLoading()
-                setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
-            }
+            responseFromBot(newId)
         }, 500)
-
     }
 
     private fun setResponseBot(id: Int? = 0, pesan: String) {
@@ -148,6 +112,8 @@ class TryChatActivity : AppCompatActivity() {
                 time = timeNow()
             )
         )
+        chatAdapter?.removeLoading()
+        messageFromBotBefore = pesan
         setChat()
         chatAdapter?.itemCount?.let { chatAdapter?.notifyItemInserted(it) }
 
@@ -178,6 +144,145 @@ class TryChatActivity : AppCompatActivity() {
 
         etTypeMessage.doOnTextChanged { text, start, before, count ->
             rvChat.adapter?.let { rvChat.smoothScrollToPosition(it.itemCount) }
+        }
+    }
+
+    private fun responseFromBot(newId: Int?) {
+        if (messageFromMe == "") {
+            setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
+        } else if (messageFromMe.contains("Halo") || messageFromMe.contains("Hallo") || messageFromMe.contains(
+                "Helo"
+            ) || messageFromMe.contains("Hello") || messageFromMe.contains("halo") || messageFromMe.contains(
+                "hallo"
+            ) || messageFromMe.contains("helo") || messageFromMe.contains("hello") || messageFromMe.contains(
+                "HALLO"
+            ) || messageFromMe.contains("HALO") || messageFromMe.contains("HELLO") || messageFromMe.contains(
+                "HELO"
+            )
+        ) {
+            if (messageFromMe.contains("gimana kabarmu")) {
+                setResponseBot(newId, "Hai dan, kabarku baik\nKalau kabarmu?")
+            } else {
+                setResponseBot(newId, "Hai dan, gimana kabarmu?")
+            }
+        } else if (messageFromMe.contains("Hai") || messageFromMe.contains("hai") || messageFromMe.contains(
+                "HAI"
+            ) || messageFromMe.contains("Hi") || messageFromMe.contains("hi") || messageFromMe.contains(
+                "HI"
+            ) || messageFromMe.contains("Hey") || messageFromMe.contains("HEY") || messageFromMe.contains(
+                "HAY"
+            ) || messageFromMe.contains("Hay")
+        ) {
+            if (messageFromMe.contains("gimana kabarmu")) {
+                setResponseBot(newId, "Halo dan, kabarku baik\nKalau kabarmu?")
+            } else {
+                setResponseBot(newId, "Halo dan, gimana kabarmu?")
+            }
+        } else if (messageFromMe.contains("Elysia") || messageFromMe.contains("elysia") || messageFromMe.contains(
+                "ELYSIA"
+            ) || messageFromMe.contains("EL") || messageFromMe.contains("el") || messageFromMe.contains(
+                "El"
+            )
+        ) {
+            if (messageFromBotBefore.contains("Elysia") || messageFromBotBefore.contains("elysia") || messageFromBotBefore.contains(
+                    "ELYSIA"
+                ) || messageFromBotBefore.contains("EL") || messageFromBotBefore.contains("el") || messageFromBotBefore.contains(
+                    "El"
+                )
+            ) {
+                setResponseBot(newId, "Iyaa, ada apa?")
+            } else {
+                setResponseBot(newId, "Ya, ada apa dan?\nApa ada yang bisa tak bantu?")
+            }
+        } else if (messageFromMe.contains("Kabarku baik") || messageFromMe.contains("Kabarku Baik") || messageFromMe.contains(
+                "kabarku baik"
+            ) || messageFromMe.contains("Baik kok") || messageFromMe.contains("baik kok") || messageFromMe.contains(
+                "baik"
+            ) || messageFromMe.contains("Baik") || messageFromMe.contains("Syukurlah baik") || messageFromMe.contains(
+                "Syukurlah, baik"
+            ) || messageFromMe.contains("Puji Tuhan, baik") || messageFromMe.contains("Alhamdulilah, baik")
+        ) {
+            if (messageFromBotBefore.contains("gimana kabarmu") || messageFromBotBefore.contains(
+                    "kalau kabarmu"
+                ) || messageFromBotBefore.contains("Kalau kabarmu")
+            ) {
+                setResponseBot(newId, "Syukurlah kalau baik\nAku jadi tenang")
+            } else {
+                setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
+            }
+        } else if (messageFromMe.contains("Buruk") || messageFromMe.contains("buruk") || messageFromMe.contains(
+                "BURUK"
+            ) || messageFromMe.contains("kabarku buruk") || messageFromMe.contains("tidak baik") || messageFromMe.contains(
+                "Tidak baik"
+            ) || messageFromMe.contains("Tidak Baik") || messageFromMe.contains("TIDAK BAIK") || messageFromMe.contains(
+                "tidak baik baik saja"
+            ) || messageFromMe.contains("Tidak baik baik saja") || messageFromMe.contains("Tidak Baik Baik Saja") || messageFromMe.contains(
+                "TIDAK BAIK BAIK SAJA"
+            ) || messageFromMe.contains("nggak baik") || messageFromMe.contains("Nggak baik") || messageFromMe.contains(
+                "NGGAK BAIK"
+            )
+        ) {
+            if (messageFromBotBefore.contains("gimana kabarmu") || messageFromBotBefore.contains(
+                    "kalau kabarmu"
+                ) || messageFromBotBefore.contains("Kalau kabarmu")
+            ) {
+                setResponseBot(newId, "Waduhh, kenapa dan?\nKalau mau cerita, cerita aja")
+            } else {
+                setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
+            }
+        } else if (messageFromMe.contains("Aku ada masalah") || messageFromMe.contains("aku ada masalah") || messageFromMe.contains(
+                "Aku ada masalah"
+            ) || messageFromMe.contains("Aku Ada Masalah") || messageFromMe.contains("AKU ADA MASALAH") || messageFromMe.contains(
+                "lagi ada masalah"
+            ) || messageFromMe.contains("Lagi ada masalah") || messageFromMe.contains("Lagi Ada Masalah") || messageFromMe.contains(
+                "LAGI ADA MASALAH"
+            ) || messageFromMe.contains("Lagi bingung") || messageFromMe.contains("lagi bingung") || messageFromMe.contains(
+                "Lagi Bingung"
+            ) || messageFromMe.contains("LAGI BINGUNG")
+        ) {
+            if (messageFromMe.contains("Masalah") || messageFromMe.contains("masalah") || messageFromMe.contains(
+                    "MASALAH"
+                )
+            ) {
+                setResponseBot(newId, "Masalah apa dan?")
+            } else if (messageFromMe.contains("Bingung") || messageFromMe.contains("bingung") || messageFromMe.contains(
+                    "BINGUNG"
+                )
+            ) {
+                setResponseBot(newId, "Bingung kenapa dan?")
+            }
+        } else if (messageFromMe.contains("OK") || messageFromMe.contains("Ok") || messageFromMe.contains(
+                "ok"
+            ) || messageFromMe.contains("Okey") || messageFromMe.contains("okey") || messageFromMe.contains(
+                "OKEY"
+            ) || messageFromMe.contains("Baiklah") || messageFromMe.contains("baiklah") || messageFromMe.contains(
+                "BAIKLAH"
+            )
+        ) {
+            if (messageFromBotBefore.contains("Syukurlah kalau baik") || messageFromBotBefore.contains(
+                    "Aku jadi tenang"
+                )
+            ) {
+                setResponseBot(newId, "Okey")
+            } else {
+                setResponseBot(newId, "Maaf, aku tidak tau apa yang kamu maksud")
+            }
+        } else {
+            if (messageFromBotBefore.contains("Maaf dan, aku nggak ngerti apa yang kamu maksud")) {
+                setResponseBot(newId, "Maaf, aku tidak tau apa yang kamu maksud")
+            } else if (messageFromBotBefore.contains("Maaf, aku tidak tau apa yang kamu maksud")) {
+                setResponseBot(newId, "Tolong apakah kamu typo atau gimana?")
+            } else if (messageFromBotBefore.contains("Tolong apakah kamu typo atau gimana?")) {
+                setResponseBot(newId, "Jangan aneh aneh...!")
+            } else if (messageFromBotBefore.contains("Jangan aneh aneh...!")) {
+                setResponseBot(newId, "......")
+            } else if (messageFromBotBefore.contains("......")) {
+                setResponseBot(newId, "-_-")
+            } else if (messageFromBotBefore.contains("-_-")) {
+                setResponseBot(newId, "-_-")
+            } else {
+                setResponseBot(newId, "Maaf dan, aku nggak ngerti apa yang kamu maksud")
+            }
         }
     }
 
