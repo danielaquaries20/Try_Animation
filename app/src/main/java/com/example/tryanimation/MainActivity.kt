@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryScannQRCOde: Button
     private lateinit var btnTryNavigationComponent: Button
     private lateinit var btnTryChat: Button
+    private lateinit var btnTryDatePicker: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         btnTryScannQRCOde = findViewById(R.id.btnTryScanQR)
         btnTryNavigationComponent = findViewById(R.id.btnTryNavigationComponent)
         btnTryChat = findViewById(R.id.btnTryChatApp)
+        btnTryDatePicker = findViewById(R.id.btnTryDatePicker)
         /*endregion*/
 
         /*region Action*/
@@ -102,6 +104,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryChat.setOnClickListener {
             startActivity(Intent(this, TryChatActivity::class.java))
+        }
+
+        btnTryDatePicker.setOnClickListener {
+            startActivity(Intent(this, TryDatePickerActivity::class.java))
         }
 
         /*endregion*/

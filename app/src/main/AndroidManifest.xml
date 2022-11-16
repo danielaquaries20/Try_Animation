@@ -17,9 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".TryDatePickerActivity"
+            android:exported="false" />
+        <activity
             android:name=".try_chat_app.TryChatActivity"
             android:exported="false"
-            android:theme="@style/ThemeForChat"/>
+            android:theme="@style/ThemeForChat" />
         <activity
             android:name=".TryNavigationComponentActivity"
             android:exported="false" />
