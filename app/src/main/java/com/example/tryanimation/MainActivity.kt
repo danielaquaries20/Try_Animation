@@ -74,7 +74,8 @@ class MainActivity : AppCompatActivity() {
 
         btnMotionLayout.setOnClickListener {
             startActivity(Intent(this, MotionLayoutOneActivity::class.java))
-            overridePendingTransition(R.anim.transition_from_right, R.anim.transition_to_left)
+            overridePendingTransition(R.anim.transition_to_left, R.anim.transition_to_right)
+//            overridePendingTransition(R.anim.transition_from_right, R.anim.transition_to_left)
         }
 
         btnCoordinatorLayout.setOnClickListener {
