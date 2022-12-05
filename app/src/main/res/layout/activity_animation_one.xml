@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:animateLayoutChanges="true"
     android:id="@+id/scrollRootLayout"
     android:background="@color/purple_transparent_20"
     tools:context=".AnimationOneActivity">
@@ -37,10 +37,10 @@
             android:id="@+id/tvDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lorem_ipsum_dolor___"
+            android:text="@string/lorem_ipsum_dolor_"
             android:textSize="15sp"
             android:fontFamily="monospace"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:layout_margin="10dp"
             android:textStyle="normal"/>
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/orange_transparent_70"
             android:text="Show"
-            android:layout_margin="15dp"
+            android:layout_margin="1dp"
             android:textAllCaps="false"
             android:visibility="visible"
             android:layout_gravity="center"
@@ -64,11 +64,106 @@
             android:backgroundTint="@color/orange_transparent_70"
             android:text="Hide"
             android:visibility="gone"
-            android:layout_margin="15dp"
+            android:layout_margin="1dp"
             android:textAllCaps="false"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif-medium"/>
+            android:fontFamily="sans-serif-medium" />
 
+        <Button
+            android:id="@+id/btnForRoot1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:backgroundTint="@color/red600"
+            android:fontFamily="sans-serif-medium"
+            android:text="Show"
+            android:textAllCaps="false"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnForRoot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:backgroundTint="@color/red600"
+            android:fontFamily="sans-serif-medium"
+            android:text="Hide"
+            android:textAllCaps="false"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnForRootRoot1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:backgroundTint="@color/redA100"
+            android:fontFamily="sans-serif-medium"
+            android:text="Show"
+            android:textAllCaps="false"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnForRootRoot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:backgroundTint="@color/redA100"
+            android:fontFamily="sans-serif-medium"
+            android:text="Hide"
+            android:textAllCaps="false"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnForImage1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:backgroundTint="@color/blue600"
+            android:fontFamily="sans-serif-medium"
+            android:text="Show"
+            android:textAllCaps="false"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnForImage2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:backgroundTint="@color/blue600"
+            android:fontFamily="sans-serif-medium"
+            android:text="Hide"
+            android:textAllCaps="false"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnForTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:backgroundTint="@color/green800"
+            android:fontFamily="sans-serif-medium"
+            android:text="Show"
+            android:textAllCaps="false"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnForTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:backgroundTint="@color/green800"
+            android:fontFamily="sans-serif-medium"
+            android:text="Hide"
+            android:textAllCaps="false"
+            android:visibility="gone" />
 
     </LinearLayout>
 

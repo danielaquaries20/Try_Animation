@@ -114,22 +114,22 @@ class MainActivity : AppCompatActivity() {
         /*endregion*/
 
         /*region Animation*/
-//        var runnable: Runnable? = null
-//        runnable = Runnable {
-//            ivAnimation.animate().apply {
-//                duration = 1000
-////                alpha(.5f)
-////                scaleXBy(.50f)
-////                scaleYBy(.50f)
-////                rotationYBy(360f)
-////                rotationXBy(360f)
+        var runnable: Runnable? = null
+        runnable = Runnable {
+            ivAnimation.animate().apply {
+                duration = 1000
+                alpha(.5f)
+//                scaleXBy(.50f)
+//                scaleYBy(.50f)
+                rotationYBy(360f)
+                rotationXBy(360f)
 //                translationYBy(20f)
-//            }.withEndAction(runnable).start()
-//        }
-//        runnable.run()
+            }.withEndAction(runnable).start()
+        }
+        runnable.run()
 //        Uri.parse("google.navigation:q=22.659239,88.435534&mode=l")
 
-        ivAnimation.animate().apply {
+        btnToMap.animate().apply {
             duration = 1000
 //            alpha(.5f)
             scaleXBy(.50f)
@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity() {
             rotationXBy(360f)
             translationYBy(20f)
         }.withEndAction {
-            ivAnimation.animate().apply {
+            btnNext.animate().apply {
                 duration = 1000
 //                alpha(.5f)
                 scaleXBy(-.5f)
