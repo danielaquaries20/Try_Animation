@@ -37,7 +37,8 @@
                 android:paddingEnd="7dp"
                 android:paddingBottom="2dp"
                 android:text="00.00"
-                android:textColor="@color/black"
+                android:background="@drawable/background_time_from_me"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +65,8 @@
                 android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
                 android:text="Chat From Me"
-                android:textColor="@color/black"
+                android:background="@drawable/background_chat_from_me"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTimeFromMe" />
