@@ -5,7 +5,8 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:duration="1000"
+        motion:motionInterpolator="linear">
         <KeyFrameSet>
             <KeyAttribute
                 android:alpha="1"
@@ -59,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:alpha="1"
+            android:background="#CCADE60F"
             motion:layout_constraintBottom_toTopOf="@+id/vBackgroundBottom"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"

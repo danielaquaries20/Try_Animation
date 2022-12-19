@@ -1,6 +1,7 @@
 package com.example.tryanimation
 
 import android.os.Bundle
+import android.util.Log
 import android.util.SparseIntArray
 import android.widget.Button
 import android.widget.TextView
@@ -13,13 +14,27 @@ import com.aminography.primedatepicker.picker.callback.MultipleDaysPickCallback
 import com.aminography.primedatepicker.picker.callback.RangeDaysPickCallback
 import com.aminography.primedatepicker.picker.callback.SingleDayPickCallback
 import com.aminography.primedatepicker.picker.theme.LightThemeFactory
+import com.applandeo.materialcalendarview.CalendarUtils
+import com.applandeo.materialcalendarview.CalendarView
+import java.text.SimpleDateFormat
 import java.util.*
 
 class TryDatePickerActivity : AppCompatActivity() {
 
-    private lateinit var tvDateStart  : TextView
-    private lateinit var tvDateEnd  : TextView
+    private lateinit var tvDateStart: TextView
+    private lateinit var tvDateEnd: TextView
     private lateinit var btnPickDate: Button
+
+    private lateinit var tvDateStartApplandeo: TextView
+    private lateinit var tvDateEndApplandeo: TextView
+    private lateinit var btnPickDateApplandeo: Button
+    private lateinit var applandeoDatePicker: CalendarView
+
+    private var startDateApplandeo = ""
+    private var endDateApplandeo = ""
+    private var calendarStartApplandeo: Calendar? = null
+    private var calendarEndApplandeo: Calendar? = null
+    private var countClickApplandeoDatePicker = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +44,55 @@ class TryDatePickerActivity : AppCompatActivity() {
         tvDateEnd = findViewById(R.id.tvDateEnd)
         btnPickDate = findViewById(R.id.btnPickDate)
 
+        tvDateStartApplandeo = findViewById(R.id.tvDateStartApplandeo)
+        tvDateEndApplandeo = findViewById(R.id.tvDateEndApplandeo)
+        btnPickDateApplandeo = findViewById(R.id.btnPickDateApplandeo)
+        applandeoDatePicker = findViewById(R.id.applandeoCalendarView)
+
+
         btnPickDate.setOnClickListener { initDatePicker() }
+
+        setApplandeoCalendar()
+
+    }
+
+    private fun setApplandeoCalendar() {
+//        val calendar = Calendar.getInstance()
+//        calendar.set(2022, 11, 17)
+//        applandeoDatePicker.setDate(calendar.time)
+
+        applandeoDatePicker.setOnDayClickListener {
+            if (countClickApplandeoDatePicker == 2) {
+                startDateApplandeo = ""
+                endDateApplandeo = ""
+                calendarStartApplandeo = null
+                calendarEndApplandeo = null
+                countClickApplandeoDatePicker = 1
+            } else {
+                countClickApplandeoDatePicker++
+            }
+            val tanggal = it.calendar
+            val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy")
+            val dateTime = simpleDateFormat.format(tanggal.time)
+
+            if (startDateApplandeo == "" || startDateApplandeo == dateTime) {
+                startDateApplandeo = dateTime
+                calendarStartApplandeo = it.calendar
+            }
+            if (startDateApplandeo != dateTime) {
+                endDateApplandeo = dateTime
+                calendarEndApplandeo = it.calendar
+            }
+            tvDateStartApplandeo.text = "Tanggal Mulai : $startDateApplandeo"
+            tvDateEndApplandeo.text = "Tanggal Akhir : $endDateApplandeo"
+
+            if (calendarStartApplandeo != null && calendarEndApplandeo != null) {
+                val rangePickDay =
+                    CalendarUtils.getDatesRange(calendarStartApplandeo, calendarEndApplandeo)
+                Log.d("CalendarPick", "Tanggal dipilih : $rangePickDay")
+            }
+        }
+//        CalendarUtils.getDatesRange()
     }
 
     private val themeFactory = object : LightThemeFactory() {
@@ -62,7 +125,8 @@ class TryDatePickerActivity : AppCompatActivity() {
             get() = { primeCalendar ->
                 when (primeCalendar[Calendar.DAY_OF_WEEK]) {
                     Calendar.SATURDAY,
-                    Calendar.SUNDAY -> String.format("%s😍", primeCalendar.weekDayNameShort)
+                    Calendar.SUNDAY,
+                    -> String.format("%s😍", primeCalendar.weekDayNameShort)
                     else -> String.format("%s", primeCalendar.weekDayNameShort)
                 }
             }

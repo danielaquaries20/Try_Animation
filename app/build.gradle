@@ -66,4 +66,8 @@ dependencies {
     //Prime Date Picker
     implementation 'com.aminography:primedatepicker:3.6.0'
     implementation 'com.aminography:primecalendar:1.7.0'
+
+    //Applandeo Date Picker
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
+
 }
