@@ -70,4 +70,8 @@ dependencies {
     //Applandeo Date Picker
     implementation 'com.applandeo:material-calendar-view:1.7.0'
 
+    //Sticky Scroll View
+//    implementation 'com.github.amarjain07:StickyScrollView:<1.0.3>'
+    implementation 'com.github.amarjain07:StickyScrollView:1.0.3'
+
 }

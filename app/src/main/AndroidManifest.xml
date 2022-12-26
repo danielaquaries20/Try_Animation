@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".TryStickyScrollActivity"
+            android:exported="false" />
+        <activity
             android:name=".TryDatePickerActivity"
             android:exported="false" />
         <activity
