@@ -33,6 +33,16 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_from_me.xml" value="0.25" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_from_opponent.xml" value="0.33" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_loading.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/drawable-hdpi/green_circle.xml" value="0.14" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/drawable/green_circle.xml" value="0.14" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/dialog_time_picker.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_calendar_container.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_calendar_day.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_calendar_month.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_calendar_nav.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_calendar_week.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_calendar_week_days.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_pager_month.xml" value="0.209375" />
       </map>
     </option>
   </component>

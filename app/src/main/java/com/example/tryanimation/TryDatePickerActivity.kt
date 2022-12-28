@@ -5,6 +5,7 @@ import android.util.Log
 import android.util.SparseIntArray
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aminography.primecalendar.civil.CivilCalendar
 import com.aminography.primedatepicker.common.BackgroundShapeType
@@ -16,6 +17,7 @@ import com.aminography.primedatepicker.picker.callback.SingleDayPickCallback
 import com.aminography.primedatepicker.picker.theme.LightThemeFactory
 import com.applandeo.materialcalendarview.CalendarUtils
 import com.applandeo.materialcalendarview.CalendarView
+import com.daniel.try_module.customviews.DateRangeCalendarView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,6 +31,12 @@ class TryDatePickerActivity : AppCompatActivity() {
     private lateinit var tvDateEndApplandeo: TextView
     private lateinit var btnPickDateApplandeo: Button
     private lateinit var applandeoDatePicker: CalendarView
+
+    private lateinit var tvDateStartCustom: TextView
+    private lateinit var tvDateEndCustom: TextView
+    private lateinit var btnBatalCustomDatePicker: Button
+    private lateinit var btnSimpanCustomDatePicker: Button
+    private lateinit var customDatePicker: DateRangeCalendarView
 
     private var startDateApplandeo = ""
     private var endDateApplandeo = ""
@@ -49,10 +57,17 @@ class TryDatePickerActivity : AppCompatActivity() {
         btnPickDateApplandeo = findViewById(R.id.btnPickDateApplandeo)
         applandeoDatePicker = findViewById(R.id.applandeoCalendarView)
 
+        tvDateStartCustom = findViewById(R.id.tvDateStartCustom)
+        tvDateEndCustom = findViewById(R.id.tvDateEndCustom)
+        btnBatalCustomDatePicker = findViewById(R.id.btnBatalCustomDatePicker)
+        btnSimpanCustomDatePicker = findViewById(R.id.btnSimpanCustomDatePicker)
+        customDatePicker = findViewById(R.id.customDatePicker)
 
         btnPickDate.setOnClickListener { initDatePicker() }
 
         setApplandeoCalendar()
+
+        setCustomCalendar()
 
     }
 
@@ -93,6 +108,38 @@ class TryDatePickerActivity : AppCompatActivity() {
             }
         }
 //        CalendarUtils.getDatesRange()
+    }
+
+    private fun setCustomCalendar() {
+
+        val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy")
+
+        btnBatalCustomDatePicker.setOnClickListener {
+            tvDateStartCustom.text = "Tanggal Mulai :"
+            tvDateEndCustom.text = "Tanggal Akhir :"
+        }
+
+        btnSimpanCustomDatePicker.setOnClickListener {
+            val mulai = tvDateStartCustom.text.toString()
+            val akhir = tvDateEndCustom.text.toString()
+            Toast.makeText(this, "$mulai - $akhir", Toast.LENGTH_LONG).show()
+        }
+
+        customDatePicker.setCalendarListener(object : DateRangeCalendarView.CalendarListener {
+            override fun onFirstDateSelected(startDate: Calendar?) {
+                val tanggalMulai = startDate?.time?.let { simpleDateFormat.format(it) }
+                tvDateStartCustom.text = "Tanggal Mulai : $tanggalMulai"
+                tvDateEndCustom.text = "Tanggal Akhir :"
+            }
+
+            override fun onDateRangeSelected(startDate: Calendar?, endDate: Calendar?) {
+                val tanggalMulai = startDate?.time?.let { simpleDateFormat.format(it) }
+                val tanggalSelesai = endDate?.time?.let { simpleDateFormat.format(it) }
+                tvDateStartCustom.text = "Tanggal Mulai : $tanggalMulai"
+                tvDateEndCustom.text = "Tanggal Akhir : $tanggalSelesai"
+            }
+
+        })
     }
 
     private val themeFactory = object : LightThemeFactory() {
