@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aminography.primecalendar.civil.CivilCalendar
+import com.aminography.primecalendar.japanese.JapaneseCalendar
 import com.aminography.primedatepicker.common.BackgroundShapeType
 import com.aminography.primedatepicker.common.LabelFormatter
 import com.aminography.primedatepicker.picker.PrimeDatePicker
@@ -26,6 +27,7 @@ class TryDatePickerActivity : AppCompatActivity() {
     private lateinit var tvDateStart: TextView
     private lateinit var tvDateEnd: TextView
     private lateinit var btnPickDate: Button
+    private lateinit var btnPickDate2: Button
 
     private lateinit var tvDateStartApplandeo: TextView
     private lateinit var tvDateEndApplandeo: TextView
@@ -51,6 +53,7 @@ class TryDatePickerActivity : AppCompatActivity() {
         tvDateStart = findViewById(R.id.tvDateStart)
         tvDateEnd = findViewById(R.id.tvDateEnd)
         btnPickDate = findViewById(R.id.btnPickDate)
+        btnPickDate2 = findViewById(R.id.btnPickDate2)
 
         tvDateStartApplandeo = findViewById(R.id.tvDateStartApplandeo)
         tvDateEndApplandeo = findViewById(R.id.tvDateEndApplandeo)
@@ -63,7 +66,8 @@ class TryDatePickerActivity : AppCompatActivity() {
         btnSimpanCustomDatePicker = findViewById(R.id.btnSimpanCustomDatePicker)
         customDatePicker = findViewById(R.id.customDatePicker)
 
-        btnPickDate.setOnClickListener { initDatePicker() }
+        btnPickDate.setOnClickListener { setPrimeDatePicker() }
+        btnPickDate2.setOnClickListener { setPrimeDatePicker2() }
 
         setApplandeoCalendar()
 
@@ -142,6 +146,8 @@ class TryDatePickerActivity : AppCompatActivity() {
         })
     }
 
+//    privaye val tgttg = object : DarkThemeFactory() {}
+
     private val themeFactory = object : LightThemeFactory() {
 
         /*override val typefacePath: String?
@@ -195,13 +201,16 @@ class TryDatePickerActivity : AppCompatActivity() {
             get() = true
 
         override val selectionBarBackgroundColor: Int
-            get() = getColor(com.aminography.primedatepicker.R.color.blue50)
+            get() = getColor(com.aminography.primedatepicker.R.color.blue200)
 
         override val selectionBarRangeDaysItemBackgroundColor: Int
             get() = getColor(R.color.yellow)
+
+        override val selectionBarMultipleDaysItemBackgroundColor: Int
+            get() = getColor(R.color.yellow)
     }
 
-    private fun initDatePicker() {
+    private fun setPrimeDatePicker() {
         val callbackSingle = SingleDayPickCallback { day ->
             val hari = day.longDateString
             tvDateStart.text = "Tanggal Mulai : $hari"
@@ -243,4 +252,50 @@ class TryDatePickerActivity : AppCompatActivity() {
 
         datePicker.show(supportFragmentManager, "PRIME_DATE_PICKER")
     }
+
+    private fun setPrimeDatePicker2() {
+        val callbackSingle = SingleDayPickCallback { day ->
+            val hari = day.longDateString
+            tvDateStart.text = "Tanggal Mulai : $hari"
+        }
+        val callbackRange = RangeDaysPickCallback { startDay, endDay ->
+            val hariPertama = startDay.longDateString
+            val hariAkhir = endDay.longDateString
+            tvDateStart.text = "Tanggal Mulai : $hariPertama"
+            tvDateEnd.text = "Tanggal Akhir : $hariAkhir"
+        }
+
+        val callbackMultiple = MultipleDaysPickCallback { multipleDays ->
+            val indexTerakhir = multipleDays.lastIndex
+            val hariPertama = multipleDays[0].longDateString
+            val hariAkhir = multipleDays[indexTerakhir].longDateString
+            tvDateStart.text = "Tanggal Mulai : $hariPertama"
+            tvDateEnd.text = "Tanggal Akhir : $hariAkhir"
+        }
+
+        val today = JapaneseCalendar()
+//        val minPossibeDate = today.also {
+//            it.year = Calendar.YEAR
+//            it.month = Calendar.MONTH
+//            it.firstDayOfWeek = Calendar.MONDAY
+//        }
+//        val maxPossibleDate = today.also {
+//            it.year = 2024
+//            it.month = Calendar.MONTH
+//            it.firstDayOfWeek = Calendar.MONDAY
+//        }
+
+        val datePicker = PrimeDatePicker.bottomSheetWith(today)  // or dialogWith(today)
+//            .pickRangeDays(callbackRange)
+            .pickMultipleDays(callbackMultiple)
+//            .initiallyPickedStartDay(today)
+//            .autoSelectPickEndDay(true)
+//            .minPossibleDate(minPossibeDate)
+//            .maxPossibleDate(maxPossibleDate)
+            .applyTheme(themeFactory)
+            .build()
+
+        datePicker.show(supportFragmentManager, "PRIME_DATE_PICKER")
+    }
+
 }

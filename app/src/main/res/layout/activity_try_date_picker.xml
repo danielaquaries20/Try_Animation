@@ -56,6 +56,16 @@
                 android:text="Pilih Tanggal"
                 android:textAllCaps="false" />
 
+            <Button
+                android:id="@+id/btnPickDate2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="17dp"
+                android:backgroundTint="@color/red700"
+                android:text="Pilih Tanggal (Custom Theme)"
+                android:textAllCaps="false" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/titleApplandeoDatePicker"
@@ -116,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/titleCustomDatePicker"
