@@ -1,19 +1,22 @@
 package com.example.tryanimation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.play.core.splitinstall.SplitInstallManager
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
+import com.google.android.play.core.splitinstall.SplitInstallRequest
 
 class TryModuleDynamicFeatureActivity : AppCompatActivity() {
 
     private lateinit var ivPhoto: ImageView
     private lateinit var btnDynamicFeature: Button
+    private lateinit var linearLoading: LinearLayout
+    private lateinit var splitInstallManager : SplitInstallManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +24,9 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
 
         ivPhoto = findViewById(R.id.ivPhoto)
         btnDynamicFeature = findViewById(R.id.btnDynamicFeature)
+        linearLoading = findViewById(R.id.linearLoading)
+
+        splitInstallManager = SplitInstallManagerFactory.create(this)
 
 //        ivPhoto.setImageResource(com.daniel.try_module.R.drawable.photo_1)
 
@@ -30,11 +36,52 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
 
     private fun initClick() {
         btnDynamicFeature.setOnClickListener {
-            alertDialogTry("Module 1", "Install Module 1", 0)
+            tryDynamicFeatureModule()
         }
     }
 
-    private fun alertDialogTry(title: String, subtitle: String?, condition: Int) {
+    private fun tryDynamicFeatureModule() {
+        try {
+            val moduleTryDynamicFeature = "try_dynamic_feature"
+            val className = "com.daniel.try_dynamic_feature.DefaultActivity"
+            val cobaLihat = splitInstallManager.installedModules
+            if (splitInstallManager.installedModules.contains(moduleTryDynamicFeature)) {
+                Toast.makeText(this, "Install : $cobaLihat", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, Class.forName(className)))
+            } else {
+                Toast.makeText(this, "Install : $cobaLihat", Toast.LENGTH_SHORT).show()
+                alertDialogTry("Install Module Confirmation",
+                    "Apakah Anda ingin meng-install module Try Dynamic Feature?\nInstall : $cobaLihat",
+                    moduleTryDynamicFeature, className)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Error : $e", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun installModule(module: String, className: String) {
+        linearLoading.visibility = View.VISIBLE
+        val request = SplitInstallRequest.newBuilder()
+            .addModule(module)
+            .build()
+
+        splitInstallManager.startInstall(request).addOnSuccessListener {
+            linearLoading.visibility = View.GONE
+            Toast.makeText(this, "Success Install Module", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, Class.forName(className)))
+        }.addOnFailureListener {
+            linearLoading.visibility = View.GONE
+            Toast.makeText(this, "Failed to Install Module", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun alertDialogTry(
+        title: String,
+        subtitle: String?,
+        module: String,
+        className: String,
+    ) {
         val alertDialogInstallConfirmation =
             LayoutInflater.from(this)
                 .inflate(R.layout.alert_dialog_install_module_confirmation,
@@ -64,12 +111,7 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
         }
 
         btnKonfirmasi.setOnClickListener {
-            if (condition == 0) {
-                Toast.makeText(this, "Install module $condition", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Don't know which module to Install", Toast.LENGTH_SHORT)
-                    .show()
-            }
+            installModule(module, className)
         }
 
     }

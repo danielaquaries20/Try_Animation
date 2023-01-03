@@ -17,6 +17,30 @@
             android:contentDescription="@string/icon_image"
             android:src="@drawable/photo_1" />
 
+        <LinearLayout
+            android:id="@+id/linearLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="17dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:progressBackgroundTint="@color/red700"
+                android:progressTint="#A69120" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading...." />
+
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/btnDynamicFeature"
             android:layout_width="match_parent"

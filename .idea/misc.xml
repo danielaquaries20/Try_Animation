@@ -12,6 +12,7 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/background_time_from_opponent.xml" value="0.14" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/backround_round_yellow.xml" value="0.138" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/ic_baseline_animation.xml" value="0.138" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/ic_baseline_install_mobile.xml" value="0.164" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/ic_baseline_send.xml" value="0.206" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/shadow_bottom.xml" value="0.14" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_animation_one.xml" value="0.209375" />
@@ -26,6 +27,7 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_navigation_component.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_scan_qractivity.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_sticky_scroll.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/alert_dialog_install_module_confirmation.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/alert_dialog_try.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/bottom_sheet_try.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_first_nav_component.xml" value="0.1953125" />
@@ -44,6 +46,7 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_calendar_week.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_calendar_week_days.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/layout_pager_month.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/try_dynamic_feature/src/main/res/layout/activity_default.xml" value="0.209375" />
       </map>
     </option>
   </component>
