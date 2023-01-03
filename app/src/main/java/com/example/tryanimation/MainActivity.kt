@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryChat: Button
     private lateinit var btnTryDatePicker: Button
     private lateinit var btnTryStickyView: Button
+    private lateinit var btnTryModuleDynamicFeature: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         btnTryChat = findViewById(R.id.btnTryChatApp)
         btnTryDatePicker = findViewById(R.id.btnTryDatePicker)
         btnTryStickyView = findViewById(R.id.btnTryStickyView)
+        btnTryModuleDynamicFeature = findViewById(R.id.btnTryModuleDynamicFeature)
         /*endregion*/
 
         /*region Action*/
@@ -115,6 +117,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryStickyView.setOnClickListener {
             startActivity(Intent(this, TryStickyScrollActivity::class.java))
+        }
+
+        btnTryModuleDynamicFeature.setOnClickListener {
+            startActivity(Intent(this, TryModuleDynamicFeatureActivity::class.java))
         }
 
         /*endregion*/

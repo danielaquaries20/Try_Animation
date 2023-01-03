@@ -36,6 +36,7 @@ android {
         dataBinding true
         viewBinding true
     }
+    dynamicFeatures = [':try_dynamic_feature']
 }
 
 dependencies {

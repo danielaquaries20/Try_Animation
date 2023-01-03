@@ -9,4 +9,5 @@
     <string name="elysia">Elysia</string>
     <string name="message">Message..</string>
     <string name="label_sedang_mengetik">sedang mengetik...</string>
+    <string name="title_try_dynamic_feature">Try Dynamic Feature</string>
 </resources>
