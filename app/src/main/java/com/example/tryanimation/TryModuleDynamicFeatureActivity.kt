@@ -49,9 +49,8 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
                 Toast.makeText(this, "Install : $cobaLihat", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, Class.forName(className)))
             } else {
-                Toast.makeText(this, "Install : $cobaLihat", Toast.LENGTH_SHORT).show()
                 alertDialogTry("Install Module Confirmation",
-                    "Apakah Anda ingin meng-install module Try Dynamic Feature?\nInstall : $cobaLihat",
+                    "Apakah Anda ingin meng-install module Try Dynamic Feature?\nInstalled Module : $cobaLihat",
                     moduleTryDynamicFeature, className)
             }
         } catch (e: Exception) {
