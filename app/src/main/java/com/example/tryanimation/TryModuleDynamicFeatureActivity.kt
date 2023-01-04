@@ -2,6 +2,7 @@ package com.example.tryanimation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -15,6 +16,7 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
 
     private lateinit var ivPhoto: ImageView
     private lateinit var btnDynamicFeature: Button
+    private lateinit var btnDynamic1: Button
     private lateinit var linearLoading: LinearLayout
     private lateinit var splitInstallManager : SplitInstallManager
 
@@ -24,6 +26,7 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
 
         ivPhoto = findViewById(R.id.ivPhoto)
         btnDynamicFeature = findViewById(R.id.btnDynamicFeature)
+        btnDynamic1 = findViewById(R.id.btnDynamic1)
         linearLoading = findViewById(R.id.linearLoading)
 
         splitInstallManager = SplitInstallManagerFactory.create(this)
@@ -37,6 +40,10 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
     private fun initClick() {
         btnDynamicFeature.setOnClickListener {
             tryDynamicFeatureModule()
+        }
+        btnDynamic1.setOnClickListener {
+            val cobaLihat = splitInstallManager.installedModules
+            Toast.makeText(this, "Installed Module: $cobaLihat", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -70,8 +77,11 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
             Toast.makeText(this, "Success Install Module", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, Class.forName(className)))
         }.addOnFailureListener {
+            // TODO: Handle saat Install Module Failed
+            Log.e("FailedModule", "Error: $it")
+            alertDialogTry("Error Notification", "$it", module, className, false)
             linearLoading.visibility = View.GONE
-            Toast.makeText(this, "Failed to Install Module", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Failed to Install Module, Error: $it", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -80,6 +90,7 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
         subtitle: String?,
         module: String,
         className: String,
+        withBtn: Boolean = true,
     ) {
         val alertDialogInstallConfirmation =
             LayoutInflater.from(this)
@@ -96,6 +107,7 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
         val tvSubtitle = alertDialogInstallConfirmation.findViewById<TextView>(R.id.tvSubtitleAlert)
         val btnBatal = alertDialogInstallConfirmation.findViewById<Button>(R.id.btnBatal)
         val btnKonfirmasi = alertDialogInstallConfirmation.findViewById<Button>(R.id.btnKonfirmasi)
+        val linearBtn = alertDialogInstallConfirmation.findViewById<LinearLayout>(R.id.linearBtn)
 
         tvTitle.text = title
 
@@ -105,12 +117,19 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
             tvSubtitle.text = subtitle
         }
 
+        if (withBtn) {
+            linearBtn.visibility = View.VISIBLE
+        } else {
+            linearBtn.visibility = View.GONE
+        }
+
         btnBatal.setOnClickListener {
             theAlertDialog.dismiss()
         }
 
         btnKonfirmasi.setOnClickListener {
             installModule(module, className)
+            theAlertDialog.dismiss()
         }
 
     }

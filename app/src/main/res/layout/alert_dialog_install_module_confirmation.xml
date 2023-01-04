@@ -37,6 +37,7 @@
         android:textSize="13sp" />
 
     <LinearLayout
+        android:id="@+id/linearBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

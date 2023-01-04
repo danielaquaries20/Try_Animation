@@ -53,6 +53,18 @@
             android:text="Dynamic Feature"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btnDynamic1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:text="Dynamic 1"
+            android:textAllCaps="false" />
+
 
     </LinearLayout>
 

@@ -10,4 +10,5 @@
     <string name="message">Message..</string>
     <string name="label_sedang_mengetik">sedang mengetik...</string>
     <string name="title_try_dynamic_feature">Try Dynamic Feature</string>
+    <string name="title_dynamic1">Dynamic 1</string>
 </resources>
