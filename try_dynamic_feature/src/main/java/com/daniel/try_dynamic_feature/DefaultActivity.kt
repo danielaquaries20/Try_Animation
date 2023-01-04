@@ -1,9 +1,12 @@
 package com.daniel.try_dynamic_feature
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.play.core.splitcompat.SplitCompat
 
 class DefaultActivity : AppCompatActivity() {
 
@@ -25,6 +28,11 @@ class DefaultActivity : AppCompatActivity() {
         tvNumber.text = number.toString()
     }
 
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        SplitCompat.installActivity(this)
+    }
+
     private fun initClick() {
         btnIncrement.setOnClickListener {
             number++
@@ -34,6 +42,10 @@ class DefaultActivity : AppCompatActivity() {
         btnDecrement.setOnClickListener {
             number--
             tvNumber.text = number.toString()
+        }
+
+        tvNumber.setOnClickListener {
+            Toast.makeText(this, "Angka : $number", Toast.LENGTH_SHORT).show()
         }
 
     }

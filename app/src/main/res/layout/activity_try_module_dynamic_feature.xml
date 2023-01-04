@@ -14,6 +14,7 @@
             android:id="@+id/ivPhoto"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
+            android:scaleType="fitXY"
             android:contentDescription="@string/icon_image"
             android:src="@drawable/photo_1" />
 
@@ -34,6 +35,7 @@
                 android:progressTint="#A69120" />
 
             <TextView
+                android:id="@+id/tvInfoProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Loading...." />

@@ -1,5 +1,6 @@
 package com.example.tryanimation
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
+import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
+import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 
 class TryModuleDynamicFeatureActivity : AppCompatActivity() {
 
@@ -18,7 +21,8 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
     private lateinit var btnDynamicFeature: Button
     private lateinit var btnDynamic1: Button
     private lateinit var linearLoading: LinearLayout
-    private lateinit var splitInstallManager : SplitInstallManager
+    private lateinit var tvInfoProgress: TextView
+    private lateinit var splitInstallManager: SplitInstallManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,7 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
         btnDynamicFeature = findViewById(R.id.btnDynamicFeature)
         btnDynamic1 = findViewById(R.id.btnDynamic1)
         linearLoading = findViewById(R.id.linearLoading)
+        tvInfoProgress = findViewById(R.id.tvInfoProgress)
 
         splitInstallManager = SplitInstallManagerFactory.create(this)
 
@@ -67,17 +72,68 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
     }
 
     private fun installModule(module: String, className: String) {
+
         linearLoading.visibility = View.VISIBLE
+        val listener = SplitInstallStateUpdatedListener { state ->
+            when (state.status()) {
+                SplitInstallSessionStatus.DOWNLOADING -> {
+                    linearLoading.visibility = View.VISIBLE
+                    tvInfoProgress.text = "Downloading"
+                }
+                SplitInstallSessionStatus.INSTALLING -> {
+                    linearLoading.visibility = View.VISIBLE
+                    tvInfoProgress.text = "Installing"
+                }
+                SplitInstallSessionStatus.CANCELING -> {
+                    linearLoading.visibility = View.VISIBLE
+                    tvInfoProgress.text = "Canceling"
+                }
+                SplitInstallSessionStatus.PENDING -> {
+                    linearLoading.visibility = View.VISIBLE
+                    tvInfoProgress.text = "Pending"
+                }
+                SplitInstallSessionStatus.INSTALLED -> {
+                    linearLoading.visibility = View.GONE
+                    tvInfoProgress.text = "Installed"
+                    Toast.makeText(this, "Module Installed", Toast.LENGTH_SHORT).show()
+                }
+                SplitInstallSessionStatus.DOWNLOADED -> {
+                    linearLoading.visibility = View.GONE
+                    tvInfoProgress.text = "Downloaded"
+                    Toast.makeText(this, "Module Downloaded", Toast.LENGTH_SHORT).show()
+                }
+                SplitInstallSessionStatus.CANCELED -> {
+                    linearLoading.visibility = View.GONE
+                    tvInfoProgress.text = "Canceled"
+                    Toast.makeText(this, "Module Canceled", Toast.LENGTH_SHORT).show()
+                }
+                SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> {
+                    linearLoading.visibility = View.VISIBLE
+                    tvInfoProgress.text = "Require User Confirmation"
+                }
+                SplitInstallSessionStatus.FAILED -> {
+                    linearLoading.visibility = View.GONE
+                    tvInfoProgress.text = "Failed"
+                    Toast.makeText(this, "Module Failed", Toast.LENGTH_SHORT).show()
+                }
+                SplitInstallSessionStatus.UNKNOWN -> {
+                    linearLoading.visibility = View.GONE
+                    tvInfoProgress.text = "Unknown"
+                    Toast.makeText(this, "Module Unknown", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         val request = SplitInstallRequest.newBuilder()
             .addModule(module)
             .build()
 
+//        splitInstallManager.registerListener(listener)
         splitInstallManager.startInstall(request).addOnSuccessListener {
             linearLoading.visibility = View.GONE
             Toast.makeText(this, "Success Install Module", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, Class.forName(className)))
         }.addOnFailureListener {
-            // TODO: Handle saat Install Module Failed
             Log.e("FailedModule", "Error: $it")
             alertDialogTry("Error Notification", "$it", module, className, false)
             linearLoading.visibility = View.GONE
