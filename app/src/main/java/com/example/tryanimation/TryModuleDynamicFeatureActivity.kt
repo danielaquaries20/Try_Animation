@@ -74,6 +74,7 @@ class TryModuleDynamicFeatureActivity : AppCompatActivity() {
     private fun installModule(module: String, className: String) {
 
         linearLoading.visibility = View.VISIBLE
+        // TODO: Mempelajari Listener State
         val listener = SplitInstallStateUpdatedListener { state ->
             when (state.status()) {
                 SplitInstallSessionStatus.DOWNLOADING -> {
