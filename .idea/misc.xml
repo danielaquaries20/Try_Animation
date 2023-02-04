@@ -20,6 +20,7 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_motion_layout_one.xml" value="0.22" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_splashscreen.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_bottom_navigation.xml" value="0.25" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_center_view.xml" value="0.25" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_chat.xml" value="0.21686746987951808" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_date_picker.xml" value="0.209375" />
@@ -31,11 +32,14 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/alert_dialog_try.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/bottom_sheet_try.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_first_nav_component.xml" value="0.1953125" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_home.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_profile.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_second_nav_component.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_date.xml" value="0.67" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_from_me.xml" value="0.25" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_from_opponent.xml" value="0.33" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_loading.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/menu/menu_try_bottom_navigation.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/drawable-hdpi/green_circle.xml" value="0.14" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/drawable/green_circle.xml" value="0.14" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/dialog_time_picker.xml" value="0.209375" />

@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".try_bottom_navigation.TryBottomNavigationActivity"
+            android:exported="false" />
+        <activity
             android:name=".TryModuleDynamicFeatureActivity"
             android:exported="false" />
         <activity

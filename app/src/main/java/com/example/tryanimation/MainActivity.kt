@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
 import com.example.tryanimation.try_chat_app.TryChatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryDatePicker: Button
     private lateinit var btnTryStickyView: Button
     private lateinit var btnTryModuleDynamicFeature: Button
+    private lateinit var btnTryBotttomNavigation: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         btnTryDatePicker = findViewById(R.id.btnTryDatePicker)
         btnTryStickyView = findViewById(R.id.btnTryStickyView)
         btnTryModuleDynamicFeature = findViewById(R.id.btnTryModuleDynamicFeature)
+        btnTryBotttomNavigation = findViewById(R.id.btnTryBottomNavigation)
         /*endregion*/
 
         /*region Action*/
@@ -121,6 +124,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryModuleDynamicFeature.setOnClickListener {
             startActivity(Intent(this, TryModuleDynamicFeatureActivity::class.java))
+        }
+
+        btnTryBotttomNavigation.setOnClickListener {
+            startActivity(Intent(this, TryBottomNavigationActivity::class.java))
         }
 
         /*endregion*/
