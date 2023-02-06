@@ -31,4 +31,11 @@ dependencies {
 
     /* play core */
     implementation "com.google.android.play:core:1.10.3"
+
+    //Lottie Animation
+    implementation "com.airbnb.android:lottie:3.4.0"
+
+    //Prime Date Picker
+    implementation 'com.aminography:primedatepicker:3.6.0'
+    implementation 'com.aminography:primecalendar:1.7.0'
 }
