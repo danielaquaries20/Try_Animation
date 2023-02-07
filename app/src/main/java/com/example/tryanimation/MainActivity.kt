@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryModuleDynamicFeature: Button
     private lateinit var btnTryBotttomNavigation: Button
     private lateinit var btnTryOnBoarder: Button
+    private lateinit var btnTryShowcase: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         btnTryModuleDynamicFeature = findViewById(R.id.btnTryModuleDynamicFeature)
         btnTryBotttomNavigation = findViewById(R.id.btnTryBottomNavigation)
         btnTryOnBoarder = findViewById(R.id.btnTryOnBoarder)
+        btnTryShowcase = findViewById(R.id.btnTryShowcase)
         /*endregion*/
 
         /*region Action*/
@@ -136,6 +138,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, TryOnBoarderActivity::class.java))
         }
 
+        btnTryShowcase.setOnClickListener {
+            startActivity(Intent(this, TryShowcaseActivity::class.java))
+        }
         /*endregion*/
 
         /*region Animation*/
