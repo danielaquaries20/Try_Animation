@@ -44,6 +44,7 @@ dependencies {
     implementation project(':calendar-module')
     implementation project(':onboarder')
     implementation project(':showcase')
+    implementation project(':material-calendar')
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
@@ -75,7 +76,7 @@ dependencies {
     implementation 'com.aminography:primecalendar:1.7.0'
 
     //Applandeo Date Picker
-    implementation 'com.applandeo:material-calendar-view:1.7.0'
+//    implementation 'com.applandeo:material-calendar-view:1.7.0'
 
     //Sticky Scroll View
 //    implementation 'com.github.amarjain07:StickyScrollView:<1.0.3>'

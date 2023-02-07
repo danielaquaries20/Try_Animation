@@ -33,6 +33,7 @@ class TryDatePickerActivity : AppCompatActivity() {
     private lateinit var tvDateEndApplandeo: TextView
     private lateinit var btnPickDateApplandeo: Button
     private lateinit var applandeoDatePicker: CalendarView
+//    private lateinit var materialCalendar: CalendarView
 
     private lateinit var tvDateStartCustom: TextView
     private lateinit var tvDateEndCustom: TextView

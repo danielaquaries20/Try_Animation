@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml:1:1-57
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml:1:1-57
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml:1:1-57
+	package
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml:1:11-55
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml:1:1-57
+uses-sdk
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\material-calendar\src\main\AndroidManifest.xml
