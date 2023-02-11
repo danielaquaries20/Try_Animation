@@ -232,6 +232,7 @@ class TryDatePickerActivity : AppCompatActivity() {
         }
 
         // To show a date picker with Civil dates, also today as the starting date
+
         val today = CivilCalendar()
         val minPossibeDate = CivilCalendar().also {
             it.year = Calendar.YEAR
@@ -244,9 +245,23 @@ class TryDatePickerActivity : AppCompatActivity() {
             it.firstDayOfWeek = Calendar.MONDAY
         }
 
+        val initialStartDate = CivilCalendar().also {
+            it.year = 2023
+            it.month = 1
+            it.date = 13
+        }
+
+        val initialEndDate = CivilCalendar().also {
+            it.year = 2023
+            it.month = 1
+            it.date = 19
+        }
+
+
         val datePicker = PrimeDatePicker.dialogWith(today)  // or dialogWith(today)
             .pickRangeDays(callbackRange)
-            .initiallyPickedStartDay(today)
+//            .initiallyPickedStartDay(today)
+            .initiallyPickedRangeDays(initialStartDate, initialEndDate)
             .autoSelectPickEndDay(true)
 //            .applyTheme(themeFactory)
             .build()

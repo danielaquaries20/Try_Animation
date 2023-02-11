@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -13,19 +14,18 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
 import android.widget.TextView;
-
-import com.reprime.onboarder.utils.ShadowTransformer;
-import com.reprime.onboarder.views.CircleIndicatorView;
-
-import java.util.List;
 
 import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
+
+import com.reprime.onboarder.utils.ShadowTransformer;
+import com.reprime.onboarder.views.CircleIndicatorView;
+
+import java.util.List;
 
 public abstract class AhoyOnboarderActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
@@ -74,6 +74,10 @@ public abstract class AhoyOnboarderActivity extends AppCompatActivity implements
         vpOnboarderPager.addOnPageChangeListener(this);
         btnSkip.setOnClickListener(this);
         btnNext.setOnClickListener(this);
+        Log.d("TagLog", "AhoyBoardThis: " + this);
+        Log.d("TagLog", "AhoyBoardPagerView: " + vpOnboarderPager);
+        Log.d("TagLog", "AhoyBoardSkipView: " + btnSkip);
+        Log.d("TagLog", "AhoyBoardNextView: " + btnNext);
 
         /*ivPrev.setOnClickListener(this);
         ivNext.setOnClickListener(this);*/

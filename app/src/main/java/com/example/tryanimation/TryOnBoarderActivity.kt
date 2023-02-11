@@ -2,6 +2,7 @@ package com.example.tryanimation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.example.tryanimation.try_chat_app.TryChatActivity
 import com.reprime.onboarder.AhoyOnboarderActivity
 import com.reprime.onboarder.AhoyOnboarderCard
@@ -12,6 +13,7 @@ class TryOnBoarderActivity : AhoyOnboarderActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("TagLog", "OnboardInstance: $savedInstanceState")
 
         val onboarderCard1 = AhoyOnboarderCard(
             "Online Absensi",
