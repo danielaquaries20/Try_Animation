@@ -13,7 +13,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.tryanimation"
+        applicationId "com.crocodic.health"
         minSdk 23
         targetSdk 32
         versionCode 1
