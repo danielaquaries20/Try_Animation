@@ -3,35 +3,54 @@ package com.example.tryanimation.try_architecture_code
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.tryanimation.R
+import com.example.tryanimation.try_architecture_code.api.ApiDummyRepository
 
 class TryArchitectureCodeActivity : AppCompatActivity() {
 
     private lateinit var viewModel: TryArchitectureViewModel
+    private val apiDummyRepository = ApiDummyRepository()
 
     private lateinit var btnTambah: Button
     private lateinit var btnKurang: Button
+    private lateinit var btnGetPost: Button
 
     private lateinit var tvAngka: TextView
     private lateinit var tvBoolean: TextView
+
+    private lateinit var tvUserId: TextView
+    private lateinit var tvId: TextView
+    private lateinit var tvTitle: TextView
+    private lateinit var tvContent: TextView
 
     private var number: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_try_architecture_code)
+        val viewModelFactory = TryArchitectureViewModelFactory(apiDummyRepository)
+        viewModel = ViewModelProvider(this, viewModelFactory)[TryArchitectureViewModel::class.java]
 
-        viewModel = ViewModelProvider(this)[TryArchitectureViewModel::class.java]
+        initView()
+        observe()
+        initClick()
+    }
 
+    private fun initView() {
         btnTambah = findViewById(R.id.btnTambah)
         btnKurang = findViewById(R.id.btnKurang)
+        btnGetPost = findViewById(R.id.btnGetPost)
+
         tvAngka = findViewById(R.id.tvLiveInt)
         tvBoolean = findViewById(R.id.tvLiveBoolean)
 
-        observe()
-        initClick()
+        tvUserId = findViewById(R.id.tvUserId)
+        tvId = findViewById(R.id.tvId)
+        tvTitle = findViewById(R.id.tvTitle)
+        tvContent = findViewById(R.id.tvContent)
     }
 
     private fun observe() {
@@ -50,6 +69,17 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
                 tvBoolean.text = "Angka masih kosong"
             }
         }
+
+        viewModel.apiResponse.observe(this) { response ->
+            if (response.isSuccessful) {
+                tvUserId.text = "UserId: ${response.body()?.userId.toString()}"
+                tvId.text = "Post Id: ${response.body()?.id.toString()}"
+                tvTitle.text = "Title: ${response.body()?.title.toString()}"
+                tvContent.text = "Content: ${response.body()?.content.toString()}"
+            } else {
+                Toast.makeText(this, "Error message: ${response.code()}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun initClick() {
@@ -58,6 +88,10 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         }
         btnKurang.setOnClickListener {
             viewModel.decrease(number)
+        }
+
+        btnGetPost.setOnClickListener {
+            viewModel.getFinalPost()
         }
 
     }
