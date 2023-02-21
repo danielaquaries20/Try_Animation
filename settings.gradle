@@ -4,6 +4,26 @@ pluginManagement {
         google()
         mavenCentral()
         jcenter()
+
+        // Configure the Maven repository address for the HMS Core SDK.
+        maven {url 'https://developer.huawei.com/repo/'}
+    }
+
+    resolutionStrategy {
+        eachPlugin {
+            if (it.requested.id.getNamespace() == 'com.huawei.agconnect') {
+                println ">> ${it.requested.id.id}"
+                if (it.requested.id.id == 'com.huawei.agconnect.agcp') {
+                    it.useModule('com.huawei.agconnect:agcp:1.7.3.302')
+                }
+                if (it.requested.id.id == 'com.huawei.agconnect.apms') {
+                    it.useModule('com.huawei.agconnect:agconnect-apms-plugin:1.6.1.300')
+                }
+                println ">> ${it.target}"
+            } else {
+                println ">  ${it.target}"
+            }
+        }
     }
 }
 dependencyResolutionManagement {
@@ -13,6 +33,9 @@ dependencyResolutionManagement {
         mavenCentral()
         jcenter()
         maven { url 'https://jitpack.io' }
+
+        // Configure the Maven repository address for the HMS Core SDK.
+        maven {url 'https://developer.huawei.com/repo/'}
     }
 }
 rootProject.name = "Try Animation"

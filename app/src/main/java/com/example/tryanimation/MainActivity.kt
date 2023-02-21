@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
 import com.example.tryanimation.try_chat_app.TryChatActivity
+import com.example.tryanimation.try_huawei_oauth.TryHuaweiOauthActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
 import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryBotttomNavigation: Button
     private lateinit var btnTryOnBoarder: Button
     private lateinit var btnTryShowcase: Button
+    private lateinit var btnTryHuaweiOauth: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         btnTryBotttomNavigation = findViewById(R.id.btnTryBottomNavigation)
         btnTryOnBoarder = findViewById(R.id.btnTryOnBoarder)
         btnTryShowcase = findViewById(R.id.btnTryShowcase)
+        btnTryHuaweiOauth = findViewById(R.id.btnTryHuaweiOauth)
         /*endregion*/
 
         /*region Action*/
@@ -140,6 +143,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryShowcase.setOnClickListener {
             startActivity(Intent(this, TryShowcaseActivity::class.java))
+        }
+
+        btnTryHuaweiOauth.setOnClickListener {
+            startActivity(Intent(this, TryHuaweiOauthActivity::class.java))
         }
         /*endregion*/
 
@@ -231,5 +238,4 @@ class MainActivity : AppCompatActivity() {
             theAlertDialog.dismiss()
         }
     }
-
 }
