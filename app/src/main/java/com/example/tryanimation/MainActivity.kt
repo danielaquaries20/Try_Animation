@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tryanimation.try_architecture_code.TryArchitectureCodeActivity
 import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
 import com.example.tryanimation.try_chat_app.TryChatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryBotttomNavigation: Button
     private lateinit var btnTryOnBoarder: Button
     private lateinit var btnTryShowcase: Button
+    private lateinit var btnTryArchitectureCode: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         btnTryBotttomNavigation = findViewById(R.id.btnTryBottomNavigation)
         btnTryOnBoarder = findViewById(R.id.btnTryOnBoarder)
         btnTryShowcase = findViewById(R.id.btnTryShowcase)
+        btnTryArchitectureCode = findViewById(R.id.btnTryArchitectureCode)
         /*endregion*/
 
         /*region Action*/
@@ -140,6 +143,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryShowcase.setOnClickListener {
             startActivity(Intent(this, TryShowcaseActivity::class.java))
+        }
+
+        btnTryArchitectureCode.setOnClickListener {
+            startActivity(Intent(this, TryArchitectureCodeActivity::class.java))
         }
         /*endregion*/
 

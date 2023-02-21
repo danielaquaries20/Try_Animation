@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".try_architecture_code.TryArchitectureCodeActivity"
+            android:exported="false" />
+        <activity
             android:name=".TryShowcaseActivity"
             android:exported="false" />
         <activity

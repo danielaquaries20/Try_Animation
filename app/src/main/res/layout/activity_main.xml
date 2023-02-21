@@ -192,6 +192,17 @@
             android:text="Try Showcase"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btnTryArchitectureCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="#4B224E"
+            android:text="Try Architecture Code"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
 
