@@ -9,7 +9,7 @@ import com.example.tryanimation.try_architecture_code.database.user.UserEntity
 
 @Database(
     entities = [UserEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false)
 abstract class MyDatabaseTry : RoomDatabase() {
 

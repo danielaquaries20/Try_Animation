@@ -142,6 +142,16 @@
             android:maxHeight="70dp"
             android:minHeight="45dp" />
 
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="15dp"
+            android:backgroundTint="#F44336"
+            android:text="Save User"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
