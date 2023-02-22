@@ -36,4 +36,17 @@ class DetailUserViewModel(context: Context) : ViewModel() {
         }
     }
 
+    fun updateUser(idUser: Int, firstName: String, lastName: String, age: Int?, bio: String?) {
+        viewModelScope.launch {
+            try {
+                val user = UserEntity(idUser, firstName, lastName, age, bio)
+                userDao?.updateUser(user)
+                response.postValue(2)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                response.postValue(0)
+            }
+        }
+    }
+
 }

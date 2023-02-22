@@ -14,7 +14,7 @@ class DetailUserActivity : AppCompatActivity() {
     private lateinit var viewModel: DetailUserViewModel
 
     private var isEdit: Boolean = false
-    private var idUser: Int? = null
+    private var idUser: Int = 0
     private var oldFirstName: String = ""
     private var oldLastName: String = ""
     private var oldAge: Int = 0
@@ -62,15 +62,24 @@ class DetailUserActivity : AppCompatActivity() {
     private fun observe() {
         lifecycleScope.launch {
             viewModel.response.observe(this@DetailUserActivity) { response ->
-                if (response == 1) {
-                    Toast.makeText(this@DetailUserActivity,
-                        "Berhasil menambahkan User",
-                        Toast.LENGTH_SHORT).show()
-                    onBackPressed()
-                } else {
-                    Toast.makeText(this@DetailUserActivity,
-                        "Gagal menambahkan User",
-                        Toast.LENGTH_SHORT).show()
+                when (response) {
+                    1 -> {
+                        Toast.makeText(this@DetailUserActivity,
+                            "Berhasil menambahkan User",
+                            Toast.LENGTH_SHORT).show()
+                        onBackPressed()
+                    }
+                    2 -> {
+                        Toast.makeText(this@DetailUserActivity,
+                            "Berhasil update User",
+                            Toast.LENGTH_SHORT).show()
+                        onBackPressed()
+                    }
+                    else -> {
+                        Toast.makeText(this@DetailUserActivity,
+                            "Gagal menambahkan User",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -124,11 +133,25 @@ class DetailUserActivity : AppCompatActivity() {
             return
         }
 
-        if (age.isEmpty()) {
-            viewModel.addUser(firstName, lastName, null, bio)
-        } else {
-            viewModel.addUser(firstName, lastName, age.toInt(), bio)
+        if (firstName == oldFirstName && lastName == oldLastName && age == oldAge.toString() && bio == oldBio) {
+            Toast.makeText(this, "Tidak ada data yang berubah", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        if (idUser == 0) {
+            if (age.isEmpty()) {
+                viewModel.addUser(firstName, lastName, null, bio)
+            } else {
+                viewModel.addUser(firstName, lastName, age.toInt(), bio)
+            }
+        } else {
+            if (age.isEmpty()) {
+                viewModel.updateUser(idUser, firstName, lastName, null, bio)
+            } else {
+                viewModel.updateUser(idUser, firstName, lastName, age.toInt(), bio)
+            }
+        }
+
 
     }
 
