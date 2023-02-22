@@ -9,12 +9,16 @@ import com.example.tryanimation.try_architecture_code.database.user.UserReposito
 
 class ListUserViewModel(context: Context) : ViewModel() {
 
-    private var listUser: LiveData<List<UserEntity>>? = null
+    var listUser: LiveData<List<UserEntity>>? = null
     private var userRepository: UserRepository? = null
 
     init {
         val userDao = MyDatabaseTry.getMyDatabaseTry(context).userDao()
         userRepository = UserRepository(userDao)
+        getListUser()
+    }
+
+    fun getListUser() {
         listUser = userRepository?.readAllUser
     }
 }

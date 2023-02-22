@@ -14,6 +14,11 @@ class DetailUserActivity : AppCompatActivity() {
     private lateinit var viewModel: DetailUserViewModel
 
     private var isEdit: Boolean = false
+    private var idUser: Int? = null
+    private var oldFirstName: String = ""
+    private var oldLastName: String = ""
+    private var oldAge: Int = 0
+    private var oldBio: String = ""
 
     private lateinit var tvTitle: TextView
     private lateinit var ivDelete: ImageView
@@ -34,6 +39,11 @@ class DetailUserActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory)[DetailUserViewModel::class.java]
 
         isEdit = intent.getBooleanExtra("isEdit", false)
+        idUser = intent.getIntExtra("idUser", 0)
+        oldFirstName = intent.getStringExtra("firstName").toString()
+        oldLastName = intent.getStringExtra("lastName").toString()
+        oldAge = intent.getIntExtra("age", 0)
+        oldBio = intent.getStringExtra("bio").toString()
 
         tvTitle = findViewById(R.id.tvTitle)
         ivDelete = findViewById(R.id.icDeleteUser)
@@ -69,8 +79,17 @@ class DetailUserActivity : AppCompatActivity() {
     private fun initView() {
 
         if (isEdit) {
+            var theAge = ""
             tvTitle.text = "Detail User"
             ivDelete.visibility = View.VISIBLE
+            etFirstName.setText(oldFirstName)
+            etLastName.setText(oldLastName)
+            etBio.setText(oldBio)
+
+            if (oldAge != 0) {
+                theAge = oldAge.toString()
+            }
+            etAge.setText(theAge)
         } else {
             tvTitle.text = "Add User"
             ivDelete.visibility = View.GONE
