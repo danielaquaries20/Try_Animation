@@ -18,6 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".try_architecture_code.ui.detail_user.DetailUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".try_architecture_code.ui.list_user.ListUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".try_architecture_code.TryArchitectureCodeActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".try_architecture_code.ui.list_user.ListUserActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/amberA700"
+        android:elevation="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:background="?selectableItemBackground"
+            android:contentDescription="@string/icon_image"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:text="List User"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/icAddUser"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"
+            android:background="?selectableItemBackground"
+            android:contentDescription="@string/icon_image"
+            android:src="@drawable/ic_baseline_person"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/icDeleteUser"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/icAddUser"
+            android:background="?selectableItemBackground"
+            android:contentDescription="@string/icon_image"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/white" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/relativeAppBar">
+
+        <TextView
+            android:id="@+id/tvDataEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Data(s) is Empty"
+            android:textSize="15sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="2" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

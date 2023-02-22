@@ -1,5 +1,6 @@
 package com.example.tryanimation.try_architecture_code
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.tryanimation.R
 import com.example.tryanimation.try_architecture_code.api.ApiDummyRepository
+import com.example.tryanimation.try_architecture_code.ui.list_user.ListUserActivity
 
 class TryArchitectureCodeActivity : AppCompatActivity() {
 
@@ -17,6 +19,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
     private lateinit var btnTambah: Button
     private lateinit var btnKurang: Button
     private lateinit var btnGetPost: Button
+    private lateinit var btnToListUser: Button
 
     private lateinit var tvAngka: TextView
     private lateinit var tvBoolean: TextView
@@ -43,6 +46,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         btnTambah = findViewById(R.id.btnTambah)
         btnKurang = findViewById(R.id.btnKurang)
         btnGetPost = findViewById(R.id.btnGetPost)
+        btnToListUser = findViewById(R.id.btnToListUser)
 
         tvAngka = findViewById(R.id.tvLiveInt)
         tvBoolean = findViewById(R.id.tvLiveBoolean)
@@ -92,6 +96,10 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
 
         btnGetPost.setOnClickListener {
             viewModel.getFinalPost()
+        }
+
+        btnToListUser.setOnClickListener {
+            startActivity(Intent(this, ListUserActivity::class.java))
         }
 
     }
