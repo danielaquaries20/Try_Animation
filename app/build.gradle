@@ -22,11 +22,44 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    signingConfigs {
+
+        /*debug {
+            storeFile file(DEBUG_STORE_FILE)
+            storePassword DEBUG_STORE_PASSWORD
+            keyAlias DEBUG_KEY_ALIAS
+            keyPassword DEBUG_KEY_PASSWORD
+        }*/
+
         release {
+            storeFile  file('try_animation_keystore.jks')
+            storePassword '1234567890'
+            keyPassword '1234567890'
+            keyAlias 'try_animation_key'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        /*debug {
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            signingConfig signingConfigs.release
+        }*/
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            signingConfig signingConfigs.release
+            debuggable true
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -39,7 +72,7 @@ android {
         dataBinding true
         viewBinding true
     }
-    dynamicFeatures = [':try_dynamic_feature', ':dynamic1']
+//    dynamicFeatures = [':try_dynamic_feature', ':dynamic1']
 }
 
 dependencies {

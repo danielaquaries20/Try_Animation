@@ -41,8 +41,8 @@ dependencyResolutionManagement {
 rootProject.name = "Try Animation"
 include ':app'
 include ':calendar-module'
-include ':try_dynamic_feature'
-include ':dynamic1'
+//include ':try_dynamic_feature'
+//include ':dynamic1'
 include ':onboarder'
 include ':showcase'
 include ':material-calendar'
