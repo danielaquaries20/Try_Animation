@@ -4,14 +4,14 @@ import com.google.gson.annotations.SerializedName
 
 data class Post(
     @SerializedName("userId")
-    val userId: Int?,
+    val userId: Int? = null,
 
     @SerializedName("id")
-    val id: Int?,
+    val id: Int? = null,
 
     @SerializedName("title")
-    val title: String?,
+    val title: String? = null,
 
     @SerializedName("body")
-    val content: String?,
+    val content: String? = null,
 )

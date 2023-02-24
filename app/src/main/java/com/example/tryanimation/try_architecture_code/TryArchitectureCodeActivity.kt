@@ -75,14 +75,15 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         }
 
         viewModel.apiResponse.observe(this) { response ->
-            if (response.isSuccessful) {
-                tvUserId.text = "UserId: ${response.body()?.userId.toString()}"
+            Toast.makeText(this, "Called: ${response.content}", Toast.LENGTH_SHORT).show()
+            /*if (response.isSuccessful) {
+                tvUserId.text = "User Id: ${response.body()?.userId.toString()}"
                 tvId.text = "Post Id: ${response.body()?.id.toString()}"
                 tvTitle.text = "Title: ${response.body()?.title.toString()}"
                 tvContent.text = "Content: ${response.body()?.content.toString()}"
             } else {
                 Toast.makeText(this, "Error message: ${response.code()}", Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
     }
 

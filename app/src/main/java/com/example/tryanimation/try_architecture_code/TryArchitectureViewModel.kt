@@ -13,7 +13,7 @@ class TryArchitectureViewModel(private val repositoryApiDummy: ApiDummyRepositor
     var currentNumber = MutableLiveData<Int>()
     var currentBoolean = MutableLiveData<Boolean>()
 
-    var apiResponse = MutableLiveData<Response<Post>>()
+    var apiResponse = MutableLiveData<Post>()
 
     fun increase(number: Int) {
         val newNumber = number + 1
