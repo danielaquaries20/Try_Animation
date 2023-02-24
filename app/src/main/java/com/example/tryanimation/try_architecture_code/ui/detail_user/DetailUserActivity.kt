@@ -3,6 +3,7 @@ package com.example.tryanimation.try_architecture_code.ui.detail_user
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -75,9 +76,25 @@ class DetailUserActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT).show()
                         onBackPressed()
                     }
-                    else -> {
+                    3 -> {
+                        Toast.makeText(this@DetailUserActivity,
+                            "Berhasil delete User",
+                            Toast.LENGTH_SHORT).show()
+                        onBackPressed()
+                    }
+                    0 -> {
                         Toast.makeText(this@DetailUserActivity,
                             "Gagal menambahkan User",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    -2 -> {
+                        Toast.makeText(this@DetailUserActivity,
+                            "Gagal update User",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    -3 -> {
+                        Toast.makeText(this@DetailUserActivity,
+                            "Gagal delete User",
                             Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -111,7 +128,7 @@ class DetailUserActivity : AppCompatActivity() {
         ivBack.setOnClickListener { onBackPressed() }
 
         ivDelete.setOnClickListener {
-            Toast.makeText(this, "Delete User", Toast.LENGTH_SHORT).show()
+            deleteConfirmation()
         }
 
         btnSave.setOnClickListener { validateForm() }
@@ -151,8 +168,29 @@ class DetailUserActivity : AppCompatActivity() {
                 viewModel.updateUser(idUser, firstName, lastName, age.toInt(), bio)
             }
         }
-
-
     }
+
+    private fun deleteConfirmation() {
+        val firstName = etFirstName.text.trim().toString()
+        val lastName = etLastName.text.trim().toString()
+        val age = etAge.text.trim().toString()
+        val bio = etBio.text.trim().toString()
+        val alertBuilder = AlertDialog.Builder(this).apply {
+            setPositiveButton("Delete") { _, _ ->
+                if (age.isEmpty()) {
+                    viewModel.deleteUser(idUser, firstName, lastName, null, bio)
+                } else {
+                    viewModel.deleteUser(idUser, firstName, lastName, age.toInt(), bio)
+                }
+            }
+
+            setNegativeButton("Cancel") { _, _ -> }
+            setTitle("Delete Confirmation")
+            setMessage("Are you sure want to delete this user?\nif you delete, this data can't back.")
+        }
+        alertBuilder.create()
+        alertBuilder.show()
+    }
+
 
 }

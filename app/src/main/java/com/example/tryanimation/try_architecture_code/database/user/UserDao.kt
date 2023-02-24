@@ -14,4 +14,10 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table ORDER BY id ASC")
     fun readAllUser(): LiveData<List<UserEntity>>
+
+    @Delete()
+    suspend fun deleteUser(user: UserEntity)
+
+    @Query("DELETE FROM user_table")
+    suspend fun deleteAllUser()
 }

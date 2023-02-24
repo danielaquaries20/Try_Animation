@@ -1,7 +1,6 @@
 package com.example.tryanimation.try_architecture_code.ui.detail_user
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +13,6 @@ import kotlinx.coroutines.launch
 class DetailUserViewModel(context: Context) : ViewModel() {
 
     var response = MutableLiveData<Int>()
-    private val getUserDetail: LiveData<UserEntity>? = null
     private var userRepository: UserRepository? = null
     private var userDao: UserDao? = null
 
@@ -27,7 +25,7 @@ class DetailUserViewModel(context: Context) : ViewModel() {
         viewModelScope.launch {
             try {
                 val user = UserEntity(0, firstName, lastName, age, bio)
-                userDao?.addUser(user)
+                userRepository?.addUser(user)
                 response.postValue(1)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -40,11 +38,25 @@ class DetailUserViewModel(context: Context) : ViewModel() {
         viewModelScope.launch {
             try {
                 val user = UserEntity(idUser, firstName, lastName, age, bio)
-                userDao?.updateUser(user)
+                userRepository?.updateUser(user)
                 response.postValue(2)
             } catch (e: Exception) {
                 e.printStackTrace()
-                response.postValue(0)
+                response.postValue(-2)
+            }
+        }
+    }
+
+
+    fun deleteUser(idUser: Int, firstName: String, lastName: String, age: Int?, bio: String?) {
+        viewModelScope.launch {
+            try {
+                val user = UserEntity(idUser, firstName, lastName, age, bio)
+                userRepository?.deleteUser(user)
+                response.postValue(3)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                response.postValue(-3)
             }
         }
     }

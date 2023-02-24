@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -50,10 +51,21 @@ class ListUserActivity : AppCompatActivity() {
             viewModel.listUser?.observe(this@ListUserActivity) {
                 if (it.isEmpty()) {
                     tvDataEmpty.visibility = View.VISIBLE
+                    ivDeleteUser.visibility = View.GONE
                 } else {
                     tvDataEmpty.visibility = View.GONE
+                    ivDeleteUser.visibility = View.VISIBLE
                 }
                 adapterListUser?.setData(it)
+            }
+            viewModel.response.observe(this@ListUserActivity) {
+                if (it == 1) {
+                    Toast.makeText(this@ListUserActivity, "Deleted all user", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Toast.makeText(this@ListUserActivity, "There some problem", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
     }
@@ -66,7 +78,7 @@ class ListUserActivity : AppCompatActivity() {
     private fun initClick() {
         ivBack.setOnClickListener { onBackPressed() }
         ivDeleteUser.setOnClickListener {
-            Toast.makeText(this, "Delete All User", Toast.LENGTH_SHORT).show()
+            deleteConfirmation()
         }
         ivAddUser.setOnClickListener {
             val toAdd = Intent(this@ListUserActivity, DetailUserActivity::class.java).apply {
@@ -74,6 +86,21 @@ class ListUserActivity : AppCompatActivity() {
             }
             startActivity(toAdd)
         }
+    }
+
+    private fun deleteConfirmation() {
+        val alertBuilder = AlertDialog.Builder(this).apply {
+            setPositiveButton("Delete") { _, _ ->
+                viewModel.deleteAllUser()
+            }
+
+            setNegativeButton("Cancel") { _, _ -> }
+            setTitle("Delete Confirmation")
+            setMessage("Are you sure want to delete all user in this list?\n" +
+                    "if you delete, this data can't back.")
+        }
+        alertBuilder.create()
+        alertBuilder.show()
     }
 
 }
