@@ -7,10 +7,12 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.json.JSONArray
 import org.json.JSONObject
 
 class ApiDummyRepository {
 
+    private val tagApi = "API"
     private val gson: Gson =
         GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create()
 
@@ -21,15 +23,63 @@ class ApiDummyRepository {
                 val responseJSON = withContext(Dispatchers.IO) {
                     JSONObject(response.body().toString())
                 }
-                Log.d("GetPost", "ResponseSuccess: $responseJSON")
+                Log.d(tagApi, "ResponseSuccess: $responseJSON")
                 gson.fromJson(responseJSON.toString(), Post::class.java)
             } else {
                 Post(id = 0, title = "Error", content = response.message())
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            Log.d("GetPost", "ResponseError: $e")
+            Log.d(tagApi, "ResponseError: $e")
             Post(id = 0, title = "Error", content = e.toString())
         }
     }
+
+    suspend fun getSpecificPost(postId: String): Post {
+        return try {
+            val response = ApiDummyInstance.apiDummy.getSpecificPost(postId)
+            if (response.isSuccessful) {
+                val responseJSON = withContext(Dispatchers.IO) {
+                    JSONObject(response.body().toString())
+                }
+                Log.d(tagApi, "ResponseSuccess: $responseJSON")
+                gson.fromJson(responseJSON.toString(), Post::class.java)
+            } else {
+                Post(id = 0, title = "Error", content = response.message())
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d(tagApi, "ResponseError: $e")
+            Post(id = 0, title = "Error", content = e.toString())
+        }
+    }
+
+
+    suspend fun getListPostByUserId(userId: String): List<Post> {
+        val emitList = ArrayList<Post>()
+        try {
+            val response = ApiDummyInstance.apiDummy.getListPostUserId(userId)
+            return if (response.isSuccessful) {
+                val responseJSON = withContext(Dispatchers.IO) {
+                    JSONArray(response.body().toString())
+                }
+                Log.d(tagApi, "ResponseSuccess: $responseJSON")
+                emitList.clear()
+                emitList.addAll(gson.fromJson(responseJSON.toString(), Array<Post>::class.java)
+                    .toList())
+                emitList
+            } else {
+                emitList.clear()
+                emitList.add(Post(id = 0, title = "Error", content = response.message()))
+                emitList
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d(tagApi, "ResponseError: $e")
+            emitList.clear()
+            emitList.add(Post(id = 0, title = "Error", content = e.toString()))
+            return emitList
+        }
+    }
+
 }

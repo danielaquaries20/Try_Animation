@@ -2,6 +2,7 @@ package com.example.tryanimation.try_architecture_code
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -18,7 +19,9 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
 
     private lateinit var btnTambah: Button
     private lateinit var btnKurang: Button
+    private lateinit var btnListPost: Button
     private lateinit var btnGetPost: Button
+    private lateinit var btnGetSpecificPost: Button
     private lateinit var btnToListUser: Button
 
     private lateinit var tvAngka: TextView
@@ -28,6 +31,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
     private lateinit var tvId: TextView
     private lateinit var tvTitle: TextView
     private lateinit var tvContent: TextView
+    private lateinit var tvListPost: TextView
 
     private var number: Int = 0
 
@@ -45,7 +49,9 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
     private fun initView() {
         btnTambah = findViewById(R.id.btnTambah)
         btnKurang = findViewById(R.id.btnKurang)
+        btnListPost = findViewById(R.id.btnListPost)
         btnGetPost = findViewById(R.id.btnGetPost)
+        btnGetSpecificPost = findViewById(R.id.btnGetSpecificPost)
         btnToListUser = findViewById(R.id.btnToListUser)
 
         tvAngka = findViewById(R.id.tvLiveInt)
@@ -55,6 +61,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         tvId = findViewById(R.id.tvId)
         tvTitle = findViewById(R.id.tvTitle)
         tvContent = findViewById(R.id.tvContent)
+        tvListPost = findViewById(R.id.tvListPost)
     }
 
     private fun observe() {
@@ -86,6 +93,19 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
                     .show()
             }
         }
+
+        viewModel.listPost.observe(this) { listResp ->
+            val postResponse = listResp[0]
+            if (postResponse.id == 0) {
+                tvListPost.visibility = View.GONE
+                Toast.makeText(this,
+                    "${postResponse.title}: ${postResponse.content}",
+                    Toast.LENGTH_SHORT).show()
+            } else {
+                tvListPost.visibility = View.VISIBLE
+                tvListPost.text = "Data: $listResp"
+            }
+        }
     }
 
     private fun initClick() {
@@ -98,6 +118,22 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
 
         btnGetPost.setOnClickListener {
             viewModel.getFinalPost()
+        }
+
+        btnGetSpecificPost.setOnClickListener {
+            if (number in 1..100) {
+                viewModel.getSpecificPost(number.toString())
+            } else {
+                Toast.makeText(this, "Tidak ada data untuk Id tersebut", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnListPost.setOnClickListener {
+            if (number in 1..10) {
+                viewModel.getListPostByUserId(number.toString())
+            } else {
+                Toast.makeText(this, "Tidak ada data untuk Id tersebut", Toast.LENGTH_SHORT).show()
+            }
         }
 
         btnToListUser.setOnClickListener {

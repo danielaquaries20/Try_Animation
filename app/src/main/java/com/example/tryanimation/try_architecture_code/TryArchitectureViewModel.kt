@@ -14,6 +14,7 @@ class TryArchitectureViewModel(private val repositoryApiDummy: ApiDummyRepositor
     var currentBoolean = MutableLiveData<Boolean>()
 
     var apiResponse = MutableLiveData<Post>()
+    var listPost = MutableLiveData<List<Post>>()
 
     fun increase(number: Int) {
         val newNumber = number + 1
@@ -33,6 +34,20 @@ class TryArchitectureViewModel(private val repositoryApiDummy: ApiDummyRepositor
         viewModelScope.launch {
             val response = repositoryApiDummy.getFinalPost()
             apiResponse.postValue(response)
+        }
+    }
+
+    fun getSpecificPost(postId: String) {
+        viewModelScope.launch {
+            val response = repositoryApiDummy.getSpecificPost(postId)
+            apiResponse.postValue(response)
+        }
+    }
+
+    fun getListPostByUserId(userId: String) {
+        viewModelScope.launch {
+            val response = repositoryApiDummy.getListPostByUserId(userId)
+            listPost.postValue(response)
         }
     }
 }
