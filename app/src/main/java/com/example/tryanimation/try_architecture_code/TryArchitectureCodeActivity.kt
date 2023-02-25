@@ -75,15 +75,16 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         }
 
         viewModel.apiResponse.observe(this) { response ->
-            Toast.makeText(this, "Called: ${response.content}", Toast.LENGTH_SHORT).show()
-            /*if (response.isSuccessful) {
-                tvUserId.text = "User Id: ${response.body()?.userId.toString()}"
-                tvId.text = "Post Id: ${response.body()?.id.toString()}"
-                tvTitle.text = "Title: ${response.body()?.title.toString()}"
-                tvContent.text = "Content: ${response.body()?.content.toString()}"
+//            Toast.makeText(this, "Called: ${response.content}", Toast.LENGTH_SHORT).show()
+            if (response.id != 0) {
+                tvUserId.text = "User Id: ${response.userId.toString()}"
+                tvId.text = "Post Id: ${response.id.toString()}"
+                tvTitle.text = "Title: ${response.title.toString()}"
+                tvContent.text = "Content: ${response.content.toString()}"
             } else {
-                Toast.makeText(this, "Error message: ${response.code()}", Toast.LENGTH_SHORT).show()
-            }*/
+                Toast.makeText(this, "${response.title}: ${response.content}", Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
     }
 

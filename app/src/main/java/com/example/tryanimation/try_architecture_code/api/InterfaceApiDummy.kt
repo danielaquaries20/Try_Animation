@@ -8,5 +8,5 @@ import retrofit2.http.GET
 interface InterfaceApiDummy {
 
     @GET("posts/1")
-    suspend fun getFinalPost(): String
+    suspend fun getFinalPost(): Response<String>
 }
