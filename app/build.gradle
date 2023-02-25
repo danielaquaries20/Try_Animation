@@ -121,5 +121,6 @@ dependencies {
     //Huawei Library
     implementation 'com.huawei.hms:hwid:5.0.5.301'
     implementation 'com.huawei.hms:hmscoreinstaller:6.6.0.300'
+    implementation 'com.huawei.hms:health:6.8.0.300'
 }
 apply plugin: 'com.huawei.agconnect'

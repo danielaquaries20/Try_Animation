@@ -5,9 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tryanimation.R
 import com.huawei.hms.common.ApiException
+import com.huawei.hms.hihealth.HuaweiHiHealth
+import com.huawei.hms.hihealth.SettingController
+import com.huawei.hms.hihealth.data.DataCollector
+import com.huawei.hms.hihealth.data.DataType
+import com.huawei.hms.hihealth.data.HealthDataTypes
+import com.huawei.hms.hihealth.data.Scopes
 import com.huawei.hms.support.account.AccountAuthManager
 import com.huawei.hms.support.account.request.AccountAuthParams
 import com.huawei.hms.support.account.request.AccountAuthParamsHelper
@@ -32,7 +39,19 @@ class TryHuaweiOauthActivity : AppCompatActivity() {
         btnHuaweiAuth = findViewById(R.id.btnHuaweiAuth)
 
         service = AccountAuthManager.getService(this, authParams)
+        val controller = HuaweiHiHealth.getSettingController(this)
+        val intent = controller.requestAuthorizationIntent(arrayOf(Scopes.HEALTHKIT_HEARTHEALTH_READ), true)
 
+        startActivityForResult(intent, 200)
+
+        val recorder = HuaweiHiHealth.getAutoRecorderController(this)
+        recorder.startRecord(HealthDataTypes.DT_INSTANTANEOUS_SPO2) {
+
+        }
+
+        recorder.startRecord(DataType.DT_INSTANTANEOUS_HEART_RATE) {
+
+        }
         initClick()
 
     }
