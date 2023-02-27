@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.tryanimation.R
 import com.example.tryanimation.try_architecture_code.api.ApiDummyRepository
+import com.example.tryanimation.try_architecture_code.ui.list_post.ListPostActivity
 import com.example.tryanimation.try_architecture_code.ui.list_user.ListUserActivity
 
 class TryArchitectureCodeActivity : AppCompatActivity() {
@@ -129,11 +130,15 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         }
 
         btnListPost.setOnClickListener {
-            if (number in 1..10) {
+            val goToListPost = Intent(this, ListPostActivity::class.java).apply {
+                putExtra("idUser", number)
+            }
+            startActivity(goToListPost)
+            /*if (number in 1..10) {
                 viewModel.getListPostByUserId(number.toString())
             } else {
                 Toast.makeText(this, "Tidak ada data untuk Id tersebut", Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
 
         btnToListUser.setOnClickListener {
