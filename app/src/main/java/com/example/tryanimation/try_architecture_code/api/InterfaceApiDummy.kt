@@ -1,9 +1,8 @@
 package com.example.tryanimation.try_architecture_code.api
 
+import com.example.tryanimation.try_architecture_code.model.Post
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface InterfaceApiDummy {
 
@@ -17,8 +16,21 @@ interface InterfaceApiDummy {
 
     @GET("posts")
     suspend fun getListPostUserId(
-        @Query("userId") userId: String
+        @Query("userId") userId: String,
     ): Response<String>
 
+    @FormUrlEncoded
+    @POST("posts")
+    suspend fun createPost(
+        @Field("userId") userId: Int,
+        @Field("id") id: Int,
+        @Field("title") title: String,
+        @Field("body") body: String,
+    ): Response<String>
+
+    @POST("posts")
+    suspend fun createPostByJson(
+        @Body post: Post,
+    ): Response<String>
 
 }

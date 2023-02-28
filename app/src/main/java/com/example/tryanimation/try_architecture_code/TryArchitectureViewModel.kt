@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.tryanimation.try_architecture_code.api.ApiDummyRepository
 import com.example.tryanimation.try_architecture_code.model.Post
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class TryArchitectureViewModel(private val repositoryApiDummy: ApiDummyRepository) : ViewModel() {
 
@@ -50,4 +49,19 @@ class TryArchitectureViewModel(private val repositoryApiDummy: ApiDummyRepositor
             listPost.postValue(response)
         }
     }
+
+    fun createPost(userId: Int, id: Int, title: String, body: String) {
+        viewModelScope.launch {
+            val response = repositoryApiDummy.createPost(userId, id, title, body)
+            apiResponse.postValue(response)
+        }
+    }
+
+    fun createPostByJson(post: Post) {
+        viewModelScope.launch {
+            val response = repositoryApiDummy.createPostByJson(post)
+            apiResponse.postValue(response)
+        }
+    }
+
 }

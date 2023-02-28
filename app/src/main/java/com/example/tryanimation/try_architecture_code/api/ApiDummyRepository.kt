@@ -54,7 +54,6 @@ class ApiDummyRepository {
         }
     }
 
-
     suspend fun getListPostByUserId(userId: String): List<Post> {
         val emitList = ArrayList<Post>()
         try {
@@ -81,5 +80,46 @@ class ApiDummyRepository {
             return emitList
         }
     }
+
+    suspend fun createPost(userId: Int, id: Int, title: String, body: String): Post {
+        return try {
+            val response = ApiDummyInstance.apiDummy.createPost(userId, id, title, body)
+            if (response.isSuccessful) {
+                val responseJSON = withContext(Dispatchers.IO) {
+                    JSONObject(response.body().toString())
+                }
+                Log.d(tagApi, "ResponseSuccess: $responseJSON")
+                gson.fromJson(responseJSON.toString(), Post::class.java)
+
+            } else {
+                Post(id = 0, title = "Error", content = response.message())
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d(tagApi, "ResponseError: $e")
+            Post(id = 0, title = "Error", content = e.toString())
+        }
+    }
+
+    suspend fun createPostByJson(post: Post): Post {
+        return try {
+            val response = ApiDummyInstance.apiDummy.createPostByJson(post)
+            if (response.isSuccessful) {
+                val responseJSON = withContext(Dispatchers.IO) {
+                    JSONObject(response.body().toString())
+                }
+                Log.d(tagApi, "ResponseSuccess: $responseJSON")
+                gson.fromJson(responseJSON.toString(), Post::class.java)
+
+            } else {
+                Post(id = 0, title = "Error", content = response.message())
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d(tagApi, "ResponseError: $e")
+            Post(id = 0, title = "Error", content = e.toString())
+        }
+    }
+
 
 }

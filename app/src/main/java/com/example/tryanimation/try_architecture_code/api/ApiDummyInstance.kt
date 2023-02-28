@@ -5,6 +5,7 @@ import com.example.tryanimation.try_architecture_code.utils.Constants.Companion.
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
@@ -16,6 +17,7 @@ object ApiDummyInstance {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
     }

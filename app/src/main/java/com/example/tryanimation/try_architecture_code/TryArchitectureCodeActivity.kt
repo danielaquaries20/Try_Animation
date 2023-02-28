@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.tryanimation.R
 import com.example.tryanimation.try_architecture_code.api.ApiDummyRepository
+import com.example.tryanimation.try_architecture_code.model.Post
 import com.example.tryanimation.try_architecture_code.ui.list_post.ListPostActivity
 import com.example.tryanimation.try_architecture_code.ui.list_user.ListUserActivity
 import com.example.tryanimation.try_architecture_code.ui.session_activity.SessionActivity
@@ -24,6 +26,8 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
     private lateinit var btnListPost: Button
     private lateinit var btnGetPost: Button
     private lateinit var btnGetSpecificPost: Button
+    private lateinit var btnCreatePost: Button
+    private lateinit var btnCreatePostByJson: Button
     private lateinit var btnToListUser: Button
     private lateinit var btnToSession: Button
 
@@ -35,6 +39,8 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
     private lateinit var tvTitle: TextView
     private lateinit var tvContent: TextView
     private lateinit var tvListPost: TextView
+
+    private lateinit var frameLoading: FrameLayout
 
     private var number: Int = 0
 
@@ -57,6 +63,8 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         btnGetSpecificPost = findViewById(R.id.btnGetSpecificPost)
         btnToListUser = findViewById(R.id.btnToListUser)
         btnToSession = findViewById(R.id.btnToSharedPreferences)
+        btnCreatePost = findViewById(R.id.btnCreatePost)
+        btnCreatePostByJson = findViewById(R.id.btnCreatePostByJson)
 
         tvAngka = findViewById(R.id.tvLiveInt)
         tvBoolean = findViewById(R.id.tvLiveBoolean)
@@ -66,6 +74,8 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         tvTitle = findViewById(R.id.tvTitle)
         tvContent = findViewById(R.id.tvContent)
         tvListPost = findViewById(R.id.tvListPost)
+
+        frameLoading = findViewById(R.id.frameLoading)
     }
 
     private fun observe() {
@@ -96,6 +106,9 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
                 Toast.makeText(this, "${response.title}: ${response.content}", Toast.LENGTH_SHORT)
                     .show()
             }
+
+            frameLoading.visibility = View.GONE
+
         }
 
         viewModel.listPost.observe(this) { listResp ->
@@ -121,11 +134,13 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         }
 
         btnGetPost.setOnClickListener {
+            frameLoading.visibility = View.VISIBLE
             viewModel.getFinalPost()
         }
 
         btnGetSpecificPost.setOnClickListener {
             if (number in 1..100) {
+                frameLoading.visibility = View.VISIBLE
                 viewModel.getSpecificPost(number.toString())
             } else {
                 Toast.makeText(this, "Tidak ada data untuk Id tersebut", Toast.LENGTH_SHORT).show()
@@ -152,6 +167,31 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
             startActivity(Intent(this, SessionActivity::class.java))
         }
 
+        btnCreatePost.setOnClickListener {
+            createFinalPost()
+        }
+
+        btnCreatePostByJson.setOnClickListener {
+            createFinalPostByJson()
+        }
+    }
+
+    private fun createFinalPost() {
+        frameLoading.visibility = View.VISIBLE
+        val userId = 11
+        val id = 101
+        val title = "Try Post 1"
+        val body = "Hello there, this is just try post from Form Url Encoded."
+
+        viewModel.createPost(userId, id, title, body)
+    }
+
+    private fun createFinalPostByJson() {
+        frameLoading.visibility = View.VISIBLE
+
+        val post = Post(11, 101, "Try Post 2", "Hey there, do you read this? This is from Json.")
+
+        viewModel.createPostByJson(post)
     }
 
 }
