@@ -35,9 +35,9 @@ class ApiDummyRepository {
         }
     }
 
-    suspend fun getSpecificPost(postId: String): Post {
+    suspend fun getSpecificPost(myHeader: String, postId: String): Post {
         return try {
-            val response = ApiDummyInstance.apiDummy.getSpecificPost(postId)
+            val response = ApiDummyInstance.apiDummy.getSpecificPost(myHeader, "True", postId)
             if (response.isSuccessful) {
                 val responseJSON = withContext(Dispatchers.IO) {
                     JSONObject(response.body().toString())

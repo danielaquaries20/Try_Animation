@@ -6,11 +6,17 @@ import retrofit2.http.*
 
 interface InterfaceApiDummy {
 
+    @Headers(
+        "Try-Header: This is just trying Header",
+        "App-Name: Try Animation"
+    )
     @GET("posts/1")
     suspend fun getFinalPost(): Response<String>
 
     @GET("posts/{postId}")
     suspend fun getSpecificPost(
+        @Header("My-Header") myHeader: String,
+        @Header("Reader-Mode") readerMode: String,
         @Path("postId") id: String,
     ): Response<String>
 

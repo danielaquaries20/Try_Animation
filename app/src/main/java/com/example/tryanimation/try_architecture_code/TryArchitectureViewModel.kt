@@ -38,7 +38,8 @@ class TryArchitectureViewModel(private val repositoryApiDummy: ApiDummyRepositor
 
     fun getSpecificPost(postId: String) {
         viewModelScope.launch {
-            val response = repositoryApiDummy.getSpecificPost(postId)
+            val myHeader = "Hoxafana Curency"
+            val response = repositoryApiDummy.getSpecificPost(myHeader, postId)
             apiResponse.postValue(response)
         }
     }
