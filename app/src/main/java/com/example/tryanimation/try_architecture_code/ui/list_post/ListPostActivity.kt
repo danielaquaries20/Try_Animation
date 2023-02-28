@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -62,7 +63,9 @@ class ListPostActivity : AppCompatActivity() {
     }
 
     private fun initRV() {
-        adapterListPost = AdapterRVListUser(this)
+        adapterListPost = AdapterRVListUser(this) { data, _ ->
+            Toast.makeText(this, "Click Title: ${data.firstName}", Toast.LENGTH_SHORT).show()
+        }
         rvPost.adapter = adapterListPost
     }
 

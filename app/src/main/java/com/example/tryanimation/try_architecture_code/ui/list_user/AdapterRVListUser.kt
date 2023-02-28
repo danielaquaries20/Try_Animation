@@ -1,18 +1,18 @@
 package com.example.tryanimation.try_architecture_code.ui.list_user
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tryanimation.R
 import com.example.tryanimation.try_architecture_code.database.user.UserEntity
-import com.example.tryanimation.try_architecture_code.ui.detail_user.DetailUserActivity
 
-class AdapterRVListUser(private val context: Context) :
+class AdapterRVListUser(
+    private val context: Context,
+    private val onItemClick: (data: UserEntity, view: View) -> Unit,
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listItem = emptyList<UserEntity>()
@@ -45,16 +45,7 @@ class AdapterRVListUser(private val context: Context) :
             }
 
             holderItem.itemView.setOnClickListener {
-                val toEdit = Intent(context, DetailUserActivity::class.java).apply {
-                    putExtra("isEdit", true)
-                    putExtra("idUser", currentItem.id)
-                    putExtra("firstName", currentItem.firstName)
-                    putExtra("lastName", currentItem.lastName)
-                    putExtra("age", currentItem.age)
-                    putExtra("bio", currentItem.bio)
-                }
-                context.startActivity(toEdit)
-//                Toast.makeText(context, "Item Clicked", Toast.LENGTH_SHORT).show()
+                onItemClick(currentItem, it)
             }
 
         } catch (e: Exception) {

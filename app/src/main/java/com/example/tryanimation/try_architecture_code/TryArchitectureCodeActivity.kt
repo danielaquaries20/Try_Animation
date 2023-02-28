@@ -12,6 +12,7 @@ import com.example.tryanimation.R
 import com.example.tryanimation.try_architecture_code.api.ApiDummyRepository
 import com.example.tryanimation.try_architecture_code.ui.list_post.ListPostActivity
 import com.example.tryanimation.try_architecture_code.ui.list_user.ListUserActivity
+import com.example.tryanimation.try_architecture_code.ui.session_activity.SessionActivity
 
 class TryArchitectureCodeActivity : AppCompatActivity() {
 
@@ -24,6 +25,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
     private lateinit var btnGetPost: Button
     private lateinit var btnGetSpecificPost: Button
     private lateinit var btnToListUser: Button
+    private lateinit var btnToSession: Button
 
     private lateinit var tvAngka: TextView
     private lateinit var tvBoolean: TextView
@@ -54,6 +56,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         btnGetPost = findViewById(R.id.btnGetPost)
         btnGetSpecificPost = findViewById(R.id.btnGetSpecificPost)
         btnToListUser = findViewById(R.id.btnToListUser)
+        btnToSession = findViewById(R.id.btnToSharedPreferences)
 
         tvAngka = findViewById(R.id.tvLiveInt)
         tvBoolean = findViewById(R.id.tvLiveBoolean)
@@ -143,6 +146,10 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
 
         btnToListUser.setOnClickListener {
             startActivity(Intent(this, ListUserActivity::class.java))
+        }
+
+        btnToSession.setOnClickListener {
+            startActivity(Intent(this, SessionActivity::class.java))
         }
 
     }

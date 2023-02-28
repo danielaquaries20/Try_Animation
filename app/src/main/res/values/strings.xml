@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">Try Animation</string>
-    <string name="lorem_ipsum_dolor___">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum ut sem in imperdiet. Mauris dapibus, odio eget sodales auctor, quam libero ultricies ipsum, condimentum fermentum enim dolor nec metus. Aliquam bibendum metus eleifend, faucibus turpis luctus, euismod justo. Sed et magna non sem eleifend sagittis sed commodo ex. Donec sed bibendum massa, vitae semper enim. Suspendisse nunc mauris, sollicitudin vitae convallis sed, pellentesque ac felis. Suspendisse id nisi fringilla, feugiat libero auctor, luctus risus. In sed iaculis leo. Etiam dictum feugiat tortor vitae lacinia. Aenean eget enim mattis nulla pulvinar consequat eu et metus. Praesent pulvinar viverra convallis.</string>
-    <string name="lorem_ipsum_dolor_">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum ut sem in imperdiet.</string>
-    <string name="bella_antrifosa">Bella Antrifosa</string>
+    <string name="app_name" translatable="false">Try Animation</string>
+    <string name="lorem_ipsum_dolor___" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum ut sem in imperdiet. Mauris dapibus, odio eget sodales auctor, quam libero ultricies ipsum, condimentum fermentum enim dolor nec metus. Aliquam bibendum metus eleifend, faucibus turpis luctus, euismod justo. Sed et magna non sem eleifend sagittis sed commodo ex. Donec sed bibendum massa, vitae semper enim. Suspendisse nunc mauris, sollicitudin vitae convallis sed, pellentesque ac felis. Suspendisse id nisi fringilla, feugiat libero auctor, luctus risus. In sed iaculis leo. Etiam dictum feugiat tortor vitae lacinia. Aenean eget enim mattis nulla pulvinar consequat eu et metus. Praesent pulvinar viverra convallis.</string>
+    <string name="lorem_ipsum_dolor_" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum ut sem in imperdiet.</string>
+    <string name="bella_antrifosa" translatable="false">Bella Antrifosa</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="icon_image">Icon Image</string>
-    <string name="elysia">Elysia</string>
-    <string name="message">Message..</string>
-    <string name="label_sedang_mengetik">sedang mengetik...</string>
-    <string name="title_try_dynamic_feature">Try Dynamic Feature</string>
-    <string name="title_dynamic1">Dynamic 1</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_profile">Profile</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="icon_image" translatable="false">Icon Image</string>
+    <string name="elysia" translatable="false">Elysia</string>
+    <string name="message" translatable="false">Message..</string>
+    <string name="label_sedang_mengetik" translatable="false">sedang mengetik...</string>
+    <string name="title_try_dynamic_feature" translatable="false">Try Dynamic Feature</string>
+    <string name="title_dynamic1" translatable="false">Dynamic 1</string>
+    <string name="menu_home" translatable="false">Home</string>
+    <string name="menu_profile" translatable="false">Profile</string>
 </resources>

@@ -71,7 +71,18 @@ class ListUserActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        adapterListUser = AdapterRVListUser(this)
+        adapterListUser = AdapterRVListUser(this) { data, view ->
+            val toEdit = Intent(this, DetailUserActivity::class.java).apply {
+                putExtra("isEdit", true)
+                putExtra("idUser", data.id)
+                putExtra("firstName", data.firstName)
+                putExtra("lastName", data.lastName)
+                putExtra("age", data.age)
+                putExtra("bio", data.bio)
+            }
+            startActivity(toEdit)
+//                Toast.makeText(context, "Item Clicked", Toast.LENGTH_SHORT).show()
+        }
         rvListUser.adapter = adapterListUser
     }
 
