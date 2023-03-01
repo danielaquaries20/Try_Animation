@@ -224,6 +224,17 @@
                     android:text="Shared Preferences Activity"
                     android:textAllCaps="false" />
 
+                <Button
+                    android:id="@+id/btnTryBinding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="6dp"
+                    android:layout_marginVertical="10dp"
+                    android:backgroundTint="#D500F9"
+                    android:text="Coba Binding"
+                    android:textAllCaps="false" />
+
             </LinearLayout>
 
         </LinearLayout>
