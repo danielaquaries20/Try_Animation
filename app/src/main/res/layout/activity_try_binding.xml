@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="address"
+            type="String" />
+
+        <variable
             name="post"
             type="com.example.tryanimation.try_architecture_code.model.Post" />
 
@@ -95,6 +99,14 @@
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text='@{address, default = "Address"}'
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
             <Button
                 android:id="@+id/btnShowTitle"
                 android:layout_width="wrap_content"
@@ -115,6 +127,16 @@
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/teal_700"
                 android:text="Show Content"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btnShowAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/teal_700"
+                android:text="Show Address"
                 android:textAllCaps="false" />
 
         </LinearLayout>
