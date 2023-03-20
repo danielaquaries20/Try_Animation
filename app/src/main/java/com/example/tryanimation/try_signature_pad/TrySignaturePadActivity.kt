@@ -3,7 +3,8 @@ package com.example.tryanimation.try_signature_pad
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
-import android.widget.LinearLayout
+import android.view.View
+import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,8 @@ class TrySignaturePadActivity : AppCompatActivity() {
     private lateinit var btnClear2: AppCompatButton
     private lateinit var btnShow: AppCompatButton
     private lateinit var btnShow2: AppCompatButton
+    private lateinit var ivSignature: ImageView
+    private lateinit var ivSignature2: ImageView
     private lateinit var vSignature: SignaturePad
     private lateinit var vSignature2: com.github.gcacace.signaturepad.views.SignaturePad
 
@@ -43,6 +46,8 @@ class TrySignaturePadActivity : AppCompatActivity() {
         vSignature2 = findViewById(R.id.vSignature2)
         btnClear = findViewById(R.id.btnClear)
         btnClear2 = findViewById(R.id.btnClear2)
+        ivSignature = findViewById(R.id.ivSignature)
+        ivSignature2 = findViewById(R.id.ivSignature2)
         btnShow = findViewById(R.id.btnShow)
         btnShow2 = findViewById(R.id.btnShow2)
 
@@ -76,7 +81,7 @@ class TrySignaturePadActivity : AppCompatActivity() {
                 val strSignature =
                     BitmapOperator().encodeToBase64(vSignature.getTransparentSignatureBitmap())
                 signature2 = strSignature
-                bitmapSgt2 = vSignature2.transparentSignatureBitmap
+                bitmapSgt2 = vSignature2.signatureBitmap
                 showContent("onSigned - Called")
             }
 
@@ -91,18 +96,28 @@ class TrySignaturePadActivity : AppCompatActivity() {
     private fun initClick() {
         btnClear.setOnClickListener {
             vSignature.clear()
+            ivSignature.visibility = View.GONE
         }
 
         btnClear2.setOnClickListener {
             vSignature2.clear()
+            ivSignature2.visibility = View.GONE
         }
 
         btnShow.setOnClickListener {
             showContent("Signature: $signature")
+            bitmapSgt?.let {
+                ivSignature.visibility = View.VISIBLE
+                ivSignature.setImageBitmap(it)
+            }
         }
 
         btnShow2.setOnClickListener {
             showContent("Signature: $signature2")
+            bitmapSgt2?.let {
+                ivSignature2.visibility = View.VISIBLE
+                ivSignature2.setImageBitmap(it)
+            }
         }
     }
 
