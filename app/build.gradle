@@ -111,4 +111,10 @@ dependencies {
     implementation "androidx.room:room-ktx:2.4.3"
 //    androidTestImplementation "androidx.room:room-testing:2.5.0"
 
+    //Signature Pad Library
+//    implementation 'com.williamww:silky-signature:0.1.0' -> Duplicate Class
+    implementation 'se.warting.signature:signature-view:0.0.20'
+    implementation 'com.github.gcacace:signature-pad:1.3.1'
+
+
 }

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tryanimation.try_architecture_code.TryArchitectureCodeActivity
 import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
 import com.example.tryanimation.try_chat_app.TryChatActivity
+import com.example.tryanimation.try_signature_pad.TrySignaturePadActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
 import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryOnBoarder: Button
     private lateinit var btnTryShowcase: Button
     private lateinit var btnTryArchitectureCode: Button
+    private lateinit var btnTrySignaturePad: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         btnTryOnBoarder = findViewById(R.id.btnTryOnBoarder)
         btnTryShowcase = findViewById(R.id.btnTryShowcase)
         btnTryArchitectureCode = findViewById(R.id.btnTryArchitectureCode)
+        btnTrySignaturePad = findViewById(R.id.btnTrySignaturePad)
         /*endregion*/
 
         /*region Action*/
@@ -147,6 +150,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryArchitectureCode.setOnClickListener {
             startActivity(Intent(this, TryArchitectureCodeActivity::class.java))
+        }
+
+        btnTrySignaturePad.setOnClickListener {
+            startActivity(Intent(this, TrySignaturePadActivity::class.java))
         }
         /*endregion*/
 

@@ -203,6 +203,17 @@
             android:text="Try Architecture Code"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btnTrySignaturePad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="#501503"
+            android:text="Try Signature Pad"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
 
