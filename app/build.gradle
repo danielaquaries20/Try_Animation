@@ -116,5 +116,7 @@ dependencies {
     implementation 'se.warting.signature:signature-view:0.0.20'
     implementation 'com.github.gcacace:signature-pad:1.3.1'
 
+    //Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }

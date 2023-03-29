@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".try_chart.TryChartActivity"
+            android:exported="false" />
+        <activity
             android:name=".try_signature_pad.TrySignaturePadActivity"
             android:exported="false" />
         <activity

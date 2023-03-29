@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tryanimation.try_architecture_code.TryArchitectureCodeActivity
 import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
+import com.example.tryanimation.try_chart.TryChartActivity
 import com.example.tryanimation.try_chat_app.TryChatActivity
 import com.example.tryanimation.try_signature_pad.TrySignaturePadActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryShowcase: Button
     private lateinit var btnTryArchitectureCode: Button
     private lateinit var btnTrySignaturePad: Button
+    private lateinit var btnTryChart: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         btnTryShowcase = findViewById(R.id.btnTryShowcase)
         btnTryArchitectureCode = findViewById(R.id.btnTryArchitectureCode)
         btnTrySignaturePad = findViewById(R.id.btnTrySignaturePad)
+        btnTryChart = findViewById(R.id.btnTryChart)
         /*endregion*/
 
         /*region Action*/
@@ -154,6 +157,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTrySignaturePad.setOnClickListener {
             startActivity(Intent(this, TrySignaturePadActivity::class.java))
+        }
+
+        btnTryChart.setOnClickListener {
+            startActivity(Intent(this, TryChartActivity::class.java))
         }
         /*endregion*/
 
