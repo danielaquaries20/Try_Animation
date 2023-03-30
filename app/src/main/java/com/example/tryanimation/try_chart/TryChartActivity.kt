@@ -102,6 +102,9 @@ class TryChartActivity : AppCompatActivity() {
         pieChart.setEntryLabelTypeface(Typeface.SANS_SERIF)
         pieChart.setEntryLabelTextSize(7f)
 
+        pieChart.setNoDataText("Maaf tidak ada data")
+        pieChart.setNoDataTextColor(R.color.black)
+        pieChart.setNoDataTextTypeface(Typeface.SANS_SERIF)
         setPieChartContent(3, 15f)
     }
 
@@ -167,7 +170,7 @@ class TryChartActivity : AppCompatActivity() {
         }
 
         if (withLog) {
-            Log.d("Signature", content)
+            Log.d("Chart", content)
         }
     }
 

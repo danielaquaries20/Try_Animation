@@ -222,7 +222,18 @@
             android:layout_marginEnd="30dp"
             android:backgroundTint="#D3D13A"
             android:text="Try Chart"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnTrySmartTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="#AD1457"
+            android:text="Try Smart Tab Layout"
+            android:textColor="@color/white"
             android:textAllCaps="false" />
 
     </LinearLayout>
