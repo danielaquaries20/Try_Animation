@@ -1,8 +1,10 @@
 package com.example.tryanimation
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.SparseIntArray
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -19,7 +21,12 @@ import com.aminography.primedatepicker.picker.theme.LightThemeFactory
 import com.applandeo.materialcalendarview.CalendarUtils
 import com.applandeo.materialcalendarview.CalendarView
 import com.daniel.try_module.customviews.DateRangeCalendarView
+import com.example.tryanimation.try_kizitonwose_calendar.DayViewContainer
+import com.kizitonwose.calendar.core.CalendarDay
+import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
+import com.kizitonwose.calendar.view.MonthDayBinder
 import java.text.SimpleDateFormat
+import java.time.YearMonth
 import java.util.*
 
 class TryDatePickerActivity : AppCompatActivity() {
@@ -40,6 +47,10 @@ class TryDatePickerActivity : AppCompatActivity() {
     private lateinit var btnBatalCustomDatePicker: Button
     private lateinit var btnSimpanCustomDatePicker: Button
     private lateinit var customDatePicker: DateRangeCalendarView
+
+    private lateinit var tvDateStartKizitonwose: TextView
+    private lateinit var tvDateEndKizitonwose: TextView
+    private lateinit var calendarKizitonwose: com.kizitonwose.calendar.view.CalendarView
 
     private var startDateApplandeo = ""
     private var endDateApplandeo = ""
@@ -67,12 +78,18 @@ class TryDatePickerActivity : AppCompatActivity() {
         btnSimpanCustomDatePicker = findViewById(R.id.btnSimpanCustomDatePicker)
         customDatePicker = findViewById(R.id.customDatePicker)
 
+        tvDateStartKizitonwose = findViewById(R.id.tvDateStartKizitonwose)
+        tvDateEndKizitonwose = findViewById(R.id.tvDateEndKizitonwose)
+        calendarKizitonwose = findViewById(R.id.calendarKizitonwose)
+
         btnPickDate.setOnClickListener { setPrimeDatePicker() }
         btnPickDate2.setOnClickListener { setPrimeDatePicker2() }
 
         setApplandeoCalendar()
 
         setCustomCalendar()
+
+        setKizitonwose()
 
     }
 
@@ -313,5 +330,27 @@ class TryDatePickerActivity : AppCompatActivity() {
 
         datePicker.show(supportFragmentManager, "PRIME_DATE_PICKER")
     }
+
+    private fun setKizitonwose() {
+        calendarKizitonwose.dayBinder = object : MonthDayBinder<DayViewContainer> {
+            override fun bind(container: DayViewContainer, data: CalendarDay) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    container.textView.text = data.date.dayOfMonth.toString()
+                }
+            }
+
+            override fun create(view: View): DayViewContainer = DayViewContainer(view)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val currentMonth = YearMonth.now()
+            val startMonth = currentMonth.minusMonths(100)  // Adjust as needed
+            val endMonth = currentMonth.plusMonths(100)  // Adjust as needed
+            val firstDayOfWeek = firstDayOfWeekFromLocale() // Available from the library
+            calendarKizitonwose.setup(startMonth, endMonth, firstDayOfWeek)
+            calendarKizitonwose.scrollToMonth(currentMonth)
+        }
+    }
+
 
 }
