@@ -90,7 +90,7 @@ class TryChartActivity : AppCompatActivity() {
         legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         legend.orientation = Legend.LegendOrientation.VERTICAL
         legend.direction = Legend.LegendDirection.RIGHT_TO_LEFT
-        legend.setDrawInside(false)
+//        legend.setDrawInside(false)
 //        legend.xEntrySpace = 7f
 //        legend.yEntrySpace = 5f
         legend.yOffset = 13f
