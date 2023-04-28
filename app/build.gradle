@@ -123,4 +123,9 @@ dependencies {
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
 
+    //Rack Month Picker
+    implementation 'com.github.kal72:RackMonthPicker:1.6.1'
+
+    //Nouraiz Month Picker
+    implementation 'com.dibyendu.picker:picker:1.0.0'
 }

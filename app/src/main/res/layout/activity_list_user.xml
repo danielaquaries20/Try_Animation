@@ -79,7 +79,8 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:spanCount="2" />
+            app:spanCount="2"
+            tools:listitem="@layout/item_rv_user"/>
 
     </FrameLayout>
 

@@ -55,10 +55,6 @@ class TrySmartTabLayoutActivity : AppCompatActivity() {
         viewPager.isVisible = true
 
         val fragments = arrayOf(HomeFragment(),
-            ProfileFragment(),
-            HomeFragment(),
-            ProfileFragment(),
-            HomeFragment(),
             ProfileFragment())
 
         val adapter = PagerAdapter(supportFragmentManager, fragments)

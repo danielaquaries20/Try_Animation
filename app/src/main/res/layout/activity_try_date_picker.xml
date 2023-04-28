@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/titlePrimeDatePicker"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/titleApplandeoDatePicker"
@@ -126,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/titleCustomDatePicker"
@@ -199,6 +199,80 @@
 
 
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/titleRackMonthPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Rack Month Picker"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvRackMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bulan: "
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/btnRackPickMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="17dp"
+                android:backgroundTint="@color/black"
+                android:text="Pilih Bulan"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/titleNouraizMonthPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Nouraiz Month Picker"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvNouraizMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bulan: "
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/btnNouraizPickMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="17dp"
+                android:backgroundTint="@color/black"
+                android:text="Pilih Bulan"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 

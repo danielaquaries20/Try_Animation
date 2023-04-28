@@ -19,6 +19,11 @@ import com.aminography.primedatepicker.picker.theme.LightThemeFactory
 import com.applandeo.materialcalendarview.CalendarUtils
 import com.applandeo.materialcalendarview.CalendarView
 import com.daniel.try_module.customviews.DateRangeCalendarView
+import com.dibyendu.picker.listener.PickerListener
+import com.dibyendu.picker.util.PickerUtils
+import com.dibyendu.picker.view.MonthYearPickerDialog
+import com.kal.rackmonthpicker.MonthType
+import com.kal.rackmonthpicker.RackMonthPicker
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,11 +46,22 @@ class TryDatePickerActivity : AppCompatActivity() {
     private lateinit var btnSimpanCustomDatePicker: Button
     private lateinit var customDatePicker: DateRangeCalendarView
 
+    private lateinit var tvMonthRackPick: TextView
+    private lateinit var btnRackMonthPick: Button
+
+    private lateinit var tvMonthNouraizPick: TextView
+    private lateinit var btnNouraizMonthPick: Button
+
     private var startDateApplandeo = ""
     private var endDateApplandeo = ""
     private var calendarStartApplandeo: Calendar? = null
     private var calendarEndApplandeo: Calendar? = null
     private var countClickApplandeoDatePicker = 0
+
+    private var monthRack: Int? = null
+    private var yearRack: Int? = null
+    var nouraizCalendar: Calendar = Calendar.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,8 +83,16 @@ class TryDatePickerActivity : AppCompatActivity() {
         btnSimpanCustomDatePicker = findViewById(R.id.btnSimpanCustomDatePicker)
         customDatePicker = findViewById(R.id.customDatePicker)
 
+        tvMonthRackPick = findViewById(R.id.tvRackMonth)
+        btnRackMonthPick = findViewById(R.id.btnRackPickMonth)
+
+        tvMonthNouraizPick = findViewById(R.id.tvNouraizMonth)
+        btnNouraizMonthPick = findViewById(R.id.btnNouraizPickMonth)
+
         btnPickDate.setOnClickListener { setPrimeDatePicker() }
         btnPickDate2.setOnClickListener { setPrimeDatePicker2() }
+        btnRackMonthPick.setOnClickListener { showRackMonthPicker() }
+        btnNouraizMonthPick.setOnClickListener { showNouraizMonthPicker() }
 
         setApplandeoCalendar()
 
@@ -312,6 +336,92 @@ class TryDatePickerActivity : AppCompatActivity() {
             .build()
 
         datePicker.show(supportFragmentManager, "PRIME_DATE_PICKER")
+    }
+
+    private fun showRackMonthPicker() {
+        RackMonthPicker(this)
+            .setLocale(Locale.US)
+            .setColorTheme(R.color.yellow)
+            .setMonthType(MonthType.TEXT)
+            .setPositiveText("Simpan")
+            .setNegativeText("Batalkan")
+            .setSelectedMonth(8)
+            .setSelectedYear(2026)
+            .setPositiveButton { month, startDate, endDate, year, monthLabel ->
+                Log.d("MonthPick", "Month: $month")
+                Log.d("MonthPick", "StartDate: $startDate")
+                Log.d("MonthPick", "EndDate: $endDate")
+                Log.d("MonthPick", "Year: $year")
+                Log.d("MonthPick", "MonthLabel: $monthLabel")
+                monthRack = month
+                yearRack = year
+                tvMonthRackPick.text = "Bulan: $monthLabel"
+            }
+            .setNegativeButton {
+                Toast.makeText(this, "Negative Button Clicked", Toast.LENGTH_SHORT).show()
+                it.dismiss()
+            }
+            .show()
+        /*if (monthRack != null && yearRack != null) {
+            RackMonthPicker(this)
+                .setLocale(Locale.US)
+                .setColorTheme(R.color.yellow)
+                .setMonthType(MonthType.TEXT)
+                .setPositiveText("Simpan")
+                .setNegativeText("Batalkan")
+                .setSelectedMonth(monthRack!!)
+                .setSelectedYear(yearRack!!)
+                .setPositiveButton { month, startDate, endDate, year, monthLabel ->
+                    Log.d("MonthPick", "Month: $month")
+                    Log.d("MonthPick", "StartDate: $startDate")
+                    Log.d("MonthPick", "EndDate: $endDate")
+                    Log.d("MonthPick", "Year: $year")
+                    Log.d("MonthPick", "MonthLabel: $monthLabel")
+                    monthRack = month
+                    yearRack = year
+                    tvMonthRackPick.text = "Bulan: $monthLabel"
+                }
+                .setNegativeButton {
+                    Toast.makeText(this, "Negative Button Clicked", Toast.LENGTH_SHORT).show()
+                    it.dismiss()
+                }
+                .show()
+        } else {
+            RackMonthPicker(this)
+                .setLocale(Locale.US)
+                .setColorTheme(R.color.yellow)
+                .setMonthType(MonthType.TEXT)
+                .setPositiveText("Simpan")
+                .setNegativeText("Batalkan")
+                .setPositiveButton { month, startDate, endDate, year, monthLabel ->
+                    Log.d("MonthPick", "Month: $month")
+                    Log.d("MonthPick", "StartDate: $startDate")
+                    Log.d("MonthPick", "EndDate: $endDate")
+                    Log.d("MonthPick", "Year: $year")
+                    Log.d("MonthPick", "MonthLabel: $monthLabel")
+                    monthRack = month
+                    yearRack = year
+                    tvMonthRackPick.text = "Bulan: $monthLabel"
+                }
+                .setNegativeButton {
+                    Toast.makeText(this, "Negative Button Clicked", Toast.LENGTH_SHORT).show()
+                    it.dismiss()
+                }
+                .show()
+        }*/
+    }
+
+    private fun showNouraizMonthPicker() {
+        MonthYearPickerDialog.show(this, nouraizCalendar, object : PickerListener {
+            override fun onSetResult(calendar: Calendar) {
+                nouraizCalendar = calendar
+                val bulan = PickerUtils.getMonthYearDisplay(this@TryDatePickerActivity,
+                    calendar,
+                    PickerUtils.Format.LONG)
+
+                tvMonthNouraizPick.text = "Bulan: $bulan"
+            }
+        })
     }
 
 }
