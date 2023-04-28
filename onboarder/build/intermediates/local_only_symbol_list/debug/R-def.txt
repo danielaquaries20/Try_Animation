@@ -1,0 +1,36 @@
+R_DEF: Internal format may change without notice
+local
+attr? transition_drawable
+attr? transition_duration
+color active_indicator
+color black_transparent
+color inactive_indicator
+color white
+dimen indicator_size
+drawable bg_bottom
+drawable fifth_bg
+drawable forth_bg
+drawable logo_app
+drawable new_state
+drawable original_state
+drawable rounded_button_white
+drawable seventh_bg
+drawable sixth_b
+drawable thrid_bg
+drawable translate
+id btn_next
+id btn_skip
+id buttons_layout
+id circle_indicator_view
+id cv_cardview
+id iv_image
+id iv_logo
+id navigation_layout
+id parent_layout
+id selected
+id tv_description
+id tv_title
+id vp_pager
+layout activity_onboard
+layout fragment_onboard
+styleable gradient transition_drawable transition_duration

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "E:\\Android Studio\\AndroidProject\\TryAnimation\\try_dynamic_feature\\build\\intermediates\\merged_res\\debug\\drawable_photo_1.jpg.flat",
+        "source": "E:\\Android Studio\\AndroidProject\\TryAnimation\\try_dynamic_feature\\src\\main\\res\\drawable\\photo_1.jpg"
+    },
+    {
+        "merged": "E:\\Android Studio\\AndroidProject\\TryAnimation\\try_dynamic_feature\\build\\intermediates\\merged_res\\debug\\layout_activity_default.xml.flat",
+        "source": "E:\\Android Studio\\AndroidProject\\TryAnimation\\try_dynamic_feature\\src\\main\\res\\layout\\activity_default.xml"
+    }
+]

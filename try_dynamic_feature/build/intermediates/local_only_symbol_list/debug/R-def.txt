@@ -1,0 +1,10 @@
+R_DEF: Internal format may change without notice
+local
+drawable photo_1
+id btnDecrement
+id btnIncrement
+id ivPhoto
+id tvNumber
+id tvTitle
+layout activity_default
+string title

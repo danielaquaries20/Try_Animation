@@ -1,0 +1,7 @@
+#Fri Apr 28 10:20:15 ICT 2023
+base.1=E\:\\Android Studio\\AndroidProject\\TryAnimation\\try_dynamic_feature\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+path.1=1/classes.dex
+base.0=E\:\\Android Studio\\AndroidProject\\TryAnimation\\try_dynamic_feature\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=0/classes.dex

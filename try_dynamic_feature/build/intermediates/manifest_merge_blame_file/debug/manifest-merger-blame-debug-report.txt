@@ -1,0 +1,45 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:dist="http://schemas.android.com/apk/distribution"
+4    featureSplit="try_dynamic_feature"
+5    package="com.example.tryanimation"
+6    android:versionCode="1"
+7    android:versionName="1.0" >
+8
+9    <uses-sdk
+10        android:minSdkVersion="23"
+10-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml
+11        android:targetSdkVersion="23" />
+11-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml
+12
+13    <dist:module
+13-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:6:5-14:19
+14        dist:instant="false"
+14-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:7:9-29
+15        dist:title="@string/title_try_dynamic_feature" >
+15-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:8:9-55
+16        <dist:delivery>
+16-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:9:9-11:25
+17            <dist:on-demand />
+17-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:10:13-31
+18        </dist:delivery>
+19
+20        <dist:fusing dist:include="true" />
+20-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:13:9-44
+20-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:13:22-41
+21    </dist:module>
+22
+23    <application
+23-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:16:5-20:19
+24        android:debuggable="true"
+25        android:extractNativeLibs="false" >
+26        <activity
+26-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:17:9-19:40
+27            android:name="com.daniel.try_dynamic_feature.DefaultActivity"
+27-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:18:13-44
+28            android:exported="false"
+28-->E:\Android Studio\AndroidProject\TryAnimation\try_dynamic_feature\src\main\AndroidManifest.xml:19:13-37
+29            android:splitName="try_dynamic_feature" />
+30    </application>
+31
+32</manifest>

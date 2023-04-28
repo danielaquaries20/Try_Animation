@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Try Animation</string>
+    <string name="google_play">Google Play</string>
+    <string name="apps">Apps</string>
+    <string name="games">Games</string>
+    <string name="movies_tv"><![CDATA[Movies & TV]]></string>
+    <string name="music">Music</string>
+    <string name="books">Books</string>
+    <string name="news">News</string>
+    <string name="menu">Menu</string>
+    <string name="more">More</string>
+    <string name="popular_apps">Popular Apps</string>
+    <string name="whats_app">Whats App</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="discord">Discord</string>
+    <string name="you_tube">You Tube</string>
+    <string name="tiktok">Tiktok</string>
+    <string name="game">Game</string>
+    <string name="clash_of_clans">Clash of Clans</string>
+    <string name="clash_royale">Clash Royale</string>
+    <string name="hay_day">Hay Day</string>
+    <string name="honkai_impact_3rd">Honkai Impact 3rd</string>
+    <string name="genshin_impact">Genshin Impact</string>
+    <string name="honkai_star_rail">Honkai Star Rail</string>
 </resources>

@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
-            android:name=".AnimationOneActivity"
+            android:name=".ui.kl_basic.chapter_4.Chapter4MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.animation_one.AnimationOneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

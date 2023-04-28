@@ -9,4 +9,18 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple_transparent_20">#349C27B0</color>
     <color name="orange_transparent_70">#B3FFC107</color>
+
+    <color name="light_gray">#B3DAD5C5</color>
+    <color name="dark_gray">#B35E5D58</color>
+
+    <color name="dark_green">#B33A8116</color>
+    <color name="light_green">#B356DC12</color>
+    <color name="green_blue">#00695C</color>
+
+    <color name="red">#D62271</color>
+    <color name="orange">#FF8F00</color>
+
+    <color name="light_blue">#04C8B0</color>
+    <color name="dark_blue">#283593</color>
+
 </resources>

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/scrollRootLayout"
     android:background="@color/purple_transparent_20"
-    tools:context=".AnimationOneActivity">
+    tools:context=".ui.animation_one.AnimationOneActivity">
 
     <LinearLayout
         android:id="@+id/linearBiodata"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Bella Antrifosa"
             android:textSize="20sp"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/inter_variable_font_slnt_wght"
             android:textColor="@color/black"
             android:layout_margin="10dp"
             android:textStyle="bold"/>

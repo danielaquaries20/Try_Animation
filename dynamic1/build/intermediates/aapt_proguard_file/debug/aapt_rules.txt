@@ -1,0 +1,1 @@
+-keep class com.daniel.dynamic1.MainActivity { <init>(); }

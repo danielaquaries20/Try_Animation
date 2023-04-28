@@ -1,0 +1,61 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:1-22:12
+	package
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:4:5-34
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:1-22:12
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+	xmlns:dist
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:3:5-61
+	android:versionCode
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:1-22:12
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:2:11-69
+dist:module
+ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:6:5-14:19
+	dist:instant
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:7:9-29
+	dist:title
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:8:9-44
+dist:delivery
+ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:9:9-11:25
+dist:on-demand
+ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:10:13-31
+dist:fusing
+ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:13:9-44
+	dist:include
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:13:22-41
+application
+ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:16:5-20:19
+activity#com.daniel.dynamic1.MainActivity
+ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:17:9-19:40
+	android:exported
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:19:13-37
+	android:name
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml:18:13-41
+uses-sdk
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+		ADDED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml
+		INJECTED from E:\Android Studio\AndroidProject\TryAnimation\dynamic1\src\main\AndroidManifest.xml

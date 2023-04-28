@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="active_indicator">#1F2B65</color>
+    <color name="black_transparent">#14000000</color>
+    <color name="inactive_indicator">#E5E5E5</color>
+    <color name="white">@android:color/white</color>
+    <dimen name="indicator_size">8dp</dimen>
+    <declare-styleable name="gradient">
+
+        <attr format="enum" name="transition_drawable"/>
+        <attr format="integer" name="transition_duration"/>
+    </declare-styleable>
+</resources>

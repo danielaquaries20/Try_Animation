@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    featureSplit="try_dynamic_feature"
+    package="com.example.tryanimation"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23" />
+
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/title_try_dynamic_feature" >
+        <dist:delivery>
+            <dist:on-demand />
+        </dist:delivery>
+
+        <dist:fusing dist:include="true" />
+    </dist:module>
+
+    <application
+        android:debuggable="true"
+        android:extractNativeLibs="false" >
+        <activity
+            android:name="com.daniel.try_dynamic_feature.DefaultActivity"
+            android:exported="false"
+            android:splitName="try_dynamic_feature" />
+    </application>
+
+</manifest>
