@@ -23,4 +23,7 @@
     <string name="honkai_impact_3rd">Honkai Impact 3rd</string>
     <string name="genshin_impact">Genshin Impact</string>
     <string name="honkai_star_rail">Honkai Star Rail</string>
+
+    <string name="flamingo">Flamingo</string>
+    <string name="bumblebee">Bumblebee</string>
 </resources>

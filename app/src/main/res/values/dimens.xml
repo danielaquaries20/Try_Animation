@@ -16,4 +16,10 @@
     <dimen name="dimens_10dp">10dp</dimen>
     <dimen name="dimens_5dp">5dp</dimen>
 
+    <dimen name="dimens_19dp">19dp</dimen>
+    <dimen name="dimens_21dp">21dp</dimen>
+    <dimen name="dimens_21sp">21sp</dimen>
+    <dimen name="dimens50dp">50dp</dimen>
+    <dimen name="dimen_100dp">100dp</dimen>
+
 </resources>
