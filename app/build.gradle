@@ -23,7 +23,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            manifestPlaceholders = [usesCleartextTraffic: false, crashlyticsEnabled: true, performanceEnabled: true]
         }
+
+        debug {
+            debuggable true
+            manifestPlaceholders = [usesCleartextTraffic: true, crashlyticsEnabled: false, performanceEnabled: false]
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -128,4 +136,7 @@ dependencies {
 
     //Nouraiz Month Picker
     implementation 'com.dibyendu.picker:picker:1.0.0'
+
+    //Corocodic Core
+//    implementation 'com.github.crocodic-studio:AndroidCoreProject:4.0.5'
 }
