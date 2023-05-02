@@ -258,6 +258,6 @@ class MainActivity : AppCompatActivity() {
         alertDialogTry.findViewById<Button>(R.id.btnAlertDialogDismiss).setOnClickListener {
             theAlertDialog.dismiss()
         }
-    }
 
+    }
 }
