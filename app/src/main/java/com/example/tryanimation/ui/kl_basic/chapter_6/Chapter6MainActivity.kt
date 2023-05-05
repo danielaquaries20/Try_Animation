@@ -48,9 +48,9 @@ class Chapter6MainActivity : AppCompatActivity(), View.OnClickListener {
         //btnNumber -> numberAction()
         //btnOperator -> operationAction
         when (v) {
-            binding.btnAc -> allClearAction(v)
-            binding.btnDelete -> backSpaceAction(v)
-            binding.btnResult -> equalsAction(v)
+            binding.btnAc -> allClearAction()
+            binding.btnDelete -> backSpaceAction()
+            binding.btnResult -> equalsAction()
             binding.btnDivider, binding.btnMultiplied, binding.btnMinus, binding.btnPlus -> operationAction(
                 v)
             else -> numberAction(v!!)
@@ -79,18 +79,18 @@ class Chapter6MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun allClearAction(view: View) {
+    private fun allClearAction() {
         binding.workingsTV.text = ""
         binding.resultsTV.text = ""
     }
 
-    private fun backSpaceAction(view: View) {
+    private fun backSpaceAction() {
         val length = binding.workingsTV.length()
         if (length > 0)
             binding.workingsTV.text = binding.workingsTV.text.subSequence(0, length - 1)
     }
 
-    private fun equalsAction(view: View) {
+    private fun equalsAction() {
         binding.resultsTV.text = calculateResults()
     }
 
