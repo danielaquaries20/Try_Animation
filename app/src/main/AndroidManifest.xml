@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".ui.kl_basic.chapter_5.Chapter5MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.kl_basic.chapter_4.Chapter4MainActivity"
             android:exported="false" />
         <activity

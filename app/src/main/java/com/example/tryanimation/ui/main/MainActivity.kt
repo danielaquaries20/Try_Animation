@@ -6,15 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
 import com.example.tryanimation.ui.animation_one.AnimationOneActivity
 import com.example.tryanimation.R
 import com.example.tryanimation.ui.kl_basic.chapter_4.Chapter4MainActivity
+import com.example.tryanimation.ui.kl_basic.chapter_5.Chapter5MainActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var ivAnimation: ImageView
     private lateinit var btnToMap: Button
     private lateinit var btnNext: Button
+    private lateinit var btnStyle: AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +26,14 @@ class MainActivity : AppCompatActivity() {
         ivAnimation = findViewById(R.id.ivImageAnimation)
         btnToMap = findViewById(R.id.btnShow)
         btnNext = findViewById(R.id.btnNext)
+        btnStyle = findViewById(R.id.btnStyle)
 
         btnNext.setOnClickListener {
             startActivity(Intent(this, Chapter4MainActivity::class.java))
+        }
+
+        btnStyle.setOnClickListener {
+            startActivity(Intent(this, Chapter5MainActivity::class.java))
         }
 
 //        var runnable: Runnable? = null
