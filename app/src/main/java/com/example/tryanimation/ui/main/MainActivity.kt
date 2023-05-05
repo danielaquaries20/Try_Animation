@@ -2,15 +2,15 @@ package com.example.tryanimation.ui.main
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import com.example.tryanimation.ui.animation_one.AnimationOneActivity
 import com.example.tryanimation.R
 import com.example.tryanimation.ui.kl_basic.chapter_4.Chapter4MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_5.Chapter5MainActivity
+import com.example.tryanimation.ui.kl_basic.chapter_6.Chapter6MainActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnToMap: Button
     private lateinit var btnNext: Button
     private lateinit var btnStyle: AppCompatButton
+    private lateinit var btnChapter6: AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         btnToMap = findViewById(R.id.btnShow)
         btnNext = findViewById(R.id.btnNext)
         btnStyle = findViewById(R.id.btnStyle)
+        btnChapter6 = findViewById(R.id.btnChapter6)
 
         btnNext.setOnClickListener {
             startActivity(Intent(this, Chapter4MainActivity::class.java))
@@ -34,6 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         btnStyle.setOnClickListener {
             startActivity(Intent(this, Chapter5MainActivity::class.java))
+        }
+
+        btnChapter6.setOnClickListener {
+            startActivity(Intent(this, Chapter6MainActivity::class.java))
         }
 
 //        var runnable: Runnable? = null
