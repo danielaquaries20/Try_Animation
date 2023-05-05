@@ -28,5 +28,9 @@
 
     <color name="yellow">#836809</color>
 
+    <color name="text_color_black">#FF000000</color>
+    <color name="text_color_white">#FFFFFFFF</color>
+
+    <color name="transparent">#00FFFFFF</color>
 
 </resources>

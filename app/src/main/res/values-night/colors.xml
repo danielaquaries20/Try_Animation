@@ -26,4 +26,10 @@
     <color name="magenta">#962198</color>
 
     <color name="yellow">#B89518</color>
+
+    <color name="text_color_black">#FF000000</color>
+    <color name="text_color_white">#FFFFFFFF</color>
+
+    <color name="transparent">#00FFFFFF</color>
+
 </resources>
