@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".try_event_bus.TryEventBusActivity"
+            android:exported="false" />
+        <activity
             android:name=".a_try_package.AaTryActivity"
             android:exported="false" />
         <activity

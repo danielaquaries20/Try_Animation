@@ -236,6 +236,17 @@
             android:textColor="@color/white"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btnTryEventBus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="#AF8849"
+            android:text="Try Event Bus"
+            android:textColor="@color/white"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
 

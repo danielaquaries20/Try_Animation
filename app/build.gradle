@@ -139,4 +139,6 @@ dependencies {
 
     //Corocodic Core
 //    implementation 'com.github.crocodic-studio:AndroidCoreProject:4.0.5'
+
+    implementation("org.greenrobot:eventbus:3.3.1")
 }

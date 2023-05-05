@@ -2,6 +2,7 @@ package com.example.tryanimation
 
 import android.content.Intent
 import android.graphics.Typeface
+import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +10,19 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.example.tryanimation.try_architecture_code.TryArchitectureCodeActivity
 import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
 import com.example.tryanimation.try_chart.TryChartActivity
 import com.example.tryanimation.try_chat_app.TryChatActivity
+import com.example.tryanimation.try_event_bus.TryEventBusActivity
 import com.example.tryanimation.try_signature_pad.TrySignaturePadActivity
 import com.example.tryanimation.try_smart_tab_layout.TrySmartTabLayoutActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
 import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
@@ -46,6 +53,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTrySignaturePad: Button
     private lateinit var btnTryChart: Button
     private lateinit var btnTrySmartTabLayout: Button
+    private lateinit var btnTryEventBus: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         btnTrySignaturePad = findViewById(R.id.btnTrySignaturePad)
         btnTryChart = findViewById(R.id.btnTryChart)
         btnTrySmartTabLayout = findViewById(R.id.btnTrySmartTabLayout)
+        btnTryEventBus = findViewById(R.id.btnTryEventBus)
         /*endregion*/
 
         /*region Action*/
@@ -169,6 +178,10 @@ class MainActivity : AppCompatActivity() {
         btnTrySmartTabLayout.setOnClickListener {
             startActivity(Intent(this, TrySmartTabLayoutActivity::class.java))
         }
+
+        btnTryEventBus.setOnClickListener {
+            startActivity(Intent(this, TryEventBusActivity::class.java))
+        }
         /*endregion*/
 
         /*region Animation*/
@@ -258,6 +271,16 @@ class MainActivity : AppCompatActivity() {
         alertDialogTry.findViewById<Button>(R.id.btnAlertDialogDismiss).setOnClickListener {
             theAlertDialog.dismiss()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+//        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+//        EventBus.getDefault().unregister(this)
     }
 
 }
