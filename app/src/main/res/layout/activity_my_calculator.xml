@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.kl_basic.chapter_6.MyCalculatorActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_first_number"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/transparent"
+                android:hint="0"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="@dimen/dimens_19dp"
+                android:paddingVertical="5dp"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_xxxlarge" />
+
+            <TextView
+                android:id="@+id/tv_operator"
+                style="@style/textCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="..."
+                android:textSize="@dimen/text_xxxlarge" />
+
+            <EditText
+                android:id="@+id/et_second_number"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/transparent"
+                android:hint="0"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="@dimen/dimens_19dp"
+                android:paddingVertical="5dp"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_xxxlarge" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimens_19dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=":"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/text_medium_" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_multiplied"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="x"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/text_medium" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_plus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/text_large" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_minus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/text_large" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimens_19dp"
+                android:layout_marginTop="@dimen/dimens_10dp"
+                android:layout_marginBottom="@dimen/dimens_15dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_all_clear"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/dimens_5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/red"
+                    android:text="AC"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_large" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_equals"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/ripple_btn_purple"
+                    android:text="="
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_xxxlarge" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_result"
+                style="@style/textEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimens_19dp"
+                android:layout_marginBottom="@dimen/dimens_19dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_xxxlarge"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

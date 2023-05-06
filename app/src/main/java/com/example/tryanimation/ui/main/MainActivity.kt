@@ -11,6 +11,7 @@ import com.example.tryanimation.R
 import com.example.tryanimation.ui.kl_basic.chapter_4.Chapter4MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_5.Chapter5MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_6.Chapter6MainActivity
+import com.example.tryanimation.ui.kl_basic.chapter_6.MyCalculatorActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnChapter6.setOnClickListener {
-            startActivity(Intent(this, Chapter6MainActivity::class.java))
+            startActivity(Intent(this, MyCalculatorActivity::class.java))
         }
 
 //        var runnable: Runnable? = null
