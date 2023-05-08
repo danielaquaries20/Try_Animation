@@ -29,6 +29,7 @@ import java.util.*
 
 class TryDatePickerActivity : AppCompatActivity() {
 
+    /*region Class Variable Global*/
     private lateinit var tvDateStart: TextView
     private lateinit var tvDateEnd: TextView
     private lateinit var btnPickDate: Button
@@ -48,6 +49,7 @@ class TryDatePickerActivity : AppCompatActivity() {
 
     private lateinit var tvMonthRackPick: TextView
     private lateinit var btnRackMonthPick: Button
+    private lateinit var btnRackMonthPick2: Button
 
     private lateinit var tvMonthNouraizPick: TextView
     private lateinit var btnNouraizMonthPick: Button
@@ -61,7 +63,7 @@ class TryDatePickerActivity : AppCompatActivity() {
     private var monthRack: Int? = null
     private var yearRack: Int? = null
     var nouraizCalendar: Calendar = Calendar.getInstance()
-
+    /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +87,7 @@ class TryDatePickerActivity : AppCompatActivity() {
 
         tvMonthRackPick = findViewById(R.id.tvRackMonth)
         btnRackMonthPick = findViewById(R.id.btnRackPickMonth)
+        btnRackMonthPick2 = findViewById(R.id.btnRackPickMonth2)
 
         tvMonthNouraizPick = findViewById(R.id.tvNouraizMonth)
         btnNouraizMonthPick = findViewById(R.id.btnNouraizPickMonth)
@@ -92,6 +95,7 @@ class TryDatePickerActivity : AppCompatActivity() {
         btnPickDate.setOnClickListener { setPrimeDatePicker() }
         btnPickDate2.setOnClickListener { setPrimeDatePicker2() }
         btnRackMonthPick.setOnClickListener { showRackMonthPicker() }
+        btnRackMonthPick2.setOnClickListener { showRackMonthPicker2() }
         btnNouraizMonthPick.setOnClickListener { showNouraizMonthPicker() }
 
         setApplandeoCalendar()
@@ -339,14 +343,19 @@ class TryDatePickerActivity : AppCompatActivity() {
     }
 
     private fun showRackMonthPicker() {
+        //Kelemahan: Logic 'setSelectedMonth' tidak bisa dijalankan
+        //sehingga tidak bisa menetapkan bulan awal default saat user ingin berinteraksi.
+        //Untuk logic 'setColorTheme' sepertinya tidak berfungsi dengan baik karena saat
+        //ditambahkan color 'black' warnanya bisa berubah tapi jika warna yang lain tidak berubah.
+
         RackMonthPicker(this)
             .setLocale(Locale.US)
-            .setColorTheme(R.color.yellow)
+            .setColorTheme(com.kal.rackmonthpicker.R.color.black_de)
             .setMonthType(MonthType.TEXT)
             .setPositiveText("Simpan")
             .setNegativeText("Batalkan")
-            .setSelectedMonth(8)
-            .setSelectedYear(2026)
+            .setSelectedMonth(10)
+            .setSelectedYear(2020)
             .setPositiveButton { month, startDate, endDate, year, monthLabel ->
                 Log.d("MonthPick", "Month: $month")
                 Log.d("MonthPick", "StartDate: $startDate")
@@ -411,13 +420,97 @@ class TryDatePickerActivity : AppCompatActivity() {
         }*/
     }
 
+    private fun showRackMonthPicker2() {
+        //Kelemahan: Logic 'setSelectedMonth' tidak bisa dijalankan
+        //sehingga tidak bisa menetapkan bulan awal default saat user ingin berinteraksi.
+        //Untuk logic 'setColorTheme' sepertinya tidak berfungsi dengan baik karena saat
+        //ditambahkan color 'black' warnanya bisa berubah tapi jika warna yang lain tidak berubah.
+
+        RackMonthPicker(this)
+            .setLocale(Locale.ENGLISH)
+            .setColorTheme(R.color.red)
+            .setMonthType(MonthType.NUMBER)
+            .setPositiveText("Simpan")
+            .setNegativeText("Batalkan")
+            .setSelectedMonth(10)
+            .setSelectedYear(2020)
+            .setPositiveButton { month, startDate, endDate, year, monthLabel ->
+                Log.d("MonthPick", "Month: $month")
+                Log.d("MonthPick", "StartDate: $startDate")
+                Log.d("MonthPick", "EndDate: $endDate")
+                Log.d("MonthPick", "Year: $year")
+                Log.d("MonthPick", "MonthLabel: $monthLabel")
+                monthRack = month
+                yearRack = year
+                tvMonthRackPick.text = "Bulan: $monthLabel"
+            }
+            .setNegativeButton {
+                Toast.makeText(this, "Negative Button Clicked", Toast.LENGTH_SHORT).show()
+                it.dismiss()
+            }
+            .show()
+        /*if (monthRack != null && yearRack != null) {
+            RackMonthPicker(this)
+                .setLocale(Locale.US)
+                .setColorTheme(R.color.yellow)
+                .setMonthType(MonthType.TEXT)
+                .setPositiveText("Simpan")
+                .setNegativeText("Batalkan")
+                .setSelectedMonth(monthRack!!)
+                .setSelectedYear(yearRack!!)
+                .setPositiveButton { month, startDate, endDate, year, monthLabel ->
+                    Log.d("MonthPick", "Month: $month")
+                    Log.d("MonthPick", "StartDate: $startDate")
+                    Log.d("MonthPick", "EndDate: $endDate")
+                    Log.d("MonthPick", "Year: $year")
+                    Log.d("MonthPick", "MonthLabel: $monthLabel")
+                    monthRack = month
+                    yearRack = year
+                    tvMonthRackPick.text = "Bulan: $monthLabel"
+                }
+                .setNegativeButton {
+                    Toast.makeText(this, "Negative Button Clicked", Toast.LENGTH_SHORT).show()
+                    it.dismiss()
+                }
+                .show()
+        } else {
+            RackMonthPicker(this)
+                .setLocale(Locale.US)
+                .setColorTheme(R.color.yellow)
+                .setMonthType(MonthType.TEXT)
+                .setPositiveText("Simpan")
+                .setNegativeText("Batalkan")
+                .setPositiveButton { month, startDate, endDate, year, monthLabel ->
+                    Log.d("MonthPick", "Month: $month")
+                    Log.d("MonthPick", "StartDate: $startDate")
+                    Log.d("MonthPick", "EndDate: $endDate")
+                    Log.d("MonthPick", "Year: $year")
+                    Log.d("MonthPick", "MonthLabel: $monthLabel")
+                    monthRack = month
+                    yearRack = year
+                    tvMonthRackPick.text = "Bulan: $monthLabel"
+                }
+                .setNegativeButton {
+                    Toast.makeText(this, "Negative Button Clicked", Toast.LENGTH_SHORT).show()
+                    it.dismiss()
+                }
+                .show()
+        }*/
+    }
+
+
     private fun showNouraizMonthPicker() {
+        //Kelemahan: Untuk month pickernya tidak bisa dikustom.
         MonthYearPickerDialog.show(this, nouraizCalendar, object : PickerListener {
             override fun onSetResult(calendar: Calendar) {
                 nouraizCalendar = calendar
                 val bulan = PickerUtils.getMonthYearDisplay(this@TryDatePickerActivity,
                     calendar,
                     PickerUtils.Format.LONG)
+
+                val justMonth = PickerUtils.getMonth(calendar)
+                Log.d("MonthPicker", "Month1: $bulan")
+                Log.d("MonthPicker", "Month2: $justMonth")
 
                 tvMonthNouraizPick.text = "Bulan: $bulan"
             }
