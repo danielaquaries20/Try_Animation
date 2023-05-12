@@ -1,6 +1,7 @@
 package com.example.tryanimation.ui.kl_basic.chapter_6
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -96,37 +97,52 @@ class Chapter6MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun calculateResults(): String {
         val digitsOperators = digitsOperators()
+        Log.d("HitungHasil", "DigitsOperator: $digitsOperators")
         if (digitsOperators.isEmpty()) return ""
 
         val timesDivision = timesDivisionCalculate(digitsOperators)
+        Log.d("HitungHasil", "TimesDivision: $timesDivision")
         if (timesDivision.isEmpty()) return ""
 
         val result = addSubtractCalculate(timesDivision)
+        Log.d("HitungHasil", "result: $result")
         return result.toString()
     }
 
     private fun addSubtractCalculate(passedList: MutableList<Any>): Float {
         var result = passedList[0] as Float
+        Log.d("addSubtractCalculate", "Begin: $passedList")
+        Log.d("addSubtractCalculate", "Indices: ${passedList.indices}")
+        Log.d("addSubtractCalculate", "LastIndex: ${passedList.lastIndex}")
 
         for (i in passedList.indices) {
+            Log.d("addSubtractCalculate", "For run: $i - data: ${passedList[i]}")
             if (passedList[i] is Char && i != passedList.lastIndex) {
+                Log.d("addSubtractCalculate", "1")
                 val operator = passedList[i]
+                Log.d("addSubtractCalculate", "operator: $operator")
                 val nextDigit = passedList[i + 1] as Float
+                Log.d("addSubtractCalculate", "nextDigit: $nextDigit")
                 if (operator == '+')
                     result += nextDigit
                 if (operator == '-')
                     result -= nextDigit
+
+                Log.d("addSubtractCalculate", "result: $result")
             }
         }
-
+        Log.d("addSubtractCalculate", "FinalResult: $result")
         return result
     }
 
     private fun timesDivisionCalculate(passedList: MutableList<Any>): MutableList<Any> {
         var list = passedList
         while (list.contains('x') || list.contains('/')) {
+            Log.d("timesDivisionCalculate", "While run")
+            Log.d("timesDivisionCalculate", "List: $list")
             list = calcTimesDiv(list)
         }
+        Log.d("timesDivisionCalculate", "result: $list")
         return list
     }
 
@@ -134,13 +150,20 @@ class Chapter6MainActivity : AppCompatActivity(), View.OnClickListener {
         val newList = mutableListOf<Any>()
         var restartIndex = passedList.size
 
+        Log.d("calcTimesDiv", "Indices: ${passedList.indices}")
+        Log.d("calcTimesDiv", "restartIndex: $restartIndex")
         for (i in passedList.indices) {
+            Log.d("calcTimesDiv", "For run: $i - data: ${passedList[i]}")
             if (passedList[i] is Char && i != passedList.lastIndex && i < restartIndex) {
+                Log.d("calcTimesDiv", "1")
                 val operator = passedList[i]
+                Log.d("calcTimesDiv", "operator: $operator")
                 val prevDigit = passedList[i - 1] as Float
+                Log.d("calcTimesDiv", "prevDigit: $prevDigit")
                 val nextDigit = passedList[i + 1] as Float
+                Log.d("calcTimesDiv", "nextDigit: $nextDigit")
                 when (operator) {
-                    'x' -> {
+                        'x' -> {
                         newList.add(prevDigit * nextDigit)
                         restartIndex = i + 1
                     }
@@ -155,29 +178,43 @@ class Chapter6MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
 
-            if (i > restartIndex)
+            if (i > restartIndex) {
+                Log.d("calcTimesDiv", "2 - index: $i")
+                Log.d("calcTimesDiv", "restartIndex: $restartIndex")
                 newList.add(passedList[i])
+                Log.d("calcTimesDiv", "newList: $newList")
+            }
         }
 
+        Log.d("calcTimesDiv", "newList: $newList")
         return newList
     }
 
     private fun digitsOperators(): MutableList<Any> {
+        Log.d("OperasiDigit", "Begin: ${binding.workingsTV.text}")
         val list = mutableListOf<Any>()
         var currentDigit = ""
         for (character in binding.workingsTV.text) {
-            if (character.isDigit() || character == '.')
+            Log.d("OperasiDigit", "Char: $character")
+            if (character.isDigit() || character == '.') {
                 currentDigit += character
-            else {
+                Log.d("OperasiDigit", "1 - currentDigit: $currentDigit")
+            } else {
+                Log.d("OperasiDigit", "0 - currentDigit: $currentDigit")
                 list.add(currentDigit.toFloat())
                 currentDigit = ""
                 list.add(character)
+                Log.d("OperasiDigit", "list: $list")
             }
         }
 
-        if (currentDigit != "")
+        if (currentDigit != "") {
+            Log.d("OperasiDigit", "2 - currentDigit: $currentDigit")
             list.add(currentDigit.toFloat())
+            Log.d("OperasiDigit", "list: $list")
+        }
 
+        Log.d("OperasiDigit", "Final Result: $list")
         return list
     }
 }

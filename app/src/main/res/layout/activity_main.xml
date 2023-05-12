@@ -1,52 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.main.MainActivity">
 
-    <Button
-        android:id="@+id/btnShow"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_margin="25dp"
-        android:text="To Map" />
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/ivImageAnimation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/ic_baseline_animation" />
+        <Button
+            android:id="@+id/btnShow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_margin="25dp"
+            android:text="To Map" />
 
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_margin="30dp"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:text="Next" />
+        <ImageView
+            android:id="@+id/ivImageAnimation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_baseline_animation" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnStyle"
-        style="@style/buttonClicked"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chapter 5"
-        android:layout_marginHorizontal="30dp" />
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_margin="30dp"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="Next" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnChapter6"
-        style="@style/buttonClicked"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        android:text="Chapter 6" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnStyle"
+            style="@style/buttonClicked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:background="@drawable/ripple_btn_red"
+            android:text="Chapter 5" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="@dimen/dimens_15dp"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnChapter6Simple"
+                style="@style/buttonClicked"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimens_5dp"
+                android:layout_weight="1"
+                android:text="Chapter 6 - A" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnChapter6Complicate"
+                style="@style/buttonClicked"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimens_5dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_btn_green"
+                android:text="Chapter 6 - B" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

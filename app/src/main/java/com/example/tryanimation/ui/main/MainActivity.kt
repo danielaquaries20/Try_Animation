@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnToMap: Button
     private lateinit var btnNext: Button
     private lateinit var btnStyle: AppCompatButton
-    private lateinit var btnChapter6: AppCompatButton
+    private lateinit var btnChapter6Simple: AppCompatButton
+    private lateinit var btnChapter6Complicate: AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         btnToMap = findViewById(R.id.btnShow)
         btnNext = findViewById(R.id.btnNext)
         btnStyle = findViewById(R.id.btnStyle)
-        btnChapter6 = findViewById(R.id.btnChapter6)
+        btnChapter6Simple = findViewById(R.id.btnChapter6Simple)
+        btnChapter6Complicate = findViewById(R.id.btnChapter6Complicate)
 
         btnNext.setOnClickListener {
             startActivity(Intent(this, Chapter4MainActivity::class.java))
@@ -39,8 +41,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, Chapter5MainActivity::class.java))
         }
 
-        btnChapter6.setOnClickListener {
+        btnChapter6Simple.setOnClickListener {
             startActivity(Intent(this, MyCalculatorActivity::class.java))
+        }
+
+        btnChapter6Complicate.setOnClickListener {
+            startActivity(Intent(this, Chapter6MainActivity::class.java))
         }
 
 //        var runnable: Runnable? = null
