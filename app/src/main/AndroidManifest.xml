@@ -10,13 +10,16 @@
         android:required="true" />
 
     <application
-        android:name="com.google.android.play.core.splitcompat.SplitCompatApplication"
+        android:name=".try_architecture_code.base.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
+        <activity
+            android:name=".try_architecture_code.ui.login.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".a_try_package.AaTryActivity"
             android:exported="false" />

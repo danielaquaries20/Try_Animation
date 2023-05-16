@@ -8,6 +8,9 @@ plugins {
     //Firebase
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+
+    //With Hilt
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -141,13 +144,17 @@ dependencies {
     //Nouraiz Month Picker
     implementation 'com.dibyendu.picker:picker:1.0.0'
 
-    //Corocodic Core
+    //Crocodic Core
     implementation 'com.github.crocodic-studio:AndroidCoreProject:4.0.5'
 
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:29.3.1')
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    //Hilt
+    implementation 'com.google.dagger:hilt-android:2.38.1'
+    kapt 'com.google.dagger:hilt-android-compiler:2.38.1'
 
 
 }
