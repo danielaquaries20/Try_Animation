@@ -25,6 +25,7 @@ class Chapter7MainActivity : AppCompatActivity(), View.OnClickListener {
         initView()
     }
 
+
     private fun initView() {
         binding.etNominal.doOnTextChanged { text, start, before, count ->
             nominalData = if (!text.isNullOrEmpty()) {
