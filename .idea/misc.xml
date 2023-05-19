@@ -18,23 +18,16 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/ic_baseline_person.xml" value="0.145" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/ic_baseline_send.xml" value="0.206" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/ic_baseline_settings.xml" value="0.145" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/ripple_btn_green.xml" value="0.137" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/ripple_btn_purple.xml" value="0.1" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/ripple_btn_red.xml" value="0.137" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/shadow_bottom.xml" value="0.14" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/slc_background_et_green.xml" value="0.137" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/slc_background_et_purple.xml" value="0.1" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_aa_try.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_animation_one.xml" value="0.209375" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_chapter4_main.xml" value="0.19814814814814816" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_chapter5_main.xml" value="0.25" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_chapter6_main.xml" value="0.25" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_chapter7_main.xml" value="0.15673981191222572" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_coordinator.xml" value="0.2" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_list_post.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_list_user.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_login.xml" value="0.18385416666666668" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_motion_layout_one.xml" value="0.22" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_my_calculator.xml" value="0.1" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_session.xml" value="0.22" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_splashscreen.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_architecture_code.xml" value="0.209375" />
@@ -44,7 +37,6 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_chart.xml" value="0.22" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_chat.xml" value="0.21686746987951808" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_date_picker.xml" value="0.209375" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_event_bus.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_huawei_oauth.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_module_dynamic_feature.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_try_navigation_component.xml" value="0.209375" />
@@ -61,6 +53,7 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_home.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_profile.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/fragment_second_nav_component.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_image_nominal.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_date.xml" value="0.67" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_from_me.xml" value="0.25" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_chat_from_opponent.xml" value="0.33" />

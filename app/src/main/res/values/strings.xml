@@ -33,4 +33,7 @@
     <string name="input_your_password">Input your Password</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password</string>
+    <string name="masukkan_jumalah_pesanan">Masukkan jumalah pesanan</string>
+    <string name="add_image">Add Image</string>
+    <string name="index">Index</string>
 </resources>
