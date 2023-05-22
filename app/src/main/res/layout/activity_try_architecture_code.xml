@@ -235,6 +235,17 @@
                     android:text="Coba Binding"
                     android:textAllCaps="false" />
 
+                <Button
+                    android:id="@+id/btnTryLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="6dp"
+                    android:layout_marginVertical="10dp"
+                    android:backgroundTint="#734120"
+                    android:text="Coba Login"
+                    android:textAllCaps="false" />
+
             </LinearLayout>
 
         </LinearLayout>

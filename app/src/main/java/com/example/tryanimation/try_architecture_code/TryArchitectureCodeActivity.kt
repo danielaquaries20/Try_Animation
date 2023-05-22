@@ -14,6 +14,7 @@ import com.example.tryanimation.try_architecture_code.api.ApiDummyRepository
 import com.example.tryanimation.try_architecture_code.model.Post
 import com.example.tryanimation.try_architecture_code.ui.list_post.ListPostActivity
 import com.example.tryanimation.try_architecture_code.ui.list_user.ListUserActivity
+import com.example.tryanimation.try_architecture_code.ui.login.LoginActivity
 import com.example.tryanimation.try_architecture_code.ui.session_activity.SessionActivity
 import com.example.tryanimation.try_architecture_code.ui.try_binding.TryBindingActivity
 
@@ -32,6 +33,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
     private lateinit var btnToListUser: Button
     private lateinit var btnToSession: Button
     private lateinit var btnTryBinding: Button
+    private lateinit var btnTryLogin: Button
 
     private lateinit var tvAngka: TextView
     private lateinit var tvBoolean: TextView
@@ -68,6 +70,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         btnCreatePost = findViewById(R.id.btnCreatePost)
         btnCreatePostByJson = findViewById(R.id.btnCreatePostByJson)
         btnTryBinding = findViewById(R.id.btnTryBinding)
+        btnTryLogin = findViewById(R.id.btnTryLogin)
 
         tvAngka = findViewById(R.id.tvLiveInt)
         tvBoolean = findViewById(R.id.tvLiveBoolean)
@@ -181,6 +184,10 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         btnTryBinding.setOnClickListener {
             startActivity(Intent(this, TryBindingActivity::class.java))
 //            createFinalPostByJson()
+        }
+
+        btnTryLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
 
     }

@@ -24,6 +24,7 @@ import com.dibyendu.picker.util.PickerUtils
 import com.dibyendu.picker.view.MonthYearPickerDialog
 import com.kal.rackmonthpicker.MonthType
 import com.kal.rackmonthpicker.RackMonthPicker
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -509,8 +510,10 @@ class TryDatePickerActivity : AppCompatActivity() {
                     PickerUtils.Format.LONG)
 
                 val justMonth = PickerUtils.getMonth(calendar)
-                Log.d("MonthPicker", "Month1: $bulan")
-                Log.d("MonthPicker", "Month2: $justMonth")
+                val justYear = PickerUtils.getYear(calendar)
+                Timber.tag("NouraizMonthPicker").d("getMonthYearDisplay: $bulan")
+                Timber.tag("NouraizMonthPicker").d("getMonth: $justMonth")
+                Timber.tag("NouraizMonthPicker").d("getYear: $justYear")
 
                 tvMonthNouraizPick.text = "Bulan: $bulan"
             }
