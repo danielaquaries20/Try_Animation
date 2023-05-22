@@ -13,6 +13,7 @@ import com.example.tryanimation.try_architecture_code.TryArchitectureCodeActivit
 import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
 import com.example.tryanimation.try_chart.TryChartActivity
 import com.example.tryanimation.try_chat_app.TryChatActivity
+import com.example.tryanimation.try_evaluate_math.TryEvaluateMathActivity
 import com.example.tryanimation.try_signature_pad.TrySignaturePadActivity
 import com.example.tryanimation.try_smart_tab_layout.TrySmartTabLayoutActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTrySignaturePad: Button
     private lateinit var btnTryChart: Button
     private lateinit var btnTrySmartTabLayout: Button
+    private lateinit var btnTryEvaluateMath: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         btnTrySignaturePad = findViewById(R.id.btnTrySignaturePad)
         btnTryChart = findViewById(R.id.btnTryChart)
         btnTrySmartTabLayout = findViewById(R.id.btnTrySmartTabLayout)
+        btnTryEvaluateMath = findViewById(R.id.btnTryEvaluateMath)
         /*endregion*/
 
         /*region Action*/
@@ -168,6 +171,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTrySmartTabLayout.setOnClickListener {
             startActivity(Intent(this, TrySmartTabLayoutActivity::class.java))
+        }
+
+        btnTryEvaluateMath.setOnClickListener {
+            startActivity(Intent(this, TryEvaluateMathActivity::class.java))
         }
         /*endregion*/
 

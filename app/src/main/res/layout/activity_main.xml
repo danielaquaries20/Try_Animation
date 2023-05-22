@@ -236,7 +236,17 @@
             android:textColor="@color/white"
             android:textAllCaps="false" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/btnTryEvaluateMath"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="#C62828"
+            android:text="Try Evaluate Math"
+            android:textColor="@color/white"
+            android:textAllCaps="false" />
 
+    </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
