@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tryanimation.try_architecture_code.TryArchitectureCodeActivity
 import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
+import com.example.tryanimation.try_broadcast_receiver.TryReceiverActivity
 import com.example.tryanimation.try_chart.TryChartActivity
 import com.example.tryanimation.try_chat_app.TryChatActivity
 import com.example.tryanimation.try_evaluate_math.TryEvaluateMathActivity
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryChart: Button
     private lateinit var btnTrySmartTabLayout: Button
     private lateinit var btnTryEvaluateMath: Button
+    private lateinit var btnTryBroadcastReceiver: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         btnTryChart = findViewById(R.id.btnTryChart)
         btnTrySmartTabLayout = findViewById(R.id.btnTrySmartTabLayout)
         btnTryEvaluateMath = findViewById(R.id.btnTryEvaluateMath)
+        btnTryBroadcastReceiver = findViewById(R.id.btnTryBroadcastReceiver)
         /*endregion*/
 
         /*region Action*/
@@ -175,6 +178,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryEvaluateMath.setOnClickListener {
             startActivity(Intent(this, TryEvaluateMathActivity::class.java))
+        }
+
+        btnTryBroadcastReceiver.setOnClickListener {
+            startActivity(Intent(this, TryReceiverActivity::class.java))
         }
         /*endregion*/
 

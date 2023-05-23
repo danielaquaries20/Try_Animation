@@ -19,6 +19,9 @@
         android:theme="@style/Theme.TryAnimation"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".try_broadcast_receiver.TryReceiverActivity"
+            android:exported="false" />
+        <activity
             android:name=".try_evaluate_math.TryEvaluateMathActivity"
             android:exported="false" />
         <activity
@@ -106,6 +109,16 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+
+        <!--<receiver android:name=".try_broadcast_receiver.MyReceiver"
+            android:exported="false">
+
+            <intent-filter>
+                <action android:name="com.daniel.CUSTOM_INTENT"/>
+            </intent-filter>
+        </receiver>-->
+
     </application>
 
 </manifest>
