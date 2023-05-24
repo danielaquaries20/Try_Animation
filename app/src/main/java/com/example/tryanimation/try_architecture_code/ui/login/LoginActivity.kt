@@ -66,8 +66,8 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
             val dateNow = DateTimeHelper().dateNow()
             val tokenInit = "$dateNow|rahasia"
             val tokenEncrypt = tokenInit.base64encrypt()
-//            Timber.tag("GetInstanceToken").d("1_Token: $tokenEncrypt")
-            session.setValue("token", tokenEncrypt)
+            Timber.tag("GetInstanceToken").d("EncryptToken: $tokenEncrypt")
+            session.setValue(Constants.TOKEN.API_TOKEN, tokenEncrypt)
 //            Timber.tag("GetInstanceToken").d("ApiService: $apiService")
             viewModel.getToken()
         }

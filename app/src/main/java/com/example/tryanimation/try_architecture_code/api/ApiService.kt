@@ -8,10 +8,10 @@ import retrofit2.http.POST
 interface ApiService {
 
     @GET("user/get-token")
-    suspend fun getToken(): String // ->Udah ada get token ini belum?
+    suspend fun getToken(): String
 
     @FormUrlEncoded
-    @POST("user/login")
+    @POST("user/login?expired=60")
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String,
@@ -25,4 +25,6 @@ interface ApiService {
         @Field("password") password: String,
     ): String
 
+    @GET("note")
+    suspend fun getNotes(): String
 }

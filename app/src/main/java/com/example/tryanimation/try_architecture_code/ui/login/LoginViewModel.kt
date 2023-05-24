@@ -77,10 +77,11 @@ class LoginViewModel @Inject constructor(
                         //Dibagian ini di cek dan di samakan
                         val apiMessage = response.getString("message")
                         val token = response.getString("token")
-                        val data = response.getJSONObject("data").toObject<UserEntity>(gson)
+//                        val data = response.getJSONObject("data").toObject<UserEntity>(gson)
 //                        userDao.insert(data.copy(idUser = 1))
 
                         session.setValue(Constants.TOKEN.API_TOKEN, token)
+                        Timber.tag("GetInstanceToken").d("RealToken: $token")
                         _loginResponse.postValue(ApiResponse(ApiStatus.SUCCESS, apiMessage))
                     }
 
