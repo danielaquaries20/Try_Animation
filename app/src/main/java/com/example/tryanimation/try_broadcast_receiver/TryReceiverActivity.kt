@@ -43,4 +43,8 @@ class TryReceiverActivity : AppCompatActivity() {
         val customIntent = Intent("com.daniel.CUSTOM_INTENT")
         sendBroadcast(customIntent)
     }
+
+
+
+    //Diikuti ya
 }

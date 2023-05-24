@@ -9,6 +9,7 @@ import com.crocodic.core.base.activity.CoreActivity
 import com.crocodic.core.data.CoreSession
 import com.crocodic.core.extension.base64encrypt
 import com.crocodic.core.extension.snacked
+import com.crocodic.core.extension.textOf
 import com.crocodic.core.helper.DateTimeHelper
 import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityLoginBinding
@@ -31,6 +32,7 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Tambahkan ini
         binding.btnTry.setOnClickListener(this)
 
         observe()
@@ -38,31 +40,50 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
         initToken()
     }
 
+    //Membuat fungsi baru namanya validateForm()
+    private fun validateForm() {
+        val email = binding.etUsername.textOf()
+        val password = binding.etPassword.textOf()
+
+        if (email.isEmpty()) {
+            binding.root.snacked("Email tidak boleh kosong")
+            return
+        }
+
+        if (password.isEmpty()) {
+            binding.root.snacked("Password tidak boleh kosong")
+            return
+        }
+
+        login(email, password)
+    }
+
+
+    //buat function baru initToken()
     private fun initToken() {
         lifecycleScope.launch {
             loadingDialog.show("Get Instance, wait for second..")
             val dateNow = DateTimeHelper().dateNow()
             val tokenInit = "$dateNow|rahasia"
             val tokenEncrypt = tokenInit.base64encrypt()
-            Timber.tag("GetInstanceToken").d("1_Token: $tokenEncrypt")
-            session.setValue(Constants.TOKEN.API_TOKEN, tokenEncrypt)
+//            Timber.tag("GetInstanceToken").d("1_Token: $tokenEncrypt")
+            session.setValue("token", tokenEncrypt)
 //            Timber.tag("GetInstanceToken").d("ApiService: $apiService")
             viewModel.getToken()
         }
     }
 
     private fun login(email: String?, password: String?) {
-        Timber.tag("TesLogin").d("Test 2")
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            Timber.tag("TesLogin").d("Test 3")
             binding.root.snacked("Isi Email atau Password")
         } else {
-            Timber.tag("TesLogin").d("Test 4")
             viewModel.login(email, password)
         }
     }
 
     private fun observe() {
+
+        //Login response di cek dan di sesuaikan
         viewModel.loginResponse.observe(this) { response ->
             when (response.status) {
                 ApiStatus.SUCCESS -> {
@@ -70,11 +91,8 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
                     binding.root.snacked("Pesan: ${response.message}")
                 }
                 ApiStatus.LOADING -> {
+                    //diganti ini
                     loadingDialog.show("Loading...")
-                }
-                ApiStatus.ERROR -> {
-                    loadingDialog.dismiss()
-                    binding.root.snacked("Error")
                 }
                 else -> {
                     loadingDialog.dismiss()
@@ -83,6 +101,7 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
             }
         }
 
+        // dibagian observe ditambahkan ini
         viewModel.tokenResponse.observe(this) { response ->
             loadingDialog.dismiss()
             when (response.status) {
@@ -92,9 +111,6 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
                 ApiStatus.LOADING -> {
                     loadingDialog.show("Get Token...")
                 }
-                ApiStatus.ERROR -> {
-                    binding.root.snacked("Error")
-                }
                 else -> {
                     binding.root.snacked("Else Branch")
                 }
@@ -102,13 +118,11 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
         }
     }
 
+
     override fun onClick(v: View?) {
         super.onClick(v)
         when (v) {
-            binding.btnTry -> {
-                Timber.tag("TesLogin").d("Test 1")
-                login("leo@gmail.com", "123456")
-            }
+            binding.btnTry -> { validateForm() }
         }
     }
 

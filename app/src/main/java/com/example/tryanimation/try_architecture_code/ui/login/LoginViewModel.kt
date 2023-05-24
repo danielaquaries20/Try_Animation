@@ -7,21 +7,23 @@ import com.crocodic.core.api.ApiResponse
 import com.crocodic.core.api.ApiStatus
 import com.crocodic.core.base.viewmodel.CoreViewModel
 import com.crocodic.core.data.CoreSession
+import com.crocodic.core.extension.toObject
 import com.example.tryanimation.try_architecture_code.api.ApiService
 import com.example.tryanimation.try_architecture_code.data.const.Constants
+import com.example.tryanimation.try_architecture_code.database.user.UserDao
+import com.example.tryanimation.try_architecture_code.database.user.UserEntity
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val session: CoreSession,
     private val apiService: ApiService,
+    private val userDao: UserDao,
     private val gson: Gson
 ) : CoreViewModel() {
 
@@ -39,35 +41,27 @@ class LoginViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    //Buat fungsi baru 'getToken'
     fun getToken() {
-        try {
             viewModelScope.launch {
-                Timber.tag("ErrorAPI").e("Error 1")
                 _tokenResponse.postValue(ApiResponse(ApiStatus.LOADING, "Loading..."))
-                Timber.tag("ErrorAPI").e("Error 2")
                 ApiObserver(
                     block = { apiService.getToken() },
                     toast = false,
                     responseListener = object : ApiObserver.ResponseListener {
                         override suspend fun onSuccess(response: JSONObject) {
-                            Timber.tag("ErrorAPI").e("Error 3")
                             val token = response.getString("token")
                             session.setValue(Constants.TOKEN.API_TOKEN, token)
-                            Timber.tag("GetInstanceToken").d("2_Token: $token")
                             _tokenResponse.postValue(ApiResponse(ApiStatus.SUCCESS))
-                            Timber.tag("ErrorAPI").e("Error 4")
                         }
 
                         override suspend fun onError(response: ApiResponse) {
-                            Timber.tag("ErrorAPI").e("Error 5")
                             super.onError(response)
                         }
                     }
                 )
             }
-        } catch (e:Exception) {
-            e.printStackTrace()
-        }
+
     }
 
 
@@ -79,14 +73,20 @@ class LoginViewModel @Inject constructor(
                 toast = false,
                 responseListener = object : ApiObserver.ResponseListener {
                     override suspend fun onSuccess(response: JSONObject) {
+
+                        //Dibagian ini di cek dan di samakan
                         val apiMessage = response.getString("message")
                         val token = response.getString("token")
-                        Timber.tag("GetInstanceToken").d("3_Token: $token")
+                        val data = response.getJSONObject("data").toObject<UserEntity>(gson)
+//                        userDao.insert(data.copy(idUser = 1))
+
                         session.setValue(Constants.TOKEN.API_TOKEN, token)
                         _loginResponse.postValue(ApiResponse(ApiStatus.SUCCESS, apiMessage))
                     }
 
                     override suspend fun onError(response: ApiResponse) {
+
+                        //yang sebelumnya dihapus, diganti dengan ini
                         super.onError(response)
 
                     }

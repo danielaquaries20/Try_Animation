@@ -67,7 +67,7 @@ class ComponentModule {
                 val accessToken = session.getString(Constants.TOKEN.API_TOKEN)
                 Timber.tag("ComponentModuleOkhttp").d("AccessToken: $accessToken")
                 val requestBuilder = original.newBuilder()
-                    .header("Authorization", accessToken)
+                    .header("Authorization", accessToken) // "access token" diganti Authorization
                     .method(original.method, original.body)
 
                 val request = requestBuilder.build()
@@ -88,7 +88,7 @@ class ComponentModule {
         return Retrofit.Builder()
             .baseUrl("http://3.1.6.193/api/")
             .addConverterFactory(ScalarsConverterFactory.create())
-            .client(okHttpClient)
+            .client(okHttpClient) // -> Tambahkan ini
             .build().create(ApiService::class.java)
     }
 }

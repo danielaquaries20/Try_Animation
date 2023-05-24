@@ -8,7 +8,7 @@ import retrofit2.http.POST
 interface ApiService {
 
     @GET("user/get-token")
-    suspend fun getToken(): String
+    suspend fun getToken(): String // ->Udah ada get token ini belum?
 
     @FormUrlEncoded
     @POST("user/login")
