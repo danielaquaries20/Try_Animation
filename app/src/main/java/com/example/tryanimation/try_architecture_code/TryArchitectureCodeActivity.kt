@@ -9,19 +9,29 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.tryanimation.R
 import com.example.tryanimation.try_architecture_code.api.ApiDummyRepository
+import com.example.tryanimation.try_architecture_code.database.user.UserEntity
+import com.example.tryanimation.try_architecture_code.database.user.UserRepository
 import com.example.tryanimation.try_architecture_code.model.Post
 import com.example.tryanimation.try_architecture_code.ui.list_post.ListPostActivity
 import com.example.tryanimation.try_architecture_code.ui.list_user.ListUserActivity
 import com.example.tryanimation.try_architecture_code.ui.login.LoginActivity
 import com.example.tryanimation.try_architecture_code.ui.session_activity.SessionActivity
 import com.example.tryanimation.try_architecture_code.ui.try_binding.TryBindingActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TryArchitectureCodeActivity : AppCompatActivity() {
 
     private lateinit var viewModel: TryArchitectureViewModel
     private val apiDummyRepository = ApiDummyRepository()
+
+    @Inject
+    lateinit var userRepository: UserRepository
 
     private lateinit var btnTambah: Button
     private lateinit var btnKurang: Button
@@ -34,6 +44,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
     private lateinit var btnToSession: Button
     private lateinit var btnTryBinding: Button
     private lateinit var btnTryLogin: Button
+    private lateinit var btnTryAddUser: Button
 
     private lateinit var tvAngka: TextView
     private lateinit var tvBoolean: TextView
@@ -71,6 +82,7 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
         btnCreatePostByJson = findViewById(R.id.btnCreatePostByJson)
         btnTryBinding = findViewById(R.id.btnTryBinding)
         btnTryLogin = findViewById(R.id.btnTryLogin)
+        btnTryAddUser = findViewById(R.id.btnTryAddUser)
 
         tvAngka = findViewById(R.id.tvLiveInt)
         tvBoolean = findViewById(R.id.tvLiveBoolean)
@@ -190,6 +202,20 @@ class TryArchitectureCodeActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
+        btnTryAddUser.setOnClickListener {
+            addUser()
+        }
+
+    }
+
+    private fun addUser() {
+        lifecycleScope.launch {
+            val user = UserEntity(1, "Daniel", "Pratama", 19, "Hello My Name is Daniel")
+            userRepository.addUser(user)
+            Toast.makeText(this@TryArchitectureCodeActivity,
+                "Berhasil menambahkan User",
+                Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun createFinalPost() {

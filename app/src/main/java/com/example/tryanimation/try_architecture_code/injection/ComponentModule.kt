@@ -7,6 +7,8 @@ import com.example.tryanimation.BuildConfig
 import com.example.tryanimation.try_architecture_code.api.ApiService
 import com.example.tryanimation.try_architecture_code.data.const.Constants
 import com.example.tryanimation.try_architecture_code.database.MyDatabaseTry
+import com.example.tryanimation.try_architecture_code.database.user.UserDao
+import com.example.tryanimation.try_architecture_code.database.user.UserRepository
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -43,6 +45,9 @@ class ComponentModule {
     @Singleton
     fun provideUserDao(database: MyDatabaseTry) = database.userDao()
 
+    @Provides
+    @Singleton
+    fun provideUserRepository(userDao: UserDao) = UserRepository(userDao)
 
     @Provides
     @Singleton

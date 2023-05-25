@@ -11,6 +11,8 @@ import com.crocodic.core.data.CoreSession
 import com.crocodic.core.extension.toList
 import com.example.tryanimation.try_architecture_code.api.ApiService
 import com.example.tryanimation.try_architecture_code.data.model.Note
+import com.example.tryanimation.try_architecture_code.database.user.UserDao
+import com.example.tryanimation.try_architecture_code.database.user.UserRepository
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,6 +23,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val apiService: ApiService,
     private val gson: Gson,
+    private val userDao: UserDao
 ) : CoreViewModel() {
     override fun apiLogout() {
         TODO("Not yet implemented")
@@ -29,6 +32,8 @@ class HomeViewModel @Inject constructor(
     override fun apiRenewToken() {
         TODO("Not yet implemented")
     }
+
+    val user = userDao.getUser()
 
     private val _listNote = MutableLiveData<List<Note>>()
     val listNote = _listNote

@@ -20,4 +20,7 @@ interface UserDao {
 
     @Query("DELETE FROM user_table")
     suspend fun deleteAllUser()
+
+    @Query("SELECT * from user_table WHERE id = 1 LIMIT 1")
+    fun getUser(): LiveData<UserEntity?>
 }

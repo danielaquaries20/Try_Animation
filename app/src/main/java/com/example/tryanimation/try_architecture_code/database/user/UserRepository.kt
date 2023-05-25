@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 class UserRepository(private val userDao: UserDao) {
 
     val readAllUser: LiveData<List<UserEntity>> = userDao.readAllUser()
+    val readUser1: LiveData<UserEntity?> = userDao.getUser()
 
     suspend fun addUser(user: UserEntity) {
         userDao.addUser(user)

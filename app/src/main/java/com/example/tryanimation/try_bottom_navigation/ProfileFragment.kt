@@ -1,27 +1,36 @@
 package com.example.tryanimation.try_bottom_navigation
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.crocodic.core.base.fragment.CoreFragment
+import com.crocodic.core.extension.text
 import com.example.tryanimation.R
+import com.example.tryanimation.databinding.FragmentProfileBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
-class ProfileFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+@AndroidEntryPoint
+class ProfileFragment : CoreFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
 
-        Log.d("FRAGMENT_TEST", "Profile Screen")
+    private lateinit var viewModel: HomeViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this@ProfileFragment)[HomeViewModel::class.java]
+
+        observe()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    private fun observe() {
+        viewModel.user.observe(requireActivity()) { user ->
+            if (user != null) {
+                binding.tvIdUser.text("Id: ${user.id}")
+                binding.tvName.text("Username: ${user.firstName} ${user.lastName}")
+                binding.tvAge.text("Age: ${user.age}")
+                binding.tvBio.text("Bio: ${user.bio}")
+            }
+        }
     }
-
 }

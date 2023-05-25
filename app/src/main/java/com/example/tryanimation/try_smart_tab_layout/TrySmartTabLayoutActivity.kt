@@ -48,6 +48,7 @@ class TrySmartTabLayoutActivity : AppCompatActivity() {
     }
 
     private fun initTabView() {
+/*
         smartTabLayout = findViewById(R.id.smartTabLayout)
         viewPager = findViewById(R.id.viewpager)
 
@@ -61,10 +62,12 @@ class TrySmartTabLayoutActivity : AppCompatActivity() {
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = 2
         smartTabLayout.setViewPager(viewPager)
+*/
 
     }
 
     private fun initTabView2() {
+/*
         materialTabLayout = findViewById(R.id.materialTabLayout)
         viewPager2 = findViewById(R.id.viewpager2)
 
@@ -105,6 +108,7 @@ class TrySmartTabLayoutActivity : AppCompatActivity() {
                 materialTabLayout.selectTab(materialTabLayout.getTabAt(position))
             }
         })
+*/
     }
 
     private fun showContent(content: String, isSnack: Boolean = true, withLog: Boolean = true) {

@@ -19,6 +19,15 @@
         android:theme="@style/Theme.TryAnimation"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".try_architecture_code.ui.profile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".try_architecture_code.ui.note.edit.EditNoteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".try_architecture_code.ui.note.add.AddNoteActivity"
+            android:exported="false" />
+        <activity
             android:name=".try_architecture_code.ui.register.RegisterActivity"
             android:exported="false" />
         <activity

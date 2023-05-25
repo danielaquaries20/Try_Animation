@@ -246,6 +246,17 @@
                     android:text="Coba Login"
                     android:textAllCaps="false" />
 
+                <Button
+                    android:id="@+id/btnTryAddUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="6dp"
+                    android:layout_marginVertical="10dp"
+                    android:backgroundTint="#FF8F00"
+                    android:text="Coba Tambahkan User"
+                    android:textAllCaps="false" />
+
             </LinearLayout>
 
         </LinearLayout>
