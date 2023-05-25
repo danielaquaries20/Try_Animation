@@ -13,6 +13,7 @@ import com.example.tryanimation.ui.kl_basic.chapter_5.Chapter5MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_6.Chapter6MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_6.MyCalculatorActivity
 import com.example.tryanimation.ui.kl_basic.chapter_7.Chapter7MainActivity
+import com.example.tryanimation.ui.kl_basic.chapter_8.Chapter8MainActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnChapter6Simple: AppCompatButton
     private lateinit var btnChapter6Complicate: AppCompatButton
     private lateinit var btnChapter7: AppCompatButton
+    private lateinit var btnChapter8: AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         btnChapter6Simple = findViewById(R.id.btnChapter6Simple)
         btnChapter6Complicate = findViewById(R.id.btnChapter6Complicate)
         btnChapter7 = findViewById(R.id.btnChapter7)
+        btnChapter8 = findViewById(R.id.btnChapter8)
 
         btnNext.setOnClickListener {
             startActivity(Intent(this, Chapter4MainActivity::class.java))
@@ -54,6 +57,10 @@ class MainActivity : AppCompatActivity() {
 
         btnChapter7.setOnClickListener {
             startActivity(Intent(this, Chapter7MainActivity::class.java))
+        }
+
+        btnChapter8.setOnClickListener {
+            startActivity(Intent(this, Chapter8MainActivity::class.java))
         }
 
 
