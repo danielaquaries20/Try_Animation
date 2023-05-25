@@ -91,7 +91,7 @@ class ComponentModule {
     @Singleton
     fun provideApiService(okHttpClient: OkHttpClient): ApiService {
         return Retrofit.Builder()
-            .baseUrl("http://3.1.6.193/api/")
+            .baseUrl("http://3.1.6.193/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .client(okHttpClient) // -> Tambahkan ini
             .build().create(ApiService::class.java)

@@ -1,16 +1,19 @@
 package com.example.tryanimation.try_bottom_navigation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.crocodic.core.api.ApiStatus
 import com.crocodic.core.base.adapter.CoreListAdapter
 import com.crocodic.core.base.fragment.CoreFragment
+import com.crocodic.core.extension.createIntent
 import com.crocodic.core.extension.tos
 import com.example.tryanimation.R
 import com.example.tryanimation.databinding.FragmentHomeBinding
 import com.example.tryanimation.databinding.ItemNoteBinding
 import com.example.tryanimation.try_architecture_code.data.model.Note
+import com.example.tryanimation.try_architecture_code.ui.note.edit.EditNoteActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -31,7 +34,15 @@ class HomeFragment : CoreFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         binding.rvNotes.adapter =
             CoreListAdapter<ItemNoteBinding, Note>(R.layout.item_note).initItem(dataList) { position, data ->
-                activity?.tos("Title: ${data?.title}")
+                val toEditNote = activity?.createIntent<EditNoteActivity> {
+                    putExtra("id_note", data?.id)
+                    putExtra("title", data?.title)
+                    putExtra("note", data?.content)
+                    putExtra("created_at", data?.createdAt)
+                    putExtra("updated_at", data?.updatedAt)
+                }
+
+                startActivityForResult(toEditNote, 101)
             }
 
         viewModel.getNotes()
@@ -77,13 +88,24 @@ class HomeFragment : CoreFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 101 && resultCode == 102) {
+            viewModel.getNotes()
+        }
+    }
 
-    private fun dummyData() {
+
+
+
+
+
+    /*private fun dummyData() {
         dataList.clear()
         binding.rvNotes.adapter?.notifyDataSetChanged()
         for (i in 1..10) {
             dataList.add(Note("Idke-$i", "Dummy $i", "lorem ipsum dolor", 12311L, 23123L))
         }
         binding.rvNotes.adapter?.notifyItemInserted(0)
-    }
+    }*/
 }

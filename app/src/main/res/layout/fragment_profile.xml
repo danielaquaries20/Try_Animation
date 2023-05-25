@@ -43,6 +43,22 @@
             android:textSize="20sp" />
 
 
+        <ImageView
+            android:id="@+id/iv_photo_profile"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/anime_girl" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
     </LinearLayout>
 
 </layout>
