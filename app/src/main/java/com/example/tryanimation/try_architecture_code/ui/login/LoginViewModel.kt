@@ -12,8 +12,12 @@ import com.example.tryanimation.try_architecture_code.api.ApiService
 import com.example.tryanimation.try_architecture_code.data.const.Constants
 import com.example.tryanimation.try_architecture_code.database.user.UserDao
 import com.example.tryanimation.try_architecture_code.database.user.UserEntity
+import com.example.tryanimation.try_architecture_code.model.User2
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import timber.log.Timber
@@ -41,7 +45,6 @@ class LoginViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    //Buat fungsi baru 'getToken'
     fun getToken() {
             viewModelScope.launch {
                 _tokenResponse.postValue(ApiResponse(ApiStatus.LOADING, "Loading..."))
@@ -64,7 +67,6 @@ class LoginViewModel @Inject constructor(
 
     }
 
-
     fun login(email: String, password: String) {
         _loginResponse.postValue(ApiResponse(ApiStatus.LOADING, "Loading..."))
         viewModelScope.launch {
@@ -77,8 +79,9 @@ class LoginViewModel @Inject constructor(
                         //Dibagian ini di cek dan di samakan
                         val apiMessage = response.getString("message")
                         val token = response.getString("token")
-//                        val data = response.getJSONObject("data").toObject<UserEntity>(gson)
-//                        userDao.insert(data.copy(idUser = 1))
+                        val data = response.getJSONObject("data").toObject<User2>(gson)
+                        val user = UserEntity(1, data.name, data.photo, null, data.id)
+                        userDao.addUser(user)
 
                         session.setValue(Constants.TOKEN.API_TOKEN, token)
                         Timber.tag("GetInstanceToken").d("RealToken: $token")
@@ -97,4 +100,14 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    fun checkLogin(isLogin: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            var login = false
+            CoroutineScope(Dispatchers.IO).launch {
+                login = userDao.isLogin()
+            }
+            delay(1000)
+            isLogin(login)
+        }
+    }
 }

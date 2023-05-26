@@ -1,5 +1,6 @@
 package com.example.tryanimation.try_architecture_code.api
 
+import okhttp3.MultipartBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -43,5 +44,18 @@ interface ApiService {
     @DELETE("api/note/{id}")
     suspend fun deleteNote(
         @Path("id") id: String
+    ): String
+
+    @FormUrlEncoded
+    @PATCH("api/user/profile")
+    suspend fun updateNameProfile(
+        @Field("name") name: String,
+    ): String
+
+    @Multipart
+    @PATCH("api/user/profile")
+    suspend fun updateProfile(
+        @Part("name") name: String,
+        @Part photo: MultipartBody.Part
     ): String
 }

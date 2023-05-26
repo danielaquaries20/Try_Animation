@@ -1,6 +1,5 @@
-package com.example.tryanimation.try_bottom_navigation
+package com.example.tryanimation.try_architecture_code.ui.profile
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.crocodic.core.api.ApiObserver
@@ -8,28 +7,24 @@ import com.crocodic.core.api.ApiResponse
 import com.crocodic.core.api.ApiStatus
 import com.crocodic.core.base.viewmodel.CoreViewModel
 import com.crocodic.core.data.CoreSession
-import com.crocodic.core.extension.toList
+import com.crocodic.core.extension.toObject
 import com.example.tryanimation.try_architecture_code.api.ApiService
-import com.example.tryanimation.try_architecture_code.data.model.Note
-import com.example.tryanimation.try_architecture_code.database.MyDatabaseTry
+import com.example.tryanimation.try_architecture_code.data.const.Constants
 import com.example.tryanimation.try_architecture_code.database.user.UserDao
-import com.example.tryanimation.try_architecture_code.database.user.UserRepository
+import com.example.tryanimation.try_architecture_code.database.user.UserEntity
 import com.example.tryanimation.try_architecture_code.model.User2
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class EditProfileViewModel @Inject constructor(
     private val apiService: ApiService,
-    private val gson: Gson,
-    private val session: CoreSession,
-    userDao: UserDao,
-    private val appDatabase: MyDatabaseTry
+    private val userDao: UserDao,
+    private val gson: Gson
 ) : CoreViewModel() {
     override fun apiLogout() {
         TODO("Not yet implemented")
@@ -41,45 +36,35 @@ class HomeViewModel @Inject constructor(
 
     val user = userDao.getUser()
 
-    private val _listNote = MutableLiveData<List<Note>>()
-    val listNote = _listNote
+    private val _updateProfileResponse = MutableLiveData<ApiResponse>()
+    val updateProfileResponse = _updateProfileResponse
 
-    private val _noteResponse = MutableLiveData<ApiResponse>()
-    val noteResponse = _noteResponse
-
-    fun getNotes() {
+    fun updateProfileName(name: String) {
+        _updateProfileResponse.postValue(ApiResponse(ApiStatus.LOADING, "Loading..."))
         viewModelScope.launch {
-            _noteResponse.postValue(ApiResponse(ApiStatus.LOADING, "Loading..."))
             ApiObserver(
-                block = { apiService.getNotes() },
+                block = { apiService.updateNameProfile(name) },
                 toast = false,
                 responseListener = object : ApiObserver.ResponseListener {
                     override suspend fun onSuccess(response: JSONObject) {
+
+                        //Dibagian ini di cek dan di samakan
                         val apiMessage = response.getString("message")
-                        val data = response.getJSONArray("data").toList<Note>(gson)
-                        Log.d("HomeViewModel", "ListNote: $data")
-                        _listNote.postValue(data)
-                        _noteResponse.postValue(ApiResponse(ApiStatus.SUCCESS, apiMessage))
+                        val data = response.getJSONObject("data").toObject<User2>(gson)
+                        val user = UserEntity(1, data.name, data.photo, null, data.id)
+                        userDao.updateUser(user)
+
+                        _updateProfileResponse.postValue(ApiResponse(ApiStatus.SUCCESS, apiMessage))
                     }
 
                     override suspend fun onError(response: ApiResponse) {
                         super.onError(response)
                     }
+
                 }
             )
         }
     }
-
-    fun logout(isLogout: () -> Unit) {
-        viewModelScope.launch {
-            session.clearAll()
-            CoroutineScope(Dispatchers.IO).launch {
-                appDatabase.clearAllTables()
-            }
-            isLogout()
-        }
-    }
-
 
 
 

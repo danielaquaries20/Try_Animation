@@ -23,4 +23,8 @@ interface UserDao {
 
     @Query("SELECT * from user_table WHERE id = 1 LIMIT 1")
     fun getUser(): LiveData<UserEntity?>
+
+    @Query("SELECT EXISTS (SELECT 1 FROM user_table WHERE id = 1)")
+    fun isLogin(): Boolean
+
 }

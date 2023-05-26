@@ -14,7 +14,7 @@
         <EditText
             android:id="@+id/et_username"
             android:layout_width="match_parent"
-            android:hint="Username"
+            android:hint="Email "
             android:layout_height="48dp" />
 
         <EditText

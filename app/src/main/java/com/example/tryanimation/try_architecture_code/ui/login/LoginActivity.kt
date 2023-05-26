@@ -8,6 +8,7 @@ import com.crocodic.core.api.ApiStatus
 import com.crocodic.core.base.activity.CoreActivity
 import com.crocodic.core.data.CoreSession
 import com.crocodic.core.extension.base64encrypt
+import com.crocodic.core.extension.openActivity
 import com.crocodic.core.extension.snacked
 import com.crocodic.core.extension.textOf
 import com.crocodic.core.helper.DateTimeHelper
@@ -15,6 +16,7 @@ import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityLoginBinding
 import com.example.tryanimation.try_architecture_code.api.ApiService
 import com.example.tryanimation.try_architecture_code.data.const.Constants
+import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -32,15 +34,21 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //Tambahkan ini
-        binding.btnTry.setOnClickListener(this)
+        viewModel.checkLogin { isLogin ->
+            Timber.d("CheckLogin: $isLogin")
+            if (isLogin) {
+                openActivity<TryBottomNavigationActivity>()
+                finish()
+            } else {
+                binding.btnTry.setOnClickListener(this)
 
-        observe()
-//        login("leo@gmail.com", "123456")
-        initToken()
+                observe()
+                initToken()
+            }
+        }
+
     }
 
-    //Membuat fungsi baru namanya validateForm()
     private fun validateForm() {
         val email = binding.etUsername.textOf()
         val password = binding.etPassword.textOf()
@@ -58,8 +66,6 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
         login(email, password)
     }
 
-
-    //buat function baru initToken()
     private fun initToken() {
         lifecycleScope.launch {
             loadingDialog.show("Get Instance, wait for second..")
@@ -88,7 +94,8 @@ class LoginActivity : CoreActivity<ActivityLoginBinding, LoginViewModel>(R.layou
             when (response.status) {
                 ApiStatus.SUCCESS -> {
                     loadingDialog.dismiss()
-                    binding.root.snacked("Pesan: ${response.message}")
+                    finish()
+                    openActivity<TryBottomNavigationActivity>()
                 }
                 ApiStatus.LOADING -> {
                     //diganti ini
