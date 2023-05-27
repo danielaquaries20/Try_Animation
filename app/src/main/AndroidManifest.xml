@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".ProfilenActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.kl_basic.chapter_8.MyBiodataActivity"
             android:exported="false" />
         <activity
