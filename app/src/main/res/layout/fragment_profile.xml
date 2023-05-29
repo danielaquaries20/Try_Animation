@@ -46,7 +46,7 @@
         <ImageView
             android:id="@+id/iv_photo_profile"
             android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@drawable/anime_girl" />
 

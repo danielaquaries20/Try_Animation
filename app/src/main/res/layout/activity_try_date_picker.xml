@@ -254,7 +254,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/titleNouraizMonthPicker"
@@ -283,6 +283,50 @@
                 android:backgroundTint="@color/black"
                 android:text="Pilih Bulan"
                 android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/titleMaterialCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Material Calendar"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvMaterialCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal: "
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/btnMaterialCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="17dp"
+                android:backgroundTint="@color/black"
+                android:text="Pilih Bulan"
+                android:textAllCaps="false" />
+
+            <DatePicker
+                android:id="@+id/materialCalendar"
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

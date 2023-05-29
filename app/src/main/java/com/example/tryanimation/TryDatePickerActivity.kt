@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.util.SparseIntArray
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.aminography.primecalendar.civil.CivilCalendar
 import com.aminography.primecalendar.japanese.JapaneseCalendar
 import com.aminography.primedatepicker.common.BackgroundShapeType
@@ -55,6 +57,10 @@ class TryDatePickerActivity : AppCompatActivity() {
     private lateinit var tvMonthNouraizPick: TextView
     private lateinit var btnNouraizMonthPick: Button
 
+    private lateinit var tvMaterialCalendar: TextView
+    private lateinit var btnMaterialCalendar: Button
+    private lateinit var materialCalendar: DatePicker
+
     private var startDateApplandeo = ""
     private var endDateApplandeo = ""
     private var calendarStartApplandeo: Calendar? = null
@@ -93,15 +99,20 @@ class TryDatePickerActivity : AppCompatActivity() {
         tvMonthNouraizPick = findViewById(R.id.tvNouraizMonth)
         btnNouraizMonthPick = findViewById(R.id.btnNouraizPickMonth)
 
+        tvMaterialCalendar = findViewById(R.id.tvMaterialCalendar)
+        btnMaterialCalendar = findViewById(R.id.btnMaterialCalendar)
+        materialCalendar = findViewById(R.id.materialCalendar)
+
         btnPickDate.setOnClickListener { setPrimeDatePicker() }
         btnPickDate2.setOnClickListener { setPrimeDatePicker2() }
         btnRackMonthPick.setOnClickListener { showRackMonthPicker() }
         btnRackMonthPick2.setOnClickListener { showRackMonthPicker2() }
         btnNouraizMonthPick.setOnClickListener { showNouraizMonthPicker() }
+        btnMaterialCalendar.setOnClickListener { showMaterialCalendar() }
 
-        setApplandeoCalendar()
+//        setApplandeoCalendar()
 
-        setCustomCalendar()
+//        setCustomCalendar()
 
     }
 
@@ -499,7 +510,6 @@ class TryDatePickerActivity : AppCompatActivity() {
         }*/
     }
 
-
     private fun showNouraizMonthPicker() {
         //Kelemahan: Untuk month pickernya tidak bisa dikustom.
         MonthYearPickerDialog.show(this, nouraizCalendar, object : PickerListener {
@@ -520,4 +530,28 @@ class TryDatePickerActivity : AppCompatActivity() {
         })
     }
 
+    private fun showMaterialCalendar() {
+        val isShow = materialCalendar.isVisible
+        if (isShow) {
+            materialCalendar.isVisible = false
+        } else {
+            materialCalendar.isVisible = true
+            val calendarNow = Calendar.getInstance()
+            val year = calendarNow.get(Calendar.YEAR)
+            val month = calendarNow.get(Calendar.MONTH)
+            val day = calendarNow.get(Calendar.DAY_OF_MONTH)
+            materialCalendar.init(year, month, day) { _, year, month, day ->
+                val newDate = "Tanggal: $year - ${month + 1} - $day"
+                tvMaterialCalendar.text = newDate
+            }
+        }
+    }
+
+    /*override fun onBackPressed() {
+        if (materialCalendar.isVisible) {
+            materialCalendar.isVisible = false
+        } else {
+            super.onBackPressed()
+        }
+    }*/
 }
