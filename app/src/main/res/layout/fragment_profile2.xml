@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.kl_basic.chapter_9.fragments.ProfileFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimens_25dp"
+                android:contentDescription="@string/honkai_impact_3rd"
+                android:scaleType="centerCrop"
+                android:src="@drawable/honkai_impact_3rd" />
+
+            <TextView
+                android:id="@+id/tv_username"
+                style="@style/textCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:layout_marginTop="@dimen/dimens_12dp"
+                android:text="Username"
+                android:textSize="@dimen/text_xlarge"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                style="@style/textCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:layout_marginTop="@dimen/dimens_5dp"
+                android:text="Description"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="normal" />
+
+            <TextView
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:text="Gender"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_gender"
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:text="Gender"
+                android:textSize="@dimen/text_large"
+                android:textStyle="normal" />
+
+
+            <TextView
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:text="Address"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:text="Address"
+                android:textSize="@dimen/text_large"
+                android:textStyle="normal" />
+
+            <TextView
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:text="Birth in"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_birth_place"
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:text="Birth Place"
+                android:textSize="@dimen/text_large"
+                android:textStyle="normal" />
+
+            <TextView
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:text="Hobby"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_hobby"
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:text="Hobby"
+                android:textSize="@dimen/text_large"
+                android:textStyle="normal" />
+
+            <TextView
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:text="Social Media"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_social_media"
+                style="@style/textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/value_16dp"
+                android:text="Social Media"
+                android:textSize="@dimen/text_large"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>
