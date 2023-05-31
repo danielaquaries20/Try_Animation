@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
         tools:context=".ui.kl_basic.chapter_9.OnPauseActivity">
 
@@ -20,6 +21,7 @@
         <FrameLayout
             android:id="@+id/frame_profile"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="match_parent"/>
 
     </LinearLayout>

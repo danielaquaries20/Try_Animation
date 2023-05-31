@@ -14,6 +14,7 @@ import com.example.tryanimation.ui.kl_basic.chapter_6.Chapter6MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_6.MyCalculatorActivity
 import com.example.tryanimation.ui.kl_basic.chapter_7.Chapter7MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_8.Chapter8MainActivity
+import com.example.tryanimation.ui.kl_basic.chapter_9.Chapter9MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_9.OnPauseActivity
 
 class MainActivity : AppCompatActivity() {
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnChapter9.setOnClickListener {
-            startActivity(Intent(this, OnPauseActivity::class.java))
+            startActivity(Intent(this, Chapter9MainActivity::class.java))
         }
 
 
