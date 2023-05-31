@@ -3,6 +3,7 @@ package com.example.tryanimation.try_bottom_navigation
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import com.crocodic.core.api.ApiStatus
 import com.crocodic.core.base.adapter.CoreListAdapter
@@ -18,7 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class HomeFragment : CoreFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+class HomeFragment : CoreFragment<FragmentHomeBinding>(R.layout.fragment_home),
+    SearchView.OnQueryTextListener {
 
     private lateinit var viewModel: HomeViewModel
 
@@ -46,7 +48,41 @@ class HomeFragment : CoreFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
 
         viewModel.getNotes()
-//        dummyData()
+
+        binding.searchViewNote.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (newText?.isNotEmpty() == true) {
+            val filter = dataAll.filter {
+                it?.title?.contains("$newText",
+                    true) == true || it?.content?.contains("$newText", true) == true
+            }
+            dataList.clear()
+            binding.rvNotes.adapter?.notifyDataSetChanged()
+            dataList.addAll(filter)
+            binding.rvNotes.adapter?.notifyItemInserted(0)
+
+        } else if (newText?.isEmpty() == true) {
+            dataList.clear()
+            binding.rvNotes.adapter?.notifyDataSetChanged()
+            dataList.addAll(dataAll)
+            binding.rvNotes.adapter?.notifyItemInserted(0)
+        }
+
+        if (dataList.isEmpty()) {
+            binding.rvNotes.visibility = View.GONE
+            binding.tvEmptyData.visibility = View.VISIBLE
+        } else {
+            binding.rvNotes.visibility = View.VISIBLE
+            binding.tvEmptyData.visibility = View.GONE
+        }
+
+        return false
     }
 
     private fun observe() {
@@ -94,11 +130,6 @@ class HomeFragment : CoreFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             viewModel.getNotes()
         }
     }
-
-
-
-
-
 
     /*private fun dummyData() {
         dataList.clear()
