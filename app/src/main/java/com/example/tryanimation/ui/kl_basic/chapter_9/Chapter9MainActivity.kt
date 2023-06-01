@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.tryanimation.R
@@ -44,6 +45,12 @@ class Chapter9MainActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener {
             val onPauseActivityIntent = Intent(this, OnPauseActivity::class.java)
             startActivity(onPauseActivityIntent)
+        }
+
+        binding.btnShowHide.setOnClickListener {
+            binding.linearTabs.isVisible = true
+            binding.btnAdd.show()
+            binding.btnShowHide.hide()
         }
     }
 
