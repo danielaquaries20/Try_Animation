@@ -13,7 +13,7 @@
             android:id="@+id/linear_tabs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             android:orientation="vertical">
 
             <com.google.android.material.tabs.TabLayout
@@ -40,7 +40,7 @@
             android:layout_marginBottom="30dp"
             android:contentDescription="@string/btn_click"
             android:src="@drawable/ic_baseline_add"
-            android:visibility="gone"
+            android:visibility="visible"
             app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -51,6 +51,7 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="30dp"
             android:backgroundTint="@color/red"
+            android:visibility="gone"
             android:contentDescription="@string/btn_click"
             android:src="@drawable/ic_baseline_lock"
             app:tint="@color/white" />
