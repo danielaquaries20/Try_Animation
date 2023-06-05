@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tryanimation.try_architecture_code.TryArchitectureCodeActivity
+import com.example.tryanimation.try_bluetooth_connection.BluetoothConnectionActivity
 import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
 import com.example.tryanimation.try_broadcast_receiver.TryReceiverActivity
 import com.example.tryanimation.try_chart.TryChartActivity
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTrySmartTabLayout: Button
     private lateinit var btnTryEvaluateMath: Button
     private lateinit var btnTryBroadcastReceiver: Button
+    private lateinit var btnTryCastBluetooth: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         btnTrySmartTabLayout = findViewById(R.id.btnTrySmartTabLayout)
         btnTryEvaluateMath = findViewById(R.id.btnTryEvaluateMath)
         btnTryBroadcastReceiver = findViewById(R.id.btnTryBroadcastReceiver)
+        btnTryCastBluetooth = findViewById(R.id.btnTryCastBluetooth)
         /*endregion*/
 
         /*region Action*/
@@ -182,6 +185,10 @@ class MainActivity : AppCompatActivity() {
 
         btnTryBroadcastReceiver.setOnClickListener {
             startActivity(Intent(this, TryReceiverActivity::class.java))
+        }
+
+        btnTryCastBluetooth.setOnClickListener {
+            startActivity(Intent(this, BluetoothConnectionActivity::class.java))
         }
         /*endregion*/
 

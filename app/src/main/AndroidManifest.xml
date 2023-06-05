@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
@@ -20,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".try_bluetooth_connection.BluetoothConnectionActivity"
+            android:exported="false" />
         <activity
             android:name=".try_architecture_code.ui.profile.EditProfileActivity"
             android:exported="false" />
