@@ -103,6 +103,16 @@
             android:background="@drawable/ripple_btn_purple"
             android:text="Chapter 9" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnChapter10"
+            style="@style/buttonClicked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_10dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@drawable/ripple_btn_green"
+            android:text="Chapter 10" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
