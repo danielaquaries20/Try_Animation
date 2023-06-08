@@ -1,5 +1,7 @@
 package com.example.tryanimation.ui.kl_basic.chapter_10
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -21,9 +23,23 @@ class DescriptionActivity : AppCompatActivity() {
     private fun initView() {
         val name = intent.getStringExtra("name")
         val school = intent.getStringExtra("school")
+        val phone = intent.getStringExtra("phone")
         val photo = intent.getIntExtra("photo", 0)
         binding.tvName.text = name
         binding.tvSchool.text = school
         binding.ivIcon.setImageResource(photo)
+
+        binding.btnCallWa.setOnClickListener {
+            val message = "Hallo $name, apa kabar?"
+            val toWa = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(
+                    "https://api.whatsapp.com/send?phone=$phone&text=$message"
+                )
+            )
+            startActivity(toWa)
+
+        }
+
     }
 }

@@ -21,7 +21,7 @@
                 android:layout_marginTop="24dp"
                 android:contentDescription="@string/add_image"
                 android:scaleType="centerCrop"
-                android:src="@color/red" />
+                android:src="@color/black" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -40,6 +40,16 @@
                 android:text="@string/apps"
                 android:textSize="@dimen/text_xlarge" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_call_wa"
+                style="@style/buttonClicked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/value_16dp"
+                android:background="@drawable/ripple_btn_green"
+                android:paddingHorizontal="@dimen/dimens_20dp"
+                android:text="Hubungi (WA)" />
 
         </LinearLayout>
 

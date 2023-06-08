@@ -30,9 +30,15 @@ class Chapter10MainActivity : AppCompatActivity() {
         val listData = arrayOf(
             TrialData(R.drawable.honkai_impact_3rd,
                 getString(R.string.honkai_impact_3rd),
-                "Mihoyo"),
-            TrialData(R.drawable.honkai_star_rail, getString(R.string.honkai_star_rail), "Mihoyo"),
-            TrialData(R.drawable.clash_of_clans, getString(R.string.clash_of_clans), "Supercell"),
+                "Mihoyo", "6281323784889"),
+            TrialData(R.drawable.honkai_star_rail,
+                getString(R.string.honkai_star_rail),
+                "Mihoyo",
+                "6281323784889"),
+            TrialData(R.drawable.clash_of_clans,
+                getString(R.string.clash_of_clans),
+                "Supercell",
+                "6281323784889"),
         )
 
         adapter = TrialAdapter(this, listData) { data ->
@@ -40,6 +46,7 @@ class Chapter10MainActivity : AppCompatActivity() {
                 putExtra("photo", data.photo)
                 putExtra("name", data.name)
                 putExtra("school", data.school)
+                putExtra("phone", data.phone)
             }
             startActivity(toDetail)
         }
