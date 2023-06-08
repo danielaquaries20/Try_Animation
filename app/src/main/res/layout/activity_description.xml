@@ -32,6 +32,15 @@
                 android:text="@string/apps"
                 android:textSize="@dimen/text_xxxlarge" />
 
+            <TextView
+                android:id="@+id/tv_school"
+                style="@style/textCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/apps"
+                android:textSize="@dimen/text_xlarge" />
+
+
         </LinearLayout>
 
     </ScrollView>

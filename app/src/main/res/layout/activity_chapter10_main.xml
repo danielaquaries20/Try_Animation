@@ -2,8 +2,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.core.widget.NestedScrollView xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.kl_basic.chapter_10.Chapter10MainActivity">
@@ -13,7 +12,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_friend"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimens_5dp"
+                android:layout_marginBottom="@dimen/dimens_12dp"
+                tools:listitem="@layout/item_trial" />
+
+            <!--<com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_hi_3_rd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,11 +123,11 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>-->
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
 

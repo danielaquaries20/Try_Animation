@@ -2,15 +2,19 @@ package com.example.tryanimation.ui.kl_basic.chapter_10
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityChapter10MainBinding
+import com.example.tryanimation.ui.kl_basic.chapter_10.adapter.TrialAdapter
+import com.example.tryanimation.ui.kl_basic.chapter_10.model.TrialData
 
-class Chapter10MainActivity : AppCompatActivity(), View.OnClickListener {
+class Chapter10MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChapter10MainBinding
+
+    private lateinit var adapter: TrialAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,39 +26,29 @@ class Chapter10MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-        binding.cardHi3Rd.setOnClickListener(this)
-        binding.cardHsr.setOnClickListener(this)
-        binding.cardCoc.setOnClickListener(this)
-    }
 
-    override fun onClick(v: View?) {
-        when (v) {
-            binding.cardHi3Rd -> goToDetailHI()
-            binding.cardHsr -> goToDetailHSR()
-            binding.cardCoc -> goToDetailCOC()
+        val listData = arrayOf(
+            TrialData(R.drawable.honkai_impact_3rd,
+                getString(R.string.honkai_impact_3rd),
+                "Mihoyo"),
+            TrialData(R.drawable.honkai_star_rail, getString(R.string.honkai_star_rail), "Mihoyo"),
+            TrialData(R.drawable.clash_of_clans, getString(R.string.clash_of_clans), "Supercell"),
+        )
+
+        adapter = TrialAdapter(this, listData) { data ->
+            val toDetail = Intent(this, DescriptionActivity::class.java).apply {
+                putExtra("photo", data.photo)
+                putExtra("name", data.name)
+                putExtra("school", data.school)
+            }
+            startActivity(toDetail)
         }
-    }
 
-    private fun goToDetailHI() {
-        val toDetail = Intent(this, DescriptionActivity::class.java).apply {
-            putExtra("name", binding.tvHi3rd.text)
-        }
-        startActivity(toDetail)
-    }
+        binding.rvListFriend.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-    private fun goToDetailHSR() {
-        val toDetail = Intent(this, DescriptionActivity::class.java).apply {
-            putExtra("name", binding.tvHsr.text)
-        }
-        startActivity(toDetail)
-    }
+        binding.rvListFriend.adapter = adapter
 
-    private fun goToDetailCOC() {
-        val toDetail = Intent(this, DescriptionActivity::class.java).apply {
-            putExtra("name", binding.tvCoc.text)
-        }
-        startActivity(toDetail)
     }
-
 
 }
