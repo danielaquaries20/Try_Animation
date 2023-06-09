@@ -5,6 +5,9 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
+import android.bluetooth.le.BluetoothLeScanner
+import android.bluetooth.le.ScanCallback
+import android.bluetooth.le.ScanResult
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -12,6 +15,8 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -20,7 +25,6 @@ import com.crocodic.core.base.adapter.ReactiveListAdapter
 import com.crocodic.core.extension.snacked
 import com.crocodic.core.extension.text
 import com.crocodic.core.extension.tos
-import com.example.tryanimation.BuildConfig
 import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityBluetoothConnectionBinding
 import com.example.tryanimation.databinding.ItemBluetoothDetectedBinding
@@ -30,8 +34,13 @@ class BluetoothConnectionActivity :
     NoViewModelActivity<ActivityBluetoothConnectionBinding>(R.layout.activity_bluetooth_connection) {
 
     private var bluetoothAdapter: BluetoothAdapter? = null
+    private var bluetoothLeScanner: BluetoothLeScanner? = null
+    private var scanning = false
+    private val handler = Handler(Looper.getMainLooper())
 
-    val REQUEST_BLUETOOTH_PERMISSION: Int = 1
+    private val SCAN_PERIOD: Long = 10000
+    private val REQUEST_BLUETOOTH_PERMISSION: Int = 1
+    private val REQUEST_BLUETOOTH_ADMIN_PERMISSION: Int = 2
 //    val REQUEST_BLUETOOTH_ENABLE: Int = 2
 
     private val adapter =
@@ -50,29 +59,15 @@ class BluetoothConnectionActivity :
         super.onCreate(savedInstanceState)
 
         initView()
-        checkBluetooth()
-
         registerBroadcast()
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        // Don't forget to unregister the ACTION_FOUND receiver.
-        unregisterReceiver(receiver)
-    }
-
-    private fun registerBroadcast() {
-        // Register for broadcasts when a device is discovered.
-        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
-        registerReceiver(receiver, filter)
+        checkBluetooth()
     }
 
     override fun onClick(v: View?) {
         super.onClick(v)
         when (v) {
-            binding.fabCast -> binding.root.snacked("Casting")
+            binding.fabCast -> discoveringDevice()
             binding.fabCheckHeart -> binding.root.snacked("Check Heart")
             binding.fabCheckSport -> binding.root.snacked("Check Sport")
         }
@@ -97,6 +92,8 @@ class BluetoothConnectionActivity :
         }
     }
 
+    private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
+
     private fun checkBluetooth() {
         packageManager.takeIf { it.missingSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE) }
             ?.also {
@@ -120,19 +117,7 @@ class BluetoothConnectionActivity :
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED
             ) {
-                if (bluetoothAdapter?.isEnabled == false) {
-                    val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                    activityLauncher.launch(enableBtIntent) { result ->
-                        if (result.resultCode == RESULT_OK) {
-                            getDevices()
-                        } else {
-                            tos("This application cannot run because Bluetooth is not enabled, please enable your bluetooth")
-                            finish()
-                        }
-                    }
-                } else {
-                    getDevices()
-                }
+                bluetoothEnabled()
             } else {
                 ActivityCompat.requestPermissions(
                     this,
@@ -141,21 +126,101 @@ class BluetoothConnectionActivity :
                 )
             }
         } else {
-            if (bluetoothAdapter?.isEnabled == false) {
-                val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                activityLauncher.launch(enableBtIntent) { result ->
-                    if (result.resultCode == RESULT_OK) {
-                        getDevices()
-                    } else {
-                        tos("This application cannot run because Bluetooth is not enabled, please enable your bluetooth")
-                        finish()
-                    }
-                }
-            } else {
-                getDevices()
-            }
+            bluetoothEnabled()
         }
 
+    }
+
+    private fun bluetoothEnabled() {
+        if (bluetoothAdapter?.isEnabled == false) {
+            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            activityLauncher.launch(enableBtIntent) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    discoveringDevice()
+//                        getDevices()
+//                        scanLeDevice()
+                } else {
+                    tos("This application cannot run because Bluetooth is not enabled, please enable your bluetooth")
+                    finish()
+                }
+            }
+        } else {
+            discoveringDevice()
+//                getDevices()
+//                scanLeDevice()
+        }
+    }
+
+    private fun discoveringDevice() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED
+        ) {
+            if (bluetoothAdapter!!.isDiscovering) {
+                bluetoothAdapter!!.cancelDiscovery()
+
+                bluetoothAdapter!!.startDiscovery()
+                val intentActionFound = IntentFilter(BluetoothDevice.ACTION_FOUND)
+                registerReceiver(receiver, intentActionFound)
+            } else {
+                bluetoothAdapter!!.startDiscovery()
+                val intentActionFound = IntentFilter(BluetoothDevice.ACTION_FOUND)
+                registerReceiver(receiver, intentActionFound)
+            }
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.BLUETOOTH_ADMIN),
+                REQUEST_BLUETOOTH_ADMIN_PERMISSION
+            )
+
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun scanLeDevice() {
+        bluetoothLeScanner = bluetoothAdapter!!.bluetoothLeScanner
+        if (bluetoothLeScanner == null) {
+            tos("Device does not have a Bluetooth LE Scanner therefore this application cannot run.")
+            finish()
+            return
+        }
+        if (!scanning) { // Stops scanning after a pre-defined scan period.
+            handler.postDelayed({
+                scanning = false
+                loadingDialog.dismiss()
+                bluetoothLeScanner!!.stopScan(leScanCallback)
+            }, SCAN_PERIOD)
+            scanning = true
+            loadingDialog.show("Scanning BLE")
+            bluetoothLeScanner!!.startScan(leScanCallback)
+        } else {
+            scanning = false
+            loadingDialog.dismiss()
+            bluetoothLeScanner!!.stopScan(leScanCallback)
+        }
+
+    }
+
+    // Device scan callback.
+    private val leScanCallback: ScanCallback = object : ScanCallback() {
+        override fun onScanFailed(errorCode: Int) {
+            super.onScanFailed(errorCode)
+            Timber.tag("ScanBluetoothLE").d("FailedScan")
+        }
+
+        override fun onBatchScanResults(results: MutableList<ScanResult>?) {
+            super.onBatchScanResults(results)
+            Timber.tag("ScanBluetoothLE").d("BatchResult: ${results}")
+        }
+
+        override fun onScanResult(callbackType: Int, result: ScanResult) {
+            super.onScanResult(callbackType, result)
+            Timber.tag("ScanBluetoothLE").d("Result: ${result.device}")
+            loadingDialog.setResponse("Result: ${result.device}",
+                R.drawable.ic_baseline_cast_connected)
+//            leDeviceListAdapter.addDevice(result.device)
+//            leDeviceListAdapter.notifyDataSetChanged()
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -168,24 +233,32 @@ class BluetoothConnectionActivity :
         notifyList(listDevices)
     }
 
-    private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_BLUETOOTH_PERMISSION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                bluetoothConnect()
-            } else {
-                tos("This application cannot run because it does not have Bluetooth permission.")
-                finish()
+        when (requestCode) {
+            REQUEST_BLUETOOTH_PERMISSION -> {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    bluetoothConnect()
+                } else {
+                    tos("This application cannot run because it does not have Bluetooth permission.")
+                    finish()
+                }
+            }
+            REQUEST_BLUETOOTH_ADMIN_PERMISSION -> {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    discoveringDevice()
+                } else {
+                    tos("This application cannot run because it does not have Bluetooth Admin permission.")
+                    finish()
+                }
             }
         }
-    }
 
+    }
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -207,12 +280,32 @@ class BluetoothConnectionActivity :
                         }
                     }
                 }
+                BluetoothAdapter.ACTION_DISCOVERY_STARTED -> {
+                    Timber.tag("CheckReceiver").d("ACTION_DISCOVERY_STARTED")
+                }
+                BluetoothAdapter.ACTION_DISCOVERY_FINISHED -> {
+                    Timber.tag("CheckReceiver").d("ACTION_DISCOVERY_FINISHED")
+                }
                 else -> {
                     Timber.tag("CheckReceiver").d("Else Branch")
                 }
             }
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+    }
+
+    private fun registerBroadcast() {
+        // Register for broadcasts when a device is discovered.
+        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND).apply {
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
+        }
+        registerReceiver(receiver, filter)
     }
 
     /*private fun dummyData() {
