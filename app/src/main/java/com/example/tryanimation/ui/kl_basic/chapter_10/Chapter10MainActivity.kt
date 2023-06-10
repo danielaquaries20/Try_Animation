@@ -29,15 +29,15 @@ class Chapter10MainActivity : AppCompatActivity() {
 
         val listData = arrayOf(
             TrialData(R.drawable.honkai_impact_3rd,
-                getString(R.string.honkai_impact_3rd),
-                "Mihoyo", "6281323784889"),
+                "Kiana Kaslana",
+                "Freya High School", "6281323784889"),
             TrialData(R.drawable.honkai_star_rail,
-                getString(R.string.honkai_star_rail),
-                "Mihoyo",
+                "Bella Antrifosa",
+                "Harvard",
                 "6281323784889"),
             TrialData(R.drawable.clash_of_clans,
-                getString(R.string.clash_of_clans),
-                "Supercell",
+                "Michael Hoxa",
+                "Stanford",
                 "6281323784889"),
         )
 

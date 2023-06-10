@@ -7,4 +7,9 @@
     android:orientation="vertical"
     tools:context=".ui.kl_basic.chapter_10.ui.ListFriendActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_friend"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>

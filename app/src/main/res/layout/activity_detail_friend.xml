@@ -6,4 +6,41 @@
     android:orientation="vertical"
     tools:context=".ui.kl_basic.chapter_10.ui.DetailFriendActivity">
 
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="150dp"
+        android:layout_margin="@dimen/value_16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="150dp"
+        android:src="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tv_school"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_12dp"
+        android:text="School"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_call_wa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_20dp"
+        android:text="Hubungi (WA)"
+        android:textAllCaps="false"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/ripple_btn_green"
+        android:textColor="@color/white"
+        android:paddingHorizontal="@dimen/dimens_12dp"/>
+
 </LinearLayout>

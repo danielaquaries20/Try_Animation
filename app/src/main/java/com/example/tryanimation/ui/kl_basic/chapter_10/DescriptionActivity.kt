@@ -30,7 +30,7 @@ class DescriptionActivity : AppCompatActivity() {
         binding.ivIcon.setImageResource(photo)
 
         binding.btnCallWa.setOnClickListener {
-            val message = "Hallo $name, apa kabar?"
+            val message = "Halo $name dari $school, apa kabar?"
             val toWa = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse(
