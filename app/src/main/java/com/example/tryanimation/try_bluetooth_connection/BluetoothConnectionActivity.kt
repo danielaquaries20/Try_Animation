@@ -95,6 +95,7 @@ class BluetoothConnectionActivity :
     private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
 
     private fun checkBluetooth() {
+        Timber.tag("TestBluetoothFlow").d("Test 1")
         packageManager.takeIf { it.missingSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE) }
             ?.also {
                 tos("Device does not support Bluetooth therefore this application cannot run.")
@@ -104,7 +105,9 @@ class BluetoothConnectionActivity :
         val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
         bluetoothAdapter = bluetoothManager.adapter
 
+        Timber.tag("TestBluetoothFlow").d("Test 2")
         if (bluetoothAdapter == null) {
+            Timber.tag("TestBluetoothFlow").d("Test 3")
             tos("Device does not have a Bluetooth adapter therefore this application cannot run.")
             return
         }
@@ -113,12 +116,16 @@ class BluetoothConnectionActivity :
     }
 
     private fun bluetoothConnect() {
+        Timber.tag("TestBluetoothFlow").d("Test 4")
         if (Build.VERSION.SDK_INT >= 31) {
+            Timber.tag("TestBluetoothFlow").d("Test 5")
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED
             ) {
+                Timber.tag("TestBluetoothFlow").d("Test 6")
                 bluetoothEnabled()
             } else {
+                Timber.tag("TestBluetoothFlow").d("Test 7")
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(Manifest.permission.BLUETOOTH),
@@ -126,25 +133,33 @@ class BluetoothConnectionActivity :
                 )
             }
         } else {
+            Timber.tag("TestBluetoothFlow").d("Test 8")
+
             bluetoothEnabled()
         }
 
     }
 
     private fun bluetoothEnabled() {
+        Timber.tag("TestBluetoothFlow").d("Test 9")
         if (bluetoothAdapter?.isEnabled == false) {
+            Timber.tag("TestBluetoothFlow").d("Test 10")
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             activityLauncher.launch(enableBtIntent) { result ->
+                Timber.tag("TestBluetoothFlow").d("Test 11")
                 if (result.resultCode == RESULT_OK) {
+                    Timber.tag("TestBluetoothFlow").d("Test 12")
                     discoveringDevice()
 //                        getDevices()
 //                        scanLeDevice()
                 } else {
+                    Timber.tag("TestBluetoothFlow").d("Test 13")
                     tos("This application cannot run because Bluetooth is not enabled, please enable your bluetooth")
                     finish()
                 }
             }
         } else {
+            Timber.tag("TestBluetoothFlow").d("Test 14")
             discoveringDevice()
 //                getDevices()
 //                scanLeDevice()
@@ -152,21 +167,26 @@ class BluetoothConnectionActivity :
     }
 
     private fun discoveringDevice() {
+        Timber.tag("TestBluetoothFlow").d("Test 15")
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED
         ) {
+            Timber.tag("TestBluetoothFlow").d("Test 15")
             if (bluetoothAdapter!!.isDiscovering) {
+                Timber.tag("TestBluetoothFlow").d("Test 16")
                 bluetoothAdapter!!.cancelDiscovery()
 
                 bluetoothAdapter!!.startDiscovery()
                 val intentActionFound = IntentFilter(BluetoothDevice.ACTION_FOUND)
                 registerReceiver(receiver, intentActionFound)
             } else {
+                Timber.tag("TestBluetoothFlow").d("Test 17")
                 bluetoothAdapter!!.startDiscovery()
                 val intentActionFound = IntentFilter(BluetoothDevice.ACTION_FOUND)
                 registerReceiver(receiver, intentActionFound)
             }
         } else {
+            Timber.tag("TestBluetoothFlow").d("Test 18")
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.BLUETOOTH_ADMIN),
