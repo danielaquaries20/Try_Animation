@@ -3,10 +3,10 @@ package com.example.tryanimation.ui.kl_basic.chapter_10
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityChapter10MainBinding
+import com.example.tryanimation.databinding.ItemTrialBinding
 import com.example.tryanimation.ui.kl_basic.chapter_10.adapter.TrialAdapter
 import com.example.tryanimation.ui.kl_basic.chapter_10.model.TrialData
 
@@ -18,7 +18,9 @@ class Chapter10MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_chapter10_main)
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_chapter10_main)
+
+        binding = ActivityChapter10MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initView()

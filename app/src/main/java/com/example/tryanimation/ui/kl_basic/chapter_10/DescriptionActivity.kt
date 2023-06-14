@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityDescriptionBinding
+import com.example.tryanimation.ui.kl_basic.chapter_10.model.TrialData
 
 class DescriptionActivity : AppCompatActivity() {
 
@@ -15,19 +16,20 @@ class DescriptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_description)
-        setContentView(binding.root)
 
         initView()
     }
 
     private fun initView() {
-        val name = intent.getStringExtra("name")
-        val school = intent.getStringExtra("school")
-        val phone = intent.getStringExtra("phone")
+        val name = intent.getStringExtra("name").toString()
+        val school = intent.getStringExtra("school").toString()
+        val phone = intent.getStringExtra("phone").toString()
         val photo = intent.getIntExtra("photo", 0)
-        binding.tvName.text = name
+        binding.friend = TrialData(photo, name, school, phone)
+
+        /*binding.tvName.text = name
         binding.tvSchool.text = school
-        binding.ivIcon.setImageResource(photo)
+        binding.ivIcon.setImageResource(photo)*/
 
         binding.btnCallWa.setOnClickListener {
             val message = "Halo $name dari $school, apa kabar?"

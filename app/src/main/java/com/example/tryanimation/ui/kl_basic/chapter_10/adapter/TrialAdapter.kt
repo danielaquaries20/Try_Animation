@@ -1,13 +1,11 @@
 package com.example.tryanimation.ui.kl_basic.chapter_10.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tryanimation.R
+import com.example.tryanimation.databinding.ItemTrialBinding
 import com.example.tryanimation.ui.kl_basic.chapter_10.model.TrialData
 
 class TrialAdapter(
@@ -15,17 +13,21 @@ class TrialAdapter(
     private val items: Array<TrialData>,
     private val onItemClick: (data: TrialData) -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private lateinit var binding: ItemTrialBinding
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return TrialViewHolder(LayoutInflater.from(context)
-            .inflate(R.layout.item_trial, parent, false))
+        binding = ItemTrialBinding.inflate(LayoutInflater.from(context), parent, false)
+        return TrialViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val viewHolder = TrialViewHolder(holder.itemView)
+        val viewHolder = TrialViewHolder(binding)
 
-        viewHolder.ivPhoto.setImageResource(items[position].photo)
-        viewHolder.tvName.text = items[position].name
-        viewHolder.tvSchool.text = items[position].school
+        Log.d("TrialAdapter", "onBindViewHolder: ${items[position]}")
+        viewHolder.binding.ivPhoto.setImageResource(items[position].photo)
+        viewHolder.binding.tvName.text = items[position].name
+        viewHolder.binding.tvSchool.text = items[position].school
 
         viewHolder.itemView.setOnClickListener {
             onItemClick(items[position])
@@ -37,8 +39,4 @@ class TrialAdapter(
     }
 }
 
-class TrialViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val ivPhoto: ImageView = view.findViewById(R.id.iv_photo)
-    val tvName: TextView = view.findViewById(R.id.tv_name)
-    val tvSchool: TextView = view.findViewById(R.id.tv_school)
-}
+class TrialViewHolder(val binding: ItemTrialBinding) : RecyclerView.ViewHolder(binding.root)

@@ -2,6 +2,14 @@
 
 <layout>
 
+    <data>
+
+        <variable
+            name="friend"
+            type="com.example.tryanimation.ui.kl_basic.chapter_10.model.TrialData" />
+
+    </data>
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -21,7 +29,7 @@
                 android:layout_marginTop="24dp"
                 android:contentDescription="@string/add_image"
                 android:scaleType="centerCrop"
-                android:src="@color/black" />
+                android:src='@{friend.photo}' />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -29,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/value_16dp"
-                android:text="@string/apps"
+                android:text='@{friend.name}'
                 android:textSize="@dimen/text_xxxlarge" />
 
             <TextView
@@ -37,7 +45,7 @@
                 style="@style/textCenter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/apps"
+                android:text='@{friend.school}'
                 android:textSize="@dimen/text_xlarge" />
 
             <androidx.appcompat.widget.AppCompatButton
