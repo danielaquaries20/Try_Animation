@@ -6,9 +6,8 @@ import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothSocket
 import android.bluetooth.le.BluetoothLeScanner
-import android.bluetooth.le.ScanCallback
-import android.bluetooth.le.ScanResult
 import android.companion.AssociationRequest
 import android.companion.BluetoothDeviceFilter
 import android.companion.CompanionDeviceManager
@@ -32,10 +31,14 @@ import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityBluetoothConnectionBinding
 import com.example.tryanimation.databinding.ItemBluetoothDetectedBinding
 import timber.log.Timber
+import java.io.IOException
+import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 class BluetoothConnectionActivity :
     NoViewModelActivity<ActivityBluetoothConnectionBinding>(R.layout.activity_bluetooth_connection) {
+
+    private val MyUuid: UUID? = UUID.fromString("074490f8-4fbc-4c9d-810c-1d59da5317f9")
 
     private val listBoundedDevice = ArrayList<String>()
     private val listScannedDevice = ArrayList<String>()
@@ -132,31 +135,17 @@ class BluetoothConnectionActivity :
 
     }
 
-    private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
-
-    private fun connectingSupportDevice() {
-        val deviceFilter: BluetoothDeviceFilter = BluetoothDeviceFilter.Builder().build()
-        val pairingRequest: AssociationRequest = AssociationRequest.Builder()
-            .addDeviceFilter(deviceFilter)
-            .setSingleDevice(true)
-            .build()
-
-        deviceManager.associate(pairingRequest,
-            object : CompanionDeviceManager.Callback() {
-                override fun onDeviceFound(chooseLauncher: IntentSender?) {
-                    startIntentSenderForResult(chooseLauncher,
-                        SELECT_DEVICE_REQUEST_CODE,
-                        null,
-                        0,
-                        0,
-                        0)
-                }
-
-                override fun onFailure(error: CharSequence?) {
-                    Timber.tag("CompanionDeviceFailure").e("Error: $error")
-                }
-            }, null)
+    private fun registerBroadcast() {
+        // Register for broadcasts when a device is discovered.
+        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND).apply {
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
+        }
+        registerReceiver(receiver, filter)
+        isHaveReceiver = true
     }
+
+    private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
 
     private fun checkBluetooth() {
         packageManager.takeIf { it.missingSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE) }
@@ -251,53 +240,6 @@ class BluetoothConnectionActivity :
     }
 
     @SuppressLint("MissingPermission")
-    private fun scanLeDevice() {
-        bluetoothLeScanner = bluetoothAdapter!!.bluetoothLeScanner
-        if (bluetoothLeScanner == null) {
-            tos("Device does not have a Bluetooth LE Scanner therefore this application cannot run.")
-            finish()
-            return
-        }
-        if (!scanning) { // Stops scanning after a pre-defined scan period.
-            handler.postDelayed({
-                scanning = false
-                loadingDialog.dismiss()
-                bluetoothLeScanner!!.stopScan(leScanCallback)
-            }, SCAN_PERIOD)
-            scanning = true
-            loadingDialog.show("Scanning BLE")
-            bluetoothLeScanner!!.startScan(leScanCallback)
-        } else {
-            scanning = false
-            loadingDialog.dismiss()
-            bluetoothLeScanner!!.stopScan(leScanCallback)
-        }
-
-    }
-
-    // Device scan callback.
-    private val leScanCallback: ScanCallback = object : ScanCallback() {
-        override fun onScanFailed(errorCode: Int) {
-            super.onScanFailed(errorCode)
-            Timber.tag("ScanBluetoothLE").d("FailedScan")
-        }
-
-        override fun onBatchScanResults(results: MutableList<ScanResult>?) {
-            super.onBatchScanResults(results)
-            Timber.tag("ScanBluetoothLE").d("BatchResult: ${results}")
-        }
-
-        override fun onScanResult(callbackType: Int, result: ScanResult) {
-            super.onScanResult(callbackType, result)
-            Timber.tag("ScanBluetoothLE").d("Result: ${result.device}")
-            loadingDialog.setResponse("Result: ${result.device}",
-                R.drawable.ic_baseline_cast_connected)
-//            leDeviceListAdapter.addDevice(result.device)
-//            leDeviceListAdapter.notifyDataSetChanged()
-        }
-    }
-
-    @SuppressLint("MissingPermission")
     private fun getDevices() {
         bluetoothAdapter?.bondedDevices?.forEach { devices ->
             val data = "Name: ${devices.name}\nAddress: ${devices.address}"
@@ -340,21 +282,34 @@ class BluetoothConnectionActivity :
 
     }
 
+    private fun connectingSupportDevice() {
+        val deviceFilter: BluetoothDeviceFilter = BluetoothDeviceFilter.Builder().build()
+        val pairingRequest: AssociationRequest = AssociationRequest.Builder()
+            .addDeviceFilter(deviceFilter)
+            .setSingleDevice(true)
+            .build()
+
+        deviceManager.associate(pairingRequest,
+            object : CompanionDeviceManager.Callback() {
+                override fun onDeviceFound(chooseLauncher: IntentSender?) {
+                    startIntentSenderForResult(chooseLauncher,
+                        SELECT_DEVICE_REQUEST_CODE,
+                        null,
+                        0,
+                        0,
+                        0)
+                }
+
+                override fun onFailure(error: CharSequence?) {
+                    Timber.tag("CompanionDeviceFailure").e("Error: $error")
+                }
+            }, null)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if (isHaveReceiver) unregisterReceiver(receiver)
     }
-
-    private fun registerBroadcast() {
-        // Register for broadcasts when a device is discovered.
-        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND).apply {
-            addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
-            addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
-        }
-        registerReceiver(receiver, filter)
-        isHaveReceiver = true
-    }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -403,6 +358,100 @@ class BluetoothConnectionActivity :
             }
         }
     }
+
+    @SuppressLint("MissingPermission")
+    private inner class ConnectThread(device: BluetoothDevice, context: Context) : Thread() {
+
+        private val mmSocket: BluetoothSocket? by lazy(LazyThreadSafetyMode.NONE) {
+            if (ActivityCompat.checkSelfPermission(context,
+                    Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+            ) {
+                device.createRfcommSocketToServiceRecord(MyUuid)
+            } else {
+                null
+            }
+        }
+
+        override fun run() {
+            // Cancel discovery because it otherwise slows down the connection.
+            bluetoothAdapter?.cancelDiscovery()
+
+            mmSocket?.let { socket ->
+                // Connect to the remote device through the socket. This call blocks
+                // until it succeeds or throws an exception.
+                if (bluetoothAdapter?.isDiscovering == true) {
+                    bluetoothAdapter?.cancelDiscovery()
+                }
+                socket.connect()
+
+                // The connection attempt succeeded. Perform work associated with
+                // the connection in a separate thread.
+//                manageMyConnectedSocket(socket)
+                handler.postDelayed({
+                    Timber.tag("ConnectThread").d("StatusConnected: ${socket.isConnected}")
+                }, SCAN_PERIOD)
+            }
+        }
+
+        fun cancel() {
+            try {
+                mmSocket?.close()
+            } catch (e: IOException) {
+                Timber.tag("ConnectThread").e("Error to Connect Device: ${e.message}")
+            }
+        }
+    }
+
+
+    /*region Scanning BLE*/
+    /*@SuppressLint("MissingPermission")
+    private fun scanLeDevice() {
+        bluetoothLeScanner = bluetoothAdapter!!.bluetoothLeScanner
+        if (bluetoothLeScanner == null) {
+            tos("Device does not have a Bluetooth LE Scanner therefore this application cannot run.")
+            finish()
+            return
+        }
+        if (!scanning) { // Stops scanning after a pre-defined scan period.
+            handler.postDelayed({
+                scanning = false
+                loadingDialog.dismiss()
+                bluetoothLeScanner!!.stopScan(leScanCallback)
+            }, SCAN_PERIOD)
+            scanning = true
+            loadingDialog.show("Scanning BLE")
+            bluetoothLeScanner!!.startScan(leScanCallback)
+        } else {
+            scanning = false
+            loadingDialog.dismiss()
+            bluetoothLeScanner!!.stopScan(leScanCallback)
+        }
+
+    }*/
+
+    // Device scan callback.
+    /*private val leScanCallback: ScanCallback = object : ScanCallback() {
+        override fun onScanFailed(errorCode: Int) {
+            super.onScanFailed(errorCode)
+            Timber.tag("ScanBluetoothLE").d("FailedScan")
+        }
+
+        override fun onBatchScanResults(results: MutableList<ScanResult>?) {
+            super.onBatchScanResults(results)
+            Timber.tag("ScanBluetoothLE").d("BatchResult: ${results}")
+        }
+
+        override fun onScanResult(callbackType: Int, result: ScanResult) {
+            super.onScanResult(callbackType, result)
+            Timber.tag("ScanBluetoothLE").d("Result: ${result.device}")
+            loadingDialog.setResponse("Result: ${result.device}",
+                R.drawable.ic_baseline_cast_connected)
+//            leDeviceListAdapter.addDevice(result.device)
+//            leDeviceListAdapter.notifyDataSetChanged()
+        }
+    }*/
+    /*endregion*/
+
 
     /*private fun dummyData() {
         val data = ArrayList<String>()
