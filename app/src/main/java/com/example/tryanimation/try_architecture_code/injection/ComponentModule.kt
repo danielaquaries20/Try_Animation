@@ -9,6 +9,8 @@ import com.example.tryanimation.try_architecture_code.data.const.Constants
 import com.example.tryanimation.try_architecture_code.database.MyDatabaseTry
 import com.example.tryanimation.try_architecture_code.database.user.UserDao
 import com.example.tryanimation.try_architecture_code.database.user.UserRepository
+import com.example.tryanimation.try_bluetooth_connection.bluetooth_trial.data.bluetooth.AndroidBluetoothController
+import com.example.tryanimation.try_bluetooth_connection.bluetooth_trial.domain.bluetooth.BluetoothController
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -95,5 +97,12 @@ class ComponentModule {
             .addConverterFactory(ScalarsConverterFactory.create())
             .client(okHttpClient) // -> Tambahkan ini
             .build().create(ApiService::class.java)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideBluetoothController(@ApplicationContext context: Context): BluetoothController {
+        return AndroidBluetoothController(context)
     }
 }

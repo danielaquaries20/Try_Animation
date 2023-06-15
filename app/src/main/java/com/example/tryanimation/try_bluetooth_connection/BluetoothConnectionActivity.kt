@@ -2,26 +2,29 @@ package com.example.tryanimation.try_bluetooth_connection
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.bluetooth.le.BluetoothLeScanner
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.companion.AssociationRequest
+import android.companion.BluetoothDeviceFilter
+import android.companion.CompanionDeviceManager
+import android.content.*
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.crocodic.core.base.activity.NoViewModelActivity
 import com.crocodic.core.base.adapter.ReactiveListAdapter
+import com.crocodic.core.extension.checkLocationPermission
 import com.crocodic.core.extension.snacked
 import com.crocodic.core.extension.text
 import com.crocodic.core.extension.tos
@@ -30,20 +33,26 @@ import com.example.tryanimation.databinding.ActivityBluetoothConnectionBinding
 import com.example.tryanimation.databinding.ItemBluetoothDetectedBinding
 import timber.log.Timber
 
+@RequiresApi(Build.VERSION_CODES.O)
 class BluetoothConnectionActivity :
     NoViewModelActivity<ActivityBluetoothConnectionBinding>(R.layout.activity_bluetooth_connection) {
+
+    private val listBoundedDevice = ArrayList<String>()
+    private val listScannedDevice = ArrayList<String>()
 
     private var bluetoothAdapter: BluetoothAdapter? = null
     private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var scanning = false
     private val handler = Handler(Looper.getMainLooper())
+    private var isHaveReceiver = false
 
-    private val SCAN_PERIOD: Long = 10000
+    private val SCAN_PERIOD: Long = 20000
     private val REQUEST_BLUETOOTH_PERMISSION: Int = 1
     private val REQUEST_BLUETOOTH_ADMIN_PERMISSION: Int = 2
+    private val SELECT_DEVICE_REQUEST_CODE: Int = 3
 //    val REQUEST_BLUETOOTH_ENABLE: Int = 2
 
-    private val adapter =
+    private val adapterBoundedDevices =
         object :
             ReactiveListAdapter<ItemBluetoothDetectedBinding, String>(R.layout.item_bluetooth_detected) {
             override fun onBindViewHolder(
@@ -55,13 +64,30 @@ class BluetoothConnectionActivity :
             }
         }
 
+    private val adapterScannedDevices =
+        object :
+            ReactiveListAdapter<ItemBluetoothDetectedBinding, String>(R.layout.item_bluetooth_detected) {
+            override fun onBindViewHolder(
+                holder: ItemViewHolder<ItemBluetoothDetectedBinding, String>,
+                position: Int,
+            ) {
+                val item = getItem(position)
+                holder.binding.tvBluetoothCast.text(item)
+            }
+        }
+
+
+    private val deviceManager: CompanionDeviceManager by lazy(LazyThreadSafetyMode.NONE) {
+        getSystemService(CompanionDeviceManager::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        initView()
-        registerBroadcast()
-
-        checkBluetooth()
+        checkLocationPermission {
+            listenLocationChange()
+            initView()
+            checkBluetooth()
+        }
     }
 
     override fun onClick(v: View?) {
@@ -74,28 +100,65 @@ class BluetoothConnectionActivity :
     }
 
     private fun initView() {
-        binding.rvBluetoothList.adapter = adapter
+        binding.rvBoundedDeviceList.adapter = adapterBoundedDevices
+        binding.rvScannedDeviceList.adapter = adapterScannedDevices
         notifyList()
         binding.fabCast.setOnClickListener(this)
         binding.fabCheckHeart.setOnClickListener(this)
         binding.fabCheckSport.setOnClickListener(this)
     }
 
-    private fun notifyList(items: ArrayList<String>? = null) {
-        if (!items.isNullOrEmpty()) {
-            binding.rvBluetoothList.visibility = View.VISIBLE
-            binding.tvEmptyData.visibility = View.GONE
-            adapter.submitList(items)
-        } else {
-            binding.rvBluetoothList.visibility = View.INVISIBLE
+    private fun notifyList() {
+        if (listBoundedDevice.isNullOrEmpty() && listScannedDevice.isNullOrEmpty()) {
             binding.tvEmptyData.visibility = View.VISIBLE
+            binding.linearBoundedDevices.visibility = View.GONE
+            binding.linearScannedDevices.visibility = View.GONE
+        } else {
+            binding.tvEmptyData.visibility = View.GONE
+            if (!listBoundedDevice.isNullOrEmpty()) {
+                binding.linearBoundedDevices.visibility = View.VISIBLE
+                adapterBoundedDevices.submitList(listBoundedDevice)
+            } else {
+                binding.linearBoundedDevices.visibility = View.GONE
+            }
+
+            if (!listScannedDevice.isNullOrEmpty()) {
+                binding.linearScannedDevices.visibility = View.VISIBLE
+                adapterScannedDevices.submitList(listScannedDevice)
+            } else {
+                binding.linearScannedDevices.visibility = View.GONE
+            }
         }
+
     }
 
     private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
 
+    private fun connectingSupportDevice() {
+        val deviceFilter: BluetoothDeviceFilter = BluetoothDeviceFilter.Builder().build()
+        val pairingRequest: AssociationRequest = AssociationRequest.Builder()
+            .addDeviceFilter(deviceFilter)
+            .setSingleDevice(true)
+            .build()
+
+        deviceManager.associate(pairingRequest,
+            object : CompanionDeviceManager.Callback() {
+                override fun onDeviceFound(chooseLauncher: IntentSender?) {
+                    startIntentSenderForResult(chooseLauncher,
+                        SELECT_DEVICE_REQUEST_CODE,
+                        null,
+                        0,
+                        0,
+                        0)
+                }
+
+                override fun onFailure(error: CharSequence?) {
+                    Timber.tag("CompanionDeviceFailure").e("Error: $error")
+                }
+            }, null)
+    }
+
     private fun checkBluetooth() {
-        Timber.tag("TestBluetoothFlow").d("Test 1")
         packageManager.takeIf { it.missingSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE) }
             ?.also {
                 tos("Device does not support Bluetooth therefore this application cannot run.")
@@ -105,9 +168,7 @@ class BluetoothConnectionActivity :
         val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
         bluetoothAdapter = bluetoothManager.adapter
 
-        Timber.tag("TestBluetoothFlow").d("Test 2")
         if (bluetoothAdapter == null) {
-            Timber.tag("TestBluetoothFlow").d("Test 3")
             tos("Device does not have a Bluetooth adapter therefore this application cannot run.")
             return
         }
@@ -116,16 +177,12 @@ class BluetoothConnectionActivity :
     }
 
     private fun bluetoothConnect() {
-        Timber.tag("TestBluetoothFlow").d("Test 4")
         if (Build.VERSION.SDK_INT >= 31) {
-            Timber.tag("TestBluetoothFlow").d("Test 5")
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED
             ) {
-                Timber.tag("TestBluetoothFlow").d("Test 6")
                 bluetoothEnabled()
             } else {
-                Timber.tag("TestBluetoothFlow").d("Test 7")
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(Manifest.permission.BLUETOOTH),
@@ -133,60 +190,57 @@ class BluetoothConnectionActivity :
                 )
             }
         } else {
-            Timber.tag("TestBluetoothFlow").d("Test 8")
-
+            registerBroadcast()
             bluetoothEnabled()
+//            connectingSupportDevice()
         }
 
     }
 
     private fun bluetoothEnabled() {
-        Timber.tag("TestBluetoothFlow").d("Test 9")
         if (bluetoothAdapter?.isEnabled == false) {
-            Timber.tag("TestBluetoothFlow").d("Test 10")
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             activityLauncher.launch(enableBtIntent) { result ->
-                Timber.tag("TestBluetoothFlow").d("Test 11")
                 if (result.resultCode == RESULT_OK) {
-                    Timber.tag("TestBluetoothFlow").d("Test 12")
                     discoveringDevice()
-//                        getDevices()
+                    getDevices()
 //                        scanLeDevice()
                 } else {
-                    Timber.tag("TestBluetoothFlow").d("Test 13")
                     tos("This application cannot run because Bluetooth is not enabled, please enable your bluetooth")
                     finish()
                 }
             }
         } else {
-            Timber.tag("TestBluetoothFlow").d("Test 14")
             discoveringDevice()
-//                getDevices()
+            getDevices()
 //                scanLeDevice()
         }
     }
 
     private fun discoveringDevice() {
-        Timber.tag("TestBluetoothFlow").d("Test 15")
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED
         ) {
-            Timber.tag("TestBluetoothFlow").d("Test 15")
+            loadingDialog.show("Discovering Devices")
             if (bluetoothAdapter!!.isDiscovering) {
-                Timber.tag("TestBluetoothFlow").d("Test 16")
+                Timber.tag("TestBluetoothFlow").d("Test 17")
                 bluetoothAdapter!!.cancelDiscovery()
 
-                bluetoothAdapter!!.startDiscovery()
-                val intentActionFound = IntentFilter(BluetoothDevice.ACTION_FOUND)
-                registerReceiver(receiver, intentActionFound)
+//                bluetoothAdapter!!.startDiscovery()
+//                val intentActionFound = IntentFilter(BluetoothDevice.ACTION_FOUND)
+//                registerReceiver(receiver, intentActionFound)
+//                isHaveReceiver = true
             } else {
-                Timber.tag("TestBluetoothFlow").d("Test 17")
                 bluetoothAdapter!!.startDiscovery()
-                val intentActionFound = IntentFilter(BluetoothDevice.ACTION_FOUND)
-                registerReceiver(receiver, intentActionFound)
+//                val intentActionFound = IntentFilter(BluetoothDevice.ACTION_FOUND)
+//                registerReceiver(receiver, intentActionFound)
+//                isHaveReceiver = true
             }
+            handler.postDelayed({
+                bluetoothAdapter!!.cancelDiscovery()
+                loadingDialog.dismiss()
+            }, SCAN_PERIOD)
         } else {
-            Timber.tag("TestBluetoothFlow").d("Test 18")
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.BLUETOOTH_ADMIN),
@@ -245,13 +299,62 @@ class BluetoothConnectionActivity :
 
     @SuppressLint("MissingPermission")
     private fun getDevices() {
-        val listDevices = ArrayList<String>()
         bluetoothAdapter?.bondedDevices?.forEach { devices ->
             val data = "Name: ${devices.name}\nAddress: ${devices.address}"
-            listDevices.add(data)
+            listBoundedDevice.add(data)
         }
-        notifyList(listDevices)
+        notifyList()
     }
+
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            when (intent?.action.toString()) {
+                BluetoothDevice.ACTION_FOUND -> {
+                    context?.let {
+                        if (ContextCompat.checkSelfPermission(context,
+                                Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED
+                        ) {
+                            bluetoothAdapter!!.cancelDiscovery()
+                            loadingDialog.dismiss()
+                            val device: BluetoothDevice? =
+                                intent?.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+                            val deviceName = device?.name
+                            val deviceHardwareAddress = device?.address // MAC address
+                            listScannedDevice.add("Name: $deviceName\nAddress: $deviceHardwareAddress")
+                            notifyList()
+                        }
+                    }
+                }
+                BluetoothAdapter.ACTION_DISCOVERY_STARTED -> {
+                    Timber.tag("CheckReceiver").d("ACTION_DISCOVERY_STARTED")
+                }
+                BluetoothAdapter.ACTION_DISCOVERY_FINISHED -> {
+                    Timber.tag("CheckReceiver").d("ACTION_DISCOVERY_FINISHED")
+                }
+                else -> {
+                    Timber.tag("CheckReceiver").d("Else Branch")
+                    binding.root.snacked("Else Branch: ${intent?.action}")
+                }
+            }
+        }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isHaveReceiver) unregisterReceiver(receiver)
+    }
+
+    private fun registerBroadcast() {
+        // Register for broadcasts when a device is discovered.
+        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND).apply {
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
+        }
+        registerReceiver(receiver, filter)
+        isHaveReceiver = true
+    }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -280,52 +383,25 @@ class BluetoothConnectionActivity :
 
     }
 
-    private val receiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            Timber.tag("CheckReceiver").d("onReceive")
-            when (intent?.action.toString()) {
-                BluetoothDevice.ACTION_FOUND -> {
-                    context?.let {
-                        if (ContextCompat.checkSelfPermission(context,
-                                Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED
-                        ) {
-                            // Discovery has found a device. Get the BluetoothDevice
-                            // object and its info from the Intent.
-                            val device: BluetoothDevice? =
-                                intent?.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-                            val deviceName = device?.name
-                            val deviceHardwareAddress = device?.address // MAC address
-                            Timber.tag("CheckReceiver").d("DeviceName: $deviceName")
-                            Timber.tag("CheckReceiver").d("DeviceAddress: $deviceHardwareAddress")
-                        }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            SELECT_DEVICE_REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val deviceToPair: BluetoothDevice? =
+                        data?.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE)
+                    if (ActivityCompat.checkSelfPermission(this,
+                            Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        Timber.tag("ActivityResult").d("BLUETOOTH_CONNECT is not Granted")
+                        return
                     }
-                }
-                BluetoothAdapter.ACTION_DISCOVERY_STARTED -> {
-                    Timber.tag("CheckReceiver").d("ACTION_DISCOVERY_STARTED")
-                }
-                BluetoothAdapter.ACTION_DISCOVERY_FINISHED -> {
-                    Timber.tag("CheckReceiver").d("ACTION_DISCOVERY_FINISHED")
-                }
-                else -> {
-                    Timber.tag("CheckReceiver").d("Else Branch")
+                    Timber.tag("ActivityResult").d("BLUETOOTH_CONNECT Granted: $deviceToPair")
+                    deviceToPair?.createBond()
                 }
             }
         }
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unregisterReceiver(receiver)
-    }
-
-    private fun registerBroadcast() {
-        // Register for broadcasts when a device is discovered.
-        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND).apply {
-            addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
-            addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
-        }
-        registerReceiver(receiver, filter)
     }
 
     /*private fun dummyData() {
