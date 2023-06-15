@@ -5,9 +5,12 @@ import com.example.tryanimation.ui.kl_basic.chapter_8.model.Human
 import com.example.tryanimation.ui.kl_basic.chapter_8.model.Person
 
 fun main() {
-//    val result = increment(3, 5)
-//    println(result)
+    val message : String? = null
+    message?.let { println(it) }
+}
 
+
+fun initOldFunction() {
     val human = Human("12342341", "Roger", 16)
 
     human.name = "Yunyun"
