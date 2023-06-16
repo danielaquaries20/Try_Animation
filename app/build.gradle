@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 
+    //Don't forget this for Data Binding
     id 'kotlin-kapt'
 }
 
