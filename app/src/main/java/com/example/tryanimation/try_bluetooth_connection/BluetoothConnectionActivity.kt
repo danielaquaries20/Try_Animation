@@ -31,6 +31,7 @@ import com.example.tryanimation.databinding.ActivityBluetoothConnectionBinding
 import com.example.tryanimation.databinding.ItemBluetoothDetectedBinding
 import timber.log.Timber
 import java.io.IOException
+import java.lang.Exception
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -66,7 +67,7 @@ class BluetoothConnectionActivity :
     private val adapterScannedDevices =
         ReactiveListAdapter<ItemBluetoothDetectedBinding, BluetoothDevice>(R.layout.item_bluetooth_detected).initItem { position, data ->
 //            tos("ScannedDevice: ${data.name}")
-            connectThread = ConnectThread(data, this@BluetoothConnectionActivity)
+            connectThread = ConnectThread(data)
             connectThread!!.run()
         }
 
@@ -357,48 +358,43 @@ class BluetoothConnectionActivity :
     }
 
     @SuppressLint("MissingPermission")
-    private inner class ConnectThread(private val device: BluetoothDevice, context: Context) :
-        Thread() {
-
+    private inner class ConnectThread(private val device: BluetoothDevice) : Thread() {
         private val mmSocket: BluetoothSocket? by lazy(LazyThreadSafetyMode.NONE) {
             Timber.tag("MyConnectThread").d("mmSocket-Initializing")
-            if (ActivityCompat.checkSelfPermission(context,
-                    Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+            device.createRfcommSocketToServiceRecord(MyUuid)
+            /*if (ActivityCompat.checkSelfPermission(context,
+                    Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED
             ) {
                 Timber.tag("MyConnectThread").d("mmSocket-Initialized")
-                device.createRfcommSocketToServiceRecord(MyUuid)
             } else {
                 Timber.tag("MyConnectThread").d("mmSocket-Initialize-null")
                 null
-            }
+            }*/
         }
 
         override fun run() {
-            // Cancel discovery because it otherwise slows down the connection.
-            Timber.tag("MyConnectThread").d("RunThread-1")
+            Timber.tag("MyConnectThread").d("RunThread-1: $mmSocket")
 
-            if (bluetoothAdapter?.isDiscovering == true) {
-                bluetoothAdapter?.cancelDiscovery()
-            }
-
-            loadingDialog.show("Connecting Device ${device.name}")
-
-            Timber.tag("MyConnectThread").d("RunThread-2")
             mmSocket?.let { socket ->
-                // Connect to the remote device through the socket. This call blocks
-                // until it succeeds or throws an exception.
+                Timber.tag("MyConnectThread").d("RunThread-2")
+                loadingDialog.show("Connecting Device ${device.name}")
+
                 if (bluetoothAdapter?.isDiscovering == true) {
                     bluetoothAdapter?.cancelDiscovery()
                 }
                 Timber.tag("MyConnectThread").d("RunThread-3")
-                socket.connect()
-
-                // The connection attempt succeeded. Perform work associated with
-                // the connection in a separate thread.
-//                manageMyConnectedSocket(socket)
+                try {
+                    socket.connect()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Timber.tag("MyConnectThread").e("Error: ${e.message}")
+                }
                 handler.postDelayed({
+                    loadingDialog.dismiss()
+                    socket.close()
                     Timber.tag("MyConnectThread").d("StatusConnected: ${socket.isConnected}")
                 }, SCAN_PERIOD)
+
             }
         }
 
