@@ -12,24 +12,20 @@ class TrialAdapter(
     private val context: Context,
     private val items: Array<TrialData>,
     private val onItemClick: (data: TrialData) -> Unit,
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<TrialAdapter.TrialViewHolder>() {
 
-    private lateinit var binding: ItemTrialBinding
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        binding = ItemTrialBinding.inflate(LayoutInflater.from(context), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrialViewHolder {
+        val binding = ItemTrialBinding.inflate(LayoutInflater.from(context), parent, false)
         return TrialViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val viewHolder = TrialViewHolder(binding)
-
+    override fun onBindViewHolder(holder: TrialViewHolder, position: Int) {
         Log.d("TrialAdapter", "onBindViewHolder: ${items[position]}")
-        viewHolder.binding.ivPhoto.setImageResource(items[position].photo)
-        viewHolder.binding.tvName.text = items[position].name
-        viewHolder.binding.tvSchool.text = items[position].school
+        holder.binding.ivPhoto.setImageResource(items[position].photo)
+        holder.binding.tvName.text = items[position].name
+        holder.binding.tvSchool.text = items[position].school
 
-        viewHolder.itemView.setOnClickListener {
+        holder.itemView.setOnClickListener {
             onItemClick(items[position])
         }
     }
@@ -37,6 +33,7 @@ class TrialAdapter(
     override fun getItemCount(): Int {
         return items.size
     }
+
+    class TrialViewHolder(val binding: ItemTrialBinding) : RecyclerView.ViewHolder(binding.root)
 }
 
-class TrialViewHolder(val binding: ItemTrialBinding) : RecyclerView.ViewHolder(binding.root)

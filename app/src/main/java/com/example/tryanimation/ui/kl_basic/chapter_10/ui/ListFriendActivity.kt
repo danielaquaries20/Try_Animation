@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tryanimation.R
+import com.example.tryanimation.databinding.ActivityListFriendBinding
 import com.example.tryanimation.model.Friend
 import com.example.tryanimation.ui.kl_basic.chapter_10.adapter.AdapterRvFriend
 
@@ -17,15 +18,16 @@ class ListFriendActivity : AppCompatActivity() {
     //4 Membuat Adapter dan ViewHolder untuk RecyclerView nya
     //5 Memasangkan Adapter ke Recycler View serta datanya ke Adapter
 
-    private lateinit var rvFriend: RecyclerView
-
     private lateinit var adapterFriend: AdapterRvFriend
+
+    private lateinit var binding: ActivityListFriendBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_friend)
 
-        rvFriend = findViewById(R.id.rv_list_friend)
+        binding = ActivityListFriendBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
         val listFriend = arrayOf(
             Friend(R.drawable.honkai_impact_3rd, "Kiana Kaslana", "Freya High School", "08675436298"),
@@ -43,7 +45,7 @@ class ListFriendActivity : AppCompatActivity() {
             startActivity(toDetail)
         }
 
-        rvFriend.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvFriend.adapter = adapterFriend
+        binding.rvListFriend.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListFriend.adapter = adapterFriend
     }
 }
