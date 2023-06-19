@@ -3,10 +3,12 @@ package com.example.tryanimation
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tryanimation.try_architecture_code.TryArchitectureCodeActivity
@@ -18,6 +20,7 @@ import com.example.tryanimation.try_chat_app.TryChatActivity
 import com.example.tryanimation.try_evaluate_math.TryEvaluateMathActivity
 import com.example.tryanimation.try_signature_pad.TrySignaturePadActivity
 import com.example.tryanimation.try_smart_tab_layout.TrySmartTabLayoutActivity
+import com.example.tryanimation.try_web_view.WebViewMainActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
 import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
@@ -52,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTryEvaluateMath: Button
     private lateinit var btnTryBroadcastReceiver: Button
     private lateinit var btnTryCastBluetooth: Button
+    private lateinit var btnTryWebView: Button
     /*endregion*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         btnTryEvaluateMath = findViewById(R.id.btnTryEvaluateMath)
         btnTryBroadcastReceiver = findViewById(R.id.btnTryBroadcastReceiver)
         btnTryCastBluetooth = findViewById(R.id.btnTryCastBluetooth)
+        btnTryWebView = findViewById(R.id.btnTryWebView)
         /*endregion*/
 
         /*region Action*/
@@ -188,7 +193,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnTryCastBluetooth.setOnClickListener {
-            startActivity(Intent(this, BluetoothConnectionActivity::class.java))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startActivity(Intent(this, BluetoothConnectionActivity::class.java))
+            } else {
+                Toast.makeText(this,
+                    "Sorry, your Android Version is bellow O",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnTryWebView.setOnClickListener {
+            startActivity(Intent(this, WebViewMainActivity::class.java))
         }
         /*endregion*/
 

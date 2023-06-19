@@ -269,6 +269,17 @@
             android:textColor="@color/white"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btnTryWebView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="#81640E"
+            android:text="Try Web View"
+            android:textColor="@color/white"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
