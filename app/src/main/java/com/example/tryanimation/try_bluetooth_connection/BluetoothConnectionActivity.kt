@@ -31,8 +31,8 @@ import com.example.tryanimation.databinding.ActivityBluetoothConnectionBinding
 import com.example.tryanimation.databinding.ItemBluetoothDetectedBinding
 import timber.log.Timber
 import java.io.IOException
-import java.lang.Exception
 import java.util.*
+import java.util.regex.Pattern
 
 @RequiresApi(Build.VERSION_CODES.O)
 class BluetoothConnectionActivity :
@@ -48,6 +48,7 @@ class BluetoothConnectionActivity :
     private var scanning = false
     private val handler = Handler(Looper.getMainLooper())
     private var isHaveReceiver = false
+    private var isScannedBefore = false
 
     private var connectThread: ConnectThread? = null
 
@@ -61,14 +62,15 @@ class BluetoothConnectionActivity :
     private val adapterBoundedDevices =
         ReactiveListAdapter<ItemBluetoothDetectedBinding, BluetoothDevice>(R.layout.item_bluetooth_detected).initItem { position, data ->
 //            tos("PairedDevice: ${data.name}")
+//            connectingSupportDevice()
         }
 
     @SuppressLint("MissingPermission")
     private val adapterScannedDevices =
         ReactiveListAdapter<ItemBluetoothDetectedBinding, BluetoothDevice>(R.layout.item_bluetooth_detected).initItem { position, data ->
 //            tos("ScannedDevice: ${data.name}")
-            connectThread = ConnectThread(data)
-            connectThread!!.run()
+            data.createBond()
+//            connectingSupportDevice()
         }
 
 
@@ -94,6 +96,14 @@ class BluetoothConnectionActivity :
         }
     }
 
+    private fun initRefresh() {
+        binding.refreshData.setOnRefreshListener {
+            getDevices()
+            discoveringDevice()
+            binding.refreshData.isRefreshing = false
+        }
+    }
+
     private fun initView() {
         binding.rvBoundedDeviceList.adapter = adapterBoundedDevices
         binding.rvScannedDeviceList.adapter = adapterScannedDevices
@@ -113,6 +123,7 @@ class BluetoothConnectionActivity :
             if (!listBoundedDevice.isNullOrEmpty()) {
                 binding.linearBoundedDevices.visibility = View.VISIBLE
                 adapterBoundedDevices.submitList(listBoundedDevice)
+                Timber.d("Bounded_NotifyList: $listBoundedDevice")
             } else {
                 binding.linearBoundedDevices.visibility = View.GONE
             }
@@ -196,6 +207,8 @@ class BluetoothConnectionActivity :
             getDevices()
 //                scanLeDevice()
         }
+
+        initRefresh()
     }
 
     private fun discoveringDevice() {
@@ -228,8 +241,10 @@ class BluetoothConnectionActivity :
 
     @SuppressLint("MissingPermission")
     private fun getDevices() {
+        listBoundedDevice.clear()
         bluetoothAdapter?.bondedDevices?.forEach { devices ->
             val data = "Name: ${devices.name}\nAddress: ${devices.address}"
+            Timber.d("Bounded_GetDevice: $data")
             listBoundedDevice.add(devices)
         }
         notifyList()
@@ -256,14 +271,18 @@ class BluetoothConnectionActivity :
                     }
                 }
                 BluetoothAdapter.ACTION_DISCOVERY_STARTED -> {
-                    loadingDialog.show("Discovering Devices")
                     listScannedDevice.clear()
-                    notifyList()
+                    if (!isScannedBefore) {
+                        loadingDialog.show("Discovering Devices")
+                        notifyList()
+                    }
+//                    notifyList()
                     Timber.tag("CheckReceiver").d("ACTION_DISCOVERY_STARTED")
                 }
                 BluetoothAdapter.ACTION_DISCOVERY_FINISHED -> {
                     loadingDialog.dismiss()
                     notifyList()
+                    isScannedBefore = true
                     Timber.tag("CheckReceiver").d("ACTION_DISCOVERY_FINISHED: $listScannedDevice")
                 }
                 else -> {
@@ -276,7 +295,11 @@ class BluetoothConnectionActivity :
     }
 
     private fun connectingSupportDevice() {
-        val deviceFilter: BluetoothDeviceFilter = BluetoothDeviceFilter.Builder().build()
+        Timber.tag("connectingSupportDevice").d("Test 1")
+        val deviceFilter: BluetoothDeviceFilter = BluetoothDeviceFilter.Builder()
+            .setNamePattern(Pattern.compile("M6"))
+            .build()
+
         val pairingRequest: AssociationRequest = AssociationRequest.Builder()
             .addDeviceFilter(deviceFilter)
             .setSingleDevice(true)
@@ -285,6 +308,7 @@ class BluetoothConnectionActivity :
         deviceManager.associate(pairingRequest,
             object : CompanionDeviceManager.Callback() {
                 override fun onDeviceFound(chooseLauncher: IntentSender?) {
+                    Timber.tag("connectingSupportDevice").d("Test 2: $chooseLauncher")
                     startIntentSenderForResult(chooseLauncher,
                         SELECT_DEVICE_REQUEST_CODE,
                         null,
@@ -294,9 +318,11 @@ class BluetoothConnectionActivity :
                 }
 
                 override fun onFailure(error: CharSequence?) {
-                    Timber.tag("CompanionDeviceFailure").e("Error: $error")
+                    Timber.tag("connectingSupportDevice").e("Error: $error")
                 }
             }, null)
+
+        Timber.tag("connectingSupportDevice").d("Test 3")
     }
 
     override fun onDestroy() {
@@ -345,7 +371,7 @@ class BluetoothConnectionActivity :
                     val deviceToPair: BluetoothDevice? =
                         data?.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE)
                     if (ActivityCompat.checkSelfPermission(this,
-                            Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED
+                            Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED
                     ) {
                         Timber.tag("ActivityResult").d("BLUETOOTH_CONNECT is not Granted")
                         return
