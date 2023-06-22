@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".ui.kl_basic.chapter_12.ui.test_ui.test_sp.SharedPreferencesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kl_basic.chapter_12.ui.test_ui.test_db.RoomDatabaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kl_basic.chapter_12.ui.main.Chapter12MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.kl_basic.chapter_11.Chapter11MainActivity"
             android:exported="false" />
         <activity
