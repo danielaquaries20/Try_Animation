@@ -3,10 +3,7 @@ package com.example.tryanimation.try_bluetooth_connection
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothManager
-import android.bluetooth.BluetoothSocket
+import android.bluetooth.*
 import android.bluetooth.le.BluetoothLeScanner
 import android.companion.AssociationRequest
 import android.companion.BluetoothDeviceFilter
@@ -17,6 +14,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
@@ -45,6 +43,7 @@ class BluetoothConnectionActivity :
 
     private var bluetoothAdapter: BluetoothAdapter? = null
     private var bluetoothLeScanner: BluetoothLeScanner? = null
+    private var bluetoothGatt: BluetoothGatt? = null
     private var scanning = false
     private val handler = Handler(Looper.getMainLooper())
     private var isHaveReceiver = false
@@ -94,6 +93,17 @@ class BluetoothConnectionActivity :
             binding.fabCheckHeart -> binding.root.snacked("Check Heart")
             binding.fabCheckSport -> binding.root.snacked("Check Sport")
         }
+    }
+
+    private fun connectGatt(device: BluetoothDevice) {
+        // TODO: Finish this Code
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        bluetoothGatt =  device.connectGatt(this, true, object : BluetoothGattCallback(){})
+
     }
 
     private fun initRefresh() {
