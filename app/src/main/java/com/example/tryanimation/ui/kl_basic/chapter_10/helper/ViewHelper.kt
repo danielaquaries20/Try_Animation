@@ -7,10 +7,10 @@ class ViewHelper {
 
     companion object {
         @JvmStatic
-        @BindingAdapter(value = ["imageSrc"], requireAll = false)
-        fun setImageSrc(view: ImageView, imageSrc: Int?) {
+        @BindingAdapter("imageSrc")
+        fun ImageView.setImageSrc(imageSrc: Int?) {
             imageSrc?.let {
-                view.setImageResource(it)
+                setImageResource(it)
             }
         }
     }

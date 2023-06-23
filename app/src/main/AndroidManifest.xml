@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
         <activity
+            android:name=".ui.kl_basic.chapter_12.ui.list_friend.ListFriendActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kl_basic.chapter_12.ui.add_friend.AddFriendActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kl_basic.chapter_12.ui.saved_name.SavedNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kl_basic.chapter_12.ui.test_ui.test_db.InsertDatabaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.kl_basic.chapter_12.ui.test_ui.test_sp.SharedPreferencesActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.kl_basic.chapter_12.ui.saved_name.SavedNameActivity">
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/textCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dimens_12dp"
+        android:text="Saved Name"
+        android:textSize="@dimen/text_medium_" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_input_name"
+            style="@style/etCapWords"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimens50dp"
+            android:layout_marginHorizontal="@dimen/dimens_12dp"
+            android:layout_marginTop="@dimen/dimens_10dp"
+            android:layout_weight="1"
+            android:hint="@string/input_your_name"
+            android:importantForAutofill="no"
+            android:paddingHorizontal="@dimen/dimens_10dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_save"
+            style="@style/buttonClicked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_8dp"
+            android:layout_marginTop="@dimen/dimens_10dp"
+            android:layout_marginEnd="@dimen/dimens_12dp"
+            android:background="@drawable/ripple_btn_green"
+            android:text="Save" />
+
+    </LinearLayout>
+
+</LinearLayout>
