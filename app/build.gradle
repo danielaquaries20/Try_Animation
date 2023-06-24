@@ -53,9 +53,14 @@ dependencies {
 //    implementation 'androidx.room:room-ktx:2.5.1'
 //    kapt 'androidx.room:room-compiler:2.5.1'
 
+
     implementation 'androidx.room:room-ktx:2.4.3'
     kapt 'androidx.room:room-compiler:2.4.3'
 
+
+    //enkripsi
+//    implementation "androidx.security:security-crypto:1.1.0-alpha04"
+//    implementation 'com.scottyab:secure-preferences-lib:0.1.7'
 
 //    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
 
