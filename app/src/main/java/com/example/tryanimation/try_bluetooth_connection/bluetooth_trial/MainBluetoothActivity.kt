@@ -123,7 +123,6 @@ class MainBluetoothActivity :
     /*endregion*/
 
     /*region Check and Enable Bluetooth*/
-
     private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
 
     private fun checkBluetooth() {
@@ -180,6 +179,24 @@ class MainBluetoothActivity :
         }
 
         initRefresh()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_PERMISSION_BLUETOOTH -> {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    bluetoothEnabled()
+                } else {
+                    tos("This application cannot run because it does not have Bluetooth permission.")
+                    finish()
+                }
+            }
+        }
     }
     /*endregion*/
 
