@@ -48,6 +48,7 @@ class BluetoothConnectionActivity :
     private val handler = Handler(Looper.getMainLooper())
     private var isHaveReceiver = false
     private var isScannedBefore = false
+    private var isConnectGatt = false
 
     private var connectThread: ConnectThread? = null
 
@@ -60,6 +61,7 @@ class BluetoothConnectionActivity :
     @SuppressLint("MissingPermission")
     private val adapterBoundedDevices =
         ReactiveListAdapter<ItemBluetoothDetectedBinding, BluetoothDevice>(R.layout.item_bluetooth_detected).initItem { position, data ->
+            connectGatt(data)
 //            tos("PairedDevice: ${data.name}")
 //            connectingSupportDevice()
         }
@@ -96,14 +98,64 @@ class BluetoothConnectionActivity :
     }
 
     private fun connectGatt(device: BluetoothDevice) {
-        // TODO: Finish this Code
+        Timber.tag("ConnectGatt").d("Test 1")
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED
         ) {
             return
         }
-        bluetoothGatt =  device.connectGatt(this, true, object : BluetoothGattCallback(){})
+        Timber.tag("ConnectGatt").d("Test 2")
 
+        isConnectGatt = true
+        bluetoothGatt =  device.connectGatt(this, true, object : BluetoothGattCallback(){
+            @SuppressLint("MissingPermission")
+            override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
+                when (newState) {
+                    BluetoothProfile.STATE_CONNECTED -> {
+                        bluetoothGatt?.discoverServices()
+//                        broadcastUpdate(ACTION_GATT_CONNECTED)
+                        Timber.tag("ConnectGatt").d("STATE_CONNECTED")
+                    }
+                    BluetoothProfile.STATE_DISCONNECTED -> {
+//                        broadcastUpdate(ACTION_GATT_DISCONNECTED)
+                        Timber.tag("ConnectGatt").d("STATE_DISCONNECTED")
+                    }
+                }
+            }
+
+            override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {
+                when (status) {
+                    BluetoothGatt.GATT_SUCCESS -> {
+                        Timber.tag("ConnectGatt").d("GATT_SUCCESS: $status")
+                        Timber.tag("ConnectGatt").d("GATT: ${gatt?.services}")
+//                        listenHeartRate()
+//                        broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED)
+                    }
+                    else -> Timber.tag("ConnectGatt").d("onServicesDiscovered_received: $status")
+                }
+            }
+
+            override fun onCharacteristicRead(
+                gatt: BluetoothGatt?,
+                characteristic: BluetoothGattCharacteristic?,
+                status: Int
+            ) {
+                Timber.tag("ConnectGatt").d("onCharacteristicRead: $status")
+            }
+
+
+        })
+
+    }
+
+    private fun closeGatt() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        bluetoothGatt?.close()
+        bluetoothGatt = null
     }
 
     private fun initRefresh() {
@@ -333,6 +385,11 @@ class BluetoothConnectionActivity :
             }, null)
 
         Timber.tag("connectingSupportDevice").d("Test 3")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        closeGatt()
     }
 
     override fun onDestroy() {
