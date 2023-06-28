@@ -63,7 +63,7 @@ class MainBluetoothActivity :
     /*region Activtiy Lifecycles*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+    
         initState()
 
     }
