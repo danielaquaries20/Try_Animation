@@ -36,6 +36,7 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_edit.xml" value="0.20615384615384616" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_edit_profile.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_gallery.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_gallery_camera.xml" value="0.20615384615384616" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_get_contact.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_list_friend.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_list_post.xml" value="0.209375" />
@@ -95,6 +96,7 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_trial.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_trial_friend.xml" value="0.20615384615384616" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/menu/menu_try_bottom_navigation.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/xml/file_provider.xml" value="0.20615384615384616" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/drawable-hdpi/green_circle.xml" value="0.14" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/drawable/green_circle.xml" value="0.14" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/dialog_time_picker.xml" value="0.209375" />
