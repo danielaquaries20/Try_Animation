@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatButton
 import com.example.tryanimation.R
 import com.example.tryanimation.ui.kl_basic.chapter_10.Chapter10MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_12.ui.main.Chapter12MainActivity
+import com.example.tryanimation.ui.kl_basic.chapter_13.ui.main.Chapter13MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_4.Chapter4MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_5.Chapter5MainActivity
 import com.example.tryanimation.ui.kl_basic.chapter_6.Chapter6MainActivity
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnChapter9: AppCompatButton
     private lateinit var btnChapter10: AppCompatButton
     private lateinit var btnChapter12: AppCompatButton
+    private lateinit var btnChapter13: AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         btnChapter9 = findViewById(R.id.btnChapter9)
         btnChapter10 = findViewById(R.id.btnChapter10)
         btnChapter12 = findViewById(R.id.btnChapter12)
+        btnChapter13 = findViewById(R.id.btnChapter13)
 
         btnNext.setOnClickListener {
             startActivity(Intent(this, Chapter4MainActivity::class.java))
@@ -87,6 +90,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, Chapter12MainActivity::class.java))
         }
 
+        btnChapter13.setOnClickListener {
+            startActivity(Intent(this, Chapter13MainActivity::class.java))
+        }
 
 //        var runnable: Runnable? = null
 //        runnable = Runnable {

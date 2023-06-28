@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.kl_basic.chapter_13.ui.main.Chapter13MainActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_contact"
+        style="@style/buttonClicked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="@dimen/dimens_10dp"
+        android:background="@drawable/ripple_btn_red"
+        android:text="Contact" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_gallery_camera"
+        style="@style/buttonClicked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="@dimen/dimens_10dp"
+        android:background="@drawable/ripple_btn_purple"
+        android:text="Gallery and Camera" />
+
+
+</LinearLayout>

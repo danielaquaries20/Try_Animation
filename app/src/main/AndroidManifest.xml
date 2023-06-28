@@ -3,6 +3,9 @@
     package="com.example.tryanimation">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -11,6 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
+        <activity
+            android:name=".ui.kl_basic.chapter_13.test_ui.gallery_and_camera.CameraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kl_basic.chapter_13.test_ui.gallery_and_camera.GalleryCameraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kl_basic.chapter_13.test_ui.contact.GetContactActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kl_basic.chapter_13.ui.main.Chapter13MainActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.kl_basic.chapter_12.ui.list_friend.ListFriendActivity"
             android:exported="false" />
@@ -93,6 +108,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>

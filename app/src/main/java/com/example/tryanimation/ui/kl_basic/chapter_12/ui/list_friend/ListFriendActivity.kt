@@ -3,7 +3,6 @@ package com.example.tryanimation.ui.kl_basic.chapter_12.ui.list_friend
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityListFriendDbBinding
 import com.example.tryanimation.ui.kl_basic.chapter_12.data.database.FriendEntity
 import com.example.tryanimation.ui.kl_basic.chapter_12.data.database.MyDatabase
