@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.kl_basic.chapter_13.test_ui.gallery_and_camera.GalleryCameraActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_gallery"
-        style="@style/buttonClicked"
+<layout>
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.example.tryanimation.ui.kl_basic.chapter_13.test_ui.gallery_and_camera.GalleryCameraActivity" />
+
+        <variable
+            name="bitmapPhoto"
+            type="android.graphics.Bitmap" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="@dimen/dimens_15dp"
-        android:background="@drawable/ripple_btn_green"
-        android:text="Gallery" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.kl_basic.chapter_13.test_ui.gallery_and_camera.GalleryCameraActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_camera"
-        style="@style/buttonClicked"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="@dimen/dimens_15dp"
-        android:layout_marginBottom="@dimen/dimens_20dp"
-        android:background="@drawable/ripple_btn_purple"
-        android:text="Camera" />
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/buttonClicked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="@dimen/dimens_15dp"
+            android:background="@drawable/ripple_btn_green"
+            android:onClick="@{() -> activity.openGallery()}"
+            android:text="Gallery" />
 
-    <ImageView
-        android:id="@+id/iv_photo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/buttonClicked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="@dimen/dimens_15dp"
+            android:layout_marginBottom="@dimen/dimens_20dp"
+            android:background="@drawable/ripple_btn_purple"
+            android:onClick="@{() -> activity.openCamera()}"
+            android:text="Camera" />
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            imageBitmap="@{bitmapPhoto}"/>
+
+    </LinearLayout>
+
+</layout>
+

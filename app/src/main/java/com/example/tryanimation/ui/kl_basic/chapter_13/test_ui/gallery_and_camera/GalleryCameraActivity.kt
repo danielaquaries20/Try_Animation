@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.databinding.DataBindingUtil
+import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityGalleryCameraBinding
 import java.io.File
 import java.io.FileInputStream
@@ -26,7 +28,7 @@ class GalleryCameraActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
-                binding.ivPhoto.setImageBitmap(takenImage)
+                binding.bitmapPhoto = takenImage
             }
         }
 
@@ -49,14 +51,15 @@ class GalleryCameraActivity : AppCompatActivity() {
                 parcelFileDescriptor?.close()
 
                 val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
-                binding.ivPhoto.setImageBitmap(takenImage)
+                binding.bitmapPhoto = takenImage
             }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityGalleryCameraBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_gallery_camera)
+
+        binding.activity = this
 
         photoFile = try {
             creteImageFile()
@@ -65,17 +68,10 @@ class GalleryCameraActivity : AppCompatActivity() {
             return
         }
 
-        binding.btnCamera.setOnClickListener {
-            openCamera()
-        }
-
-        binding.btnGallery.setOnClickListener {
-            openGallery()
-        }
 
     }
 
-    private fun openCamera() {
+    fun openCamera() {
         val photoURI =
             FileProvider.getUriForFile(this, "com.example.tryanimation.fileprovider", photoFile)
 
@@ -91,7 +87,7 @@ class GalleryCameraActivity : AppCompatActivity() {
         }
     }
 
-    private fun openGallery() {
+    fun openGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         try {
             galleryLauncher.launch(galleryIntent)
