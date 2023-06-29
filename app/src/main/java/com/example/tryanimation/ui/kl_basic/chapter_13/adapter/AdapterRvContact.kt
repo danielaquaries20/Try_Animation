@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tryanimation.databinding.ItemDbFriendBinding
+import com.example.tryanimation.databinding.ItemTryAllBinding
 
 class AdapterRvContact(private val contacts: List<String>) :
     RecyclerView.Adapter<AdapterRvContact.ViewHolderRvContact>() {
@@ -14,15 +15,12 @@ class AdapterRvContact(private val contacts: List<String>) :
         viewType: Int,
     ): ViewHolderRvContact {
         val binding =
-            ItemDbFriendBinding.inflate(LayoutInflater.from(parent.context))
+            ItemTryAllBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolderRvContact(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolderRvContact, position: Int) {
-        holder.binding.tvName.visibility = View.VISIBLE
-        holder.binding.tvName.text = contacts[position]
-        holder.binding.tvHobby.visibility = View.GONE
-        holder.binding.tvSchool.visibility = View.GONE
+        holder.bind(contacts[position])
     }
 
     override fun getItemCount(): Int {
@@ -30,7 +28,12 @@ class AdapterRvContact(private val contacts: List<String>) :
     }
 
 
-    class ViewHolderRvContact(val binding: ItemDbFriendBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    class ViewHolderRvContact(val binding: ItemTryAllBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+            fun bind(value: String) {
+                binding.contactName = value
+                binding.executePendingBindings()
+            }
+        }
 
 }

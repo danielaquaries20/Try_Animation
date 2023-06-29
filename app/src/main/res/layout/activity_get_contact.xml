@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.kl_basic.chapter_13.test_ui.contact.GetContactActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_get_contact"
-        style="@style/buttonClicked"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="@dimen/dimens_15dp"
-        android:background="@drawable/ripple_btn_red"
-        android:text="Get Contact"/>
+<layout>
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.example.tryanimation.ui.kl_basic.chapter_13.test_ui.contact.GetContactActivity" />
+
+        <variable
+            name="contactAdapter"
+            type="com.example.tryanimation.ui.kl_basic.chapter_13.adapter.AdapterRvContact" />
+
+    </data>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_contacts"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/value_8dp"
         android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_db_friend" />
+        tools:context=".ui.kl_basic.chapter_13.test_ui.contact.GetContactActivity">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_get_contact"
+            style="@style/buttonClicked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="@dimen/dimens_15dp"
+            android:background="@drawable/ripple_btn_red"
+            android:onClick="@{() -> activity.askPermission()}"
+            android:text="Get Contact" />
 
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/value_8dp"
+            android:adapter="@{contactAdapter}"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_try_all" />
+
+
+    </LinearLayout>
+
+</layout>
+

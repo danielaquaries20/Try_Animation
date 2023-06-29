@@ -7,6 +7,8 @@ import android.provider.ContactsContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityGetContactBinding
 import com.example.tryanimation.ui.kl_basic.chapter_13.adapter.AdapterRvContact
 
@@ -16,23 +18,16 @@ class GetContactActivity : AppCompatActivity() {
 
     private val contacts = ArrayList<String>()
 
-    private var adapter: AdapterRvContact? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityGetContactBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_get_contact)
 
-        adapter = AdapterRvContact(contacts)
-        binding.rvContacts.adapter = adapter
-
-        binding.btnGetContact.setOnClickListener {
-            askPermission()
-        }
+        binding.activity = this
+        binding.contactAdapter = AdapterRvContact(contacts)
 
     }
 
-    private fun askPermission() {
+    fun askPermission() {
         val permissionResult =
             ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
 
@@ -61,9 +56,9 @@ class GetContactActivity : AppCompatActivity() {
         cur?.close()
 
         contacts.clear()
-        adapter?.notifyDataSetChanged()
+        binding.contactAdapter?.notifyDataSetChanged()
         contacts.addAll(listContact)
-        adapter?.notifyItemInserted(0)
+        binding.contactAdapter?.notifyItemInserted(0)
     }
 
     override fun onRequestPermissionsResult(
