@@ -39,13 +39,31 @@
         android:importantForAutofill="no"
         android:paddingHorizontal="@dimen/dimens_10dp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_save"
-        style="@style/buttonClicked"
-        android:layout_width="@dimen/dimen_100dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimens_12dp"
-        android:layout_marginTop="@dimen/dimens_25dp"
-        android:text="Simpan" />
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_save"
+            style="@style/buttonClicked"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimens_12dp"
+            android:layout_marginTop="@dimen/dimens_25dp"
+            android:text="Simpan" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_delete"
+            style="@style/buttonClicked"
+            android:visibility="gone"
+            android:background="@drawable/ripple_btn_red"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimens_12dp"
+            android:layout_marginTop="@dimen/dimens_25dp"
+            android:text="Hapus" />
+
+    </LinearLayout>
 
 </LinearLayout>

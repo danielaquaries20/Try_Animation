@@ -33,7 +33,15 @@ class RoomDatabaseActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        adapter = TryAdapterRvDatabase(listFriend)
+        adapter = TryAdapterRvDatabase(listFriend) { data ->
+            val toEdit = Intent(this, InsertDatabaseActivity::class.java).apply {
+                putExtra("name", data.name)
+                putExtra("school", data.school)
+                putExtra("hobby", data.hobby)
+                putExtra("id", data.id)
+            }
+            startActivity(toEdit)
+        }
         binding.rvListFriend.adapter = adapter
 
         binding.btnAdd.setOnClickListener {
