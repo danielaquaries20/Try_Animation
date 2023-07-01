@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tryanimation.databinding.ItemDbFriendBinding
 import com.example.tryanimation.ui.kl_basic.chapter_12.data.database.FriendEntity
 
-class AdapterRvFriendDb(private val items: List<FriendEntity>) :
+class AdapterRvFriendDb(private val items: List<FriendEntity>, val onClickItem : (FriendEntity) -> Unit) :
     RecyclerView.Adapter<AdapterRvFriendDb.ViewHolderFriendDb>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderFriendDb {
@@ -19,6 +19,8 @@ class AdapterRvFriendDb(private val items: List<FriendEntity>) :
         holder.binding.tvName.text = items[position].name
         holder.binding.tvSchool.text = items[position].school
         holder.binding.tvHobby.text = items[position].hobby
+
+        holder.itemView.setOnClickListener { onClickItem(items[position]) }
     }
 
     override fun getItemCount(): Int {

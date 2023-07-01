@@ -23,8 +23,10 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/drawable/shadow_bottom.xml" value="0.14" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_aa_try.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_add.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_add_friend.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_animation_one.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_bluetooth_connection.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_camera_gallery.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_chapter11_main.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_chapter12_main.xml" value="0.20615384615384616" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_chapter13_main.xml" value="0.209375" />
@@ -39,6 +41,7 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_gallery_camera.xml" value="0.20615384615384616" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_get_contact.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_insert_database.xml" value="0.20615384615384616" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_list_contact.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_list_friend.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_list_post.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/activity_list_user.xml" value="0.209375" />
@@ -96,9 +99,10 @@
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_rv_user.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_trial.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_trial_friend.xml" value="0.20615384615384616" />
-        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_try_all.xml" value="0.209375" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/layout/item_try_all.xml" value="0.24885496183206107" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/menu/menu_try_bottom_navigation.xml" value="0.209375" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/xml/file_provider.xml" value="0.20615384615384616" />
+        <entry key="..\:/Android Studio/AndroidProject/TryAnimation/app/src/main/res/xml/trial_file.xml" value="0.1" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/drawable-hdpi/green_circle.xml" value="0.14" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/drawable/green_circle.xml" value="0.14" />
         <entry key="..\:/Android Studio/AndroidProject/TryAnimation/calendar-module/src/main/res/layout/dialog_time_picker.xml" value="0.209375" />

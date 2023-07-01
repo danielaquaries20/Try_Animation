@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <variable
+            name="activtiy"
+            type="com.example.tryanimation.ui.kl_basic.chapter_13.ui.camera_gallery.CameraGalleryActivity" />
+
+        <variable
+            name="image"
+            type="android.graphics.Bitmap" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.kl_basic.chapter_13.ui.camera_gallery.CameraGalleryActivity">
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/buttonClicked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="@dimen/dimens_15dp"
+            android:background="@drawable/ripple_btn_green"
+            android:onClick="@{() -> activtiy.gallery()}"
+            android:text="Gallery" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/buttonClicked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="@dimen/dimens_15dp"
+            android:layout_marginBottom="@dimen/dimens_20dp"
+            android:background="@drawable/ripple_btn_purple"
+            android:onClick="@{() -> activtiy.camera()}"
+            android:text="Camera" />
+
+        <ImageView
+            imageBitmap="@{image}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</layout>
+

@@ -49,4 +49,15 @@
         android:layout_marginTop="@dimen/dimens_25dp"
         android:text="Simpan" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_delete"
+        style="@style/buttonClicked"
+        android:background="@drawable/ripple_btn_red"
+        android:layout_width="@dimen/dimen_100dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginHorizontal="@dimen/dimens_12dp"
+        android:layout_marginTop="@dimen/dimens_25dp"
+        android:text="Hapus" />
+
 </LinearLayout>

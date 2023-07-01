@@ -5,7 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TryAnimation">
+        <activity
+            android:name=".ui.kl_basic.chapter_13.ui.camera_gallery.CameraGalleryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kl_basic.chapter_13.ui.list_contact.ListContactActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.kl_basic.chapter_13.test_ui.gallery_and_camera.CameraActivity"
             android:exported="false" />
@@ -118,7 +126,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider" />
         </provider>
-
     </application>
 
 </manifest>
