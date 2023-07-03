@@ -21,6 +21,7 @@ import com.example.tryanimation.try_chat_app.TryChatActivity
 import com.example.tryanimation.try_evaluate_math.TryEvaluateMathActivity
 import com.example.tryanimation.try_signature_pad.TrySignaturePadActivity
 import com.example.tryanimation.try_smart_tab_layout.TrySmartTabLayoutActivity
+import com.example.tryanimation.try_web_view.TryWebMainActivity
 import com.example.tryanimation.try_web_view.WebViewMainActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
@@ -204,7 +205,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnTryWebView.setOnClickListener {
-            startActivity(Intent(this, WebViewMainActivity::class.java))
+            val toTest = Intent(this, TryWebMainActivity::class.java)
+            startActivity(toTest)
         }
         /*endregion*/
 
