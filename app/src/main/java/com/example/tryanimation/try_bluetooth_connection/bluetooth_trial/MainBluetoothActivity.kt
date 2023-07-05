@@ -18,7 +18,6 @@ import androidx.core.content.ContextCompat
 import com.crocodic.core.base.activity.CoreActivity
 import com.crocodic.core.base.adapter.CoreListAdapter
 import com.crocodic.core.extension.checkLocationPermission
-import com.crocodic.core.extension.snack
 import com.crocodic.core.extension.snacked
 import com.crocodic.core.extension.tos
 import com.example.tryanimation.R
@@ -316,9 +315,11 @@ class MainBluetoothActivity :
                 binding.root.snacked("CHAR_VALUE: $data and $hexString")
             }
         }
+
     }
     /*endregion*/
 
+    /*region Read Characteristic*/
     private lateinit var mGattCharacteristics: MutableList<BluetoothGattCharacteristic>
 
     private fun displayGattService(gattServices: List<BluetoothGattService>?) {
@@ -403,6 +404,7 @@ class MainBluetoothActivity :
         //Read: Index 20 -> {CHAR_VALUE: [B@ab425f3 and 01}
 
     }
+    /*endregion*/
 
     companion object {
         const val REQUEST_PERMISSION_BLUETOOTH = 200

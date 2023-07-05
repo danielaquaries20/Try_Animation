@@ -10,11 +10,12 @@ import kotlin.math.sin
 
 fun main() {
 //    println("Hello World!")
-    sampleZero()
-    sampleOne()
-    sampleTwo()
-    sampleThree()
-    sampleFour()
+
+    val byteArray = "Hello World".toByteArray(Charsets.UTF_8)
+    val str = byteArray.toString(Charsets.UTF_8)
+
+    println("Byte Array: $byteArray")
+    println("String: $str")
 }
 
 private fun sampleZero() {

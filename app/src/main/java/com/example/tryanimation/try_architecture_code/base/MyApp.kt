@@ -13,6 +13,7 @@ class MyApp : Application() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
