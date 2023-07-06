@@ -38,6 +38,9 @@
         android:theme="@style/Theme.TryAnimation"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".try_bluetooth_connection.bluetooth_trial.ble_library.BLELibsImplMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".try_web_view.TryWebMainActivity"
             android:exported="false" />
         <activity

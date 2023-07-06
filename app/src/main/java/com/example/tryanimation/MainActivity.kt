@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tryanimation.try_architecture_code.TryArchitectureCodeActivity
 import com.example.tryanimation.try_bluetooth_connection.BluetoothConnectionActivity
 import com.example.tryanimation.try_bluetooth_connection.bluetooth_trial.MainBluetoothActivity
+import com.example.tryanimation.try_bluetooth_connection.bluetooth_trial.ble_library.BLELibsImplMainActivity
 import com.example.tryanimation.try_bottom_navigation.TryBottomNavigationActivity
 import com.example.tryanimation.try_broadcast_receiver.TryReceiverActivity
 import com.example.tryanimation.try_chart.TryChartActivity
@@ -196,7 +197,8 @@ class MainActivity : AppCompatActivity() {
 
         btnTryCastBluetooth.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startActivity(Intent(this, MainBluetoothActivity::class.java))
+//                startActivity(Intent(this, MainBluetoothActivity::class.java))
+                startActivity(Intent(this, BLELibsImplMainActivity::class.java))
             } else {
                 Toast.makeText(this,
                     "Sorry, your Android Version is bellow O",

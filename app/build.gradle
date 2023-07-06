@@ -161,7 +161,7 @@ dependencies {
 
 
     //Fast BLE Library
-//    implementation 'com.github.Jasonchenlijian:FastBle:2.4.0'
+    implementation 'com.github.Jasonchenlijian:FastBle:2.4.0'
 
 
 }
