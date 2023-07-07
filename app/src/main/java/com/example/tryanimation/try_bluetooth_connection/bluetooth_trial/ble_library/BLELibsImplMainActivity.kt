@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothManager
-import android.bluetooth.le.BluetoothLeScanner
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -25,6 +24,7 @@ import com.clj.fastble.scan.BleScanRuleConfig
 import com.crocodic.core.base.activity.NoViewModelActivity
 import com.crocodic.core.base.adapter.CoreListAdapter
 import com.crocodic.core.extension.checkLocationPermission
+import com.crocodic.core.extension.openActivity
 import com.crocodic.core.extension.snacked
 import com.crocodic.core.extension.tos
 import com.example.tryanimation.R
@@ -42,10 +42,10 @@ class BLELibsImplMainActivity :
     private lateinit var bleManager: BleManager
     private var bluetoothAdapter: BluetoothAdapter? = null
 
-    private var bluetoothLeScanner: BluetoothLeScanner? = null
+    //    private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var isScanning = false
 
-    private var bluetoothGatt: BluetoothGatt? = null
+    //    private var bluetoothGatt: BluetoothGatt? = null
     private var isConnectGatt = false
 
     private val listBoundedDevice = ArrayList<BluetoothDevice?>()
@@ -69,6 +69,7 @@ class BLELibsImplMainActivity :
         }
     /*endregion*/
 
+    /*region Lifecycle Activity*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -94,7 +95,9 @@ class BLELibsImplMainActivity :
             bleManager.destroy()
         }
     }
+    /*endregion*/
 
+    /*region Init Function*/
     override fun onClick(v: View?) {
         super.onClick(v)
         when (v) {
@@ -140,7 +143,7 @@ class BLELibsImplMainActivity :
     private fun initBleManager() {
         Timber.tag(TAG).d("INIT_BLE_MANAGER")
         bleManager = BleManager.getInstance()
-        bleManager.init(application)
+//        bleManager.init(application)
 
         bleManager
             .enableLog(true)
@@ -157,6 +160,7 @@ class BLELibsImplMainActivity :
 
         checkBluetooth()
     }
+    /*endregion*/
 
     /*region Check and Enable Bluetooth*/
     private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
@@ -302,6 +306,9 @@ class BLELibsImplMainActivity :
                 binding.root.snacked("Success to connect Device ${bleDevice?.device?.name}")
                 val services = bleManager.getBluetoothGattServices(bleDevice)
                 Timber.tag(CONNECT_DEVICE).d("LIST_SERVICE: $services")
+                openActivity<BLEDetailServiceActivity> {
+                    putExtra(KEY_DEVICE, bleDevice)
+                }
             }
 
             override fun onDisConnected(
@@ -324,5 +331,7 @@ class BLELibsImplMainActivity :
         const val TAG = "BLELibsImplMainActivity"
         const val SCAN_DEVICE = "SCAN_DEVICE"
         const val CONNECT_DEVICE = "CONNECT_DEVICE"
+
+        const val KEY_DEVICE = "device"
     }
 }
