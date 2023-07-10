@@ -45,7 +45,7 @@ class BLELibsImplMainActivity :
     //    private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var isScanning = false
 
-    //    private var bluetoothGatt: BluetoothGatt? = null
+//    private var bluetoothGatt: BluetoothGatt? = null
     private var isConnectGatt = false
 
     private val listBoundedDevice = ArrayList<BluetoothDevice?>()
@@ -58,7 +58,8 @@ class BLELibsImplMainActivity :
             val bleDevice = bleManager.convertBleDevice(data)
             Timber.tag(CONNECT_DEVICE).d("Device: ${data?.name}")
             Timber.tag(CONNECT_DEVICE).d("BleDevice: ${bleDevice?.device?.name}")
-            connectGatt(bleDevice)
+//            connectGatt(bleDevice)
+            toConnectDevice(bleDevice)
         }
 
     @SuppressLint("MissingPermission")
@@ -322,6 +323,12 @@ class BLELibsImplMainActivity :
         }
         bleManager.connect(device, connectGattCallback)
 
+    }
+
+    private fun toConnectDevice(device: BleDevice) {
+        openActivity<BLEDetailServiceActivity> {
+            putExtra(KEY_DEVICE, device)
+        }
     }
 
     /*endregion*/

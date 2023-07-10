@@ -9,17 +9,36 @@
         android:orientation="vertical"
         tools:context=".try_bluetooth_connection.bluetooth_trial.ble_library.BLEDetailServiceActivity">
 
-        <TextView
-            android:id="@+id/tv_title"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/gray600"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="16dp"
-            android:text="BLE Device"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp"
+                android:text="BLE Device"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/iv_read_desc"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="16dp"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone"
+                android:src="@drawable/ic_tap_anywhere"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
 
         <ExpandableListView
             android:id="@+id/elv_service_characteristic"
