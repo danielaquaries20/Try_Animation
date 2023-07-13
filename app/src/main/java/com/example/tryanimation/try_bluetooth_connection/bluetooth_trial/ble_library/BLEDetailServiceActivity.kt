@@ -21,6 +21,8 @@ import com.crocodic.core.extension.tos
 import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityBledetailServiceBinding
 import timber.log.Timber
+import java.util.*
+import kotlin.collections.ArrayList
 
 class BLEDetailServiceActivity :
     NoViewModelActivity<ActivityBledetailServiceBinding>(R.layout.activity_bledetail_service) {
@@ -78,8 +80,8 @@ class BLEDetailServiceActivity :
         }
         binding.tvTitle.text = "Device: ${bleDevice?.device?.name}"
 
-        connectGatt()
-//        connectGattManual()
+//        connectGatt()
+        connectGattManual()
     }
 
     private fun initExpandableList() {
@@ -87,8 +89,8 @@ class BLEDetailServiceActivity :
             mapCharacteristic) { service, characteristic ->
             Timber.tag(TAG)
                 .d("SERVICE: $service, CHARACTERISTIC: $characteristic")
-            readCharacteristic(service, characteristic!!)
-//            readCharacteristicManual(characteristic!!)
+//            readCharacteristic(service, characteristic!!)
+            readCharacteristicManual(characteristic!!)
         }
         binding.elvServiceCharacteristic.setAdapter(expandableListAdapter)
     }
@@ -130,28 +132,17 @@ class BLEDetailServiceActivity :
             Timber.tag("CharacteristicGatt").d("CHARACTERISTIC: $characteristic")
             isRead = true
             loadingDialog.dismiss()
-            /*val data: ByteArray? = characteristic?.value
+            val data: ByteArray? = characteristic?.value
             if (data?.isNotEmpty() == true) {
                 val hexString: String = data.joinToString(separator = " ") {
                     String.format("%02X", it)
                 }
-                Timber.tag("CharacteristicGatt").d("CHAR_VALUE: $data and $hexString")
+                Timber.tag(TAG_CHARACTERISTIC_READ).d("CHAR_VALUE: $data and $hexString")
+                Timber.tag(TAG_CHARACTERISTIC_READ).d("CHAR_UUID: ${characteristic.uuid}")
                 binding.root.snacked("CHAR_VALUE: $data and $hexString")
+            }
 
-                val nilai1 = data.toString(Charsets.UTF_8)
-                val nilai2 = data.toString(Charsets.UTF_16)
-                val nilai3 = data.toString(Charsets.UTF_32)
-                val nilai4 = data.toString(Charsets.UTF_16BE)
-                val nilai5 = data.toString(Charsets.UTF_16LE)
-                val nilai6 = data.toString(Charsets.UTF_32BE)
-                val nilai7 = data.toString(Charsets.UTF_32LE)
-                val nilai8 = data.toString(Charsets.ISO_8859_1)
-                val nilai9 = data.toString(Charsets.US_ASCII)
-                Timber.tag(TAG)
-                    .d("Nilai1: $nilai1, Nilai2: $nilai2, Nilai3: $nilai3, Nilai4: $nilai4, Nilai5: $nilai5, Nilai6: $nilai6, Nilai7: $nilai7, Nilai8: $nilai8, Nilai9: $nilai9")
-            }*/
-
-            if (characteristic != null) {
+            /*if (characteristic != null) {
                 val flag = characteristic.properties
                 val format = when (flag and 0x01) {
                     0x01 -> {
@@ -167,7 +158,7 @@ class BLEDetailServiceActivity :
                 Timber.tag(TAG).d("Received heart rate: %d", heartRate)
 
                 binding.root.snacked("VALUE: $heartRate")
-            }
+            }*/
         }
 
         override fun onCharacteristicChanged(
@@ -275,9 +266,19 @@ class BLEDetailServiceActivity :
 
         binding.ivReadDesc.apply {
             visibility = View.VISIBLE
-            setOnClickListener { readDesc() }
+            setOnClickListener { checkUUID(listCharacteristic) }
         }
 
+    }
+
+    private fun checkUUID(chars: List<BluetoothGattCharacteristic>) {
+        val uuidHearRate = UUID.fromString(STRING_UUID_HEART_RATE_CHAR)
+        val charHearRate = chars.firstOrNull{char ->
+            char.uuid == uuidHearRate
+        }
+
+        binding.root.snacked("CHAR_HEART_RATE: $charHearRate, ${charHearRate?.uuid}")
+        Timber.tag(TAG).d("CHAR_HEART_RATE: $charHearRate, ${charHearRate?.uuid}")
     }
 
     private fun readDesc() {
@@ -413,7 +414,7 @@ class BLEDetailServiceActivity :
         val readCallback = object : BleReadCallback() {
             override fun onReadSuccess(data: ByteArray?) {
                 loadingDialog.dismiss()
-                val flag = characteristic.properties
+                /*val flag = characteristic.properties
                 val format = when (flag and 0x01) {
                     0x01 -> {
                         Timber.tag(TAG).d("Heart rate format UINT16.")
@@ -427,27 +428,17 @@ class BLEDetailServiceActivity :
                 val heartRate = characteristic.getIntValue(format, 1)
                 Timber.tag(TAG).d("Received heart rate: %d", heartRate)
 
-                binding.root.snacked("VALUE: $heartRate")
+                binding.root.snacked("VALUE: $heartRate")*/
 
-                /*if (data?.isNotEmpty() == true) {
+
+                if (data?.isNotEmpty() == true) {
                     val hexString: String = data.joinToString(separator = " ") {
                         String.format("%02X", it)
                     }
-                Timber.tag("CharacteristicGatt").d("CHAR_VALUE: $data and $hexString")
+                Timber.tag(TAG_CHARACTERISTIC_READ).d("CHAR_VALUE: ${data.contentToString()} and $hexString")
+                Timber.tag(TAG_CHARACTERISTIC_READ).d("CHAR_UUID: ${characteristic.uuid}")
                     binding.root.snacked("CHAR_VALUE: $data and $hexString")
-
-                    val nilai1 = data.toString(Charsets.UTF_8)
-                    val nilai2 = data.toString(Charsets.UTF_16)
-                    val nilai3 = data.toString(Charsets.UTF_32)
-                    val nilai4 = data.toString(Charsets.UTF_16BE)
-                    val nilai5 = data.toString(Charsets.UTF_16LE)
-                    val nilai6 = data.toString(Charsets.UTF_32BE)
-                    val nilai7 = data.toString(Charsets.UTF_32LE)
-                    val nilai8 = data.toString(Charsets.ISO_8859_1)
-                    val nilai9 = data.toString(Charsets.US_ASCII)
-                    Timber.tag(TAG)
-                        .d("Nilai1: $nilai1, Nilai2: $nilai2, Nilai3: $nilai3, Nilai4: $nilai4, Nilai5: $nilai5, Nilai6: $nilai6, Nilai7: $nilai7, Nilai8: $nilai8, Nilai9: $nilai9")
-                }*/
+                }
             }
 
             override fun onReadFailure(exception: BleException?) {
@@ -468,44 +459,15 @@ class BLEDetailServiceActivity :
 
     }
 
-    private fun reconnect() {
-        loadingDialog.dismiss()
-        val connectBleCallback = object : BleGattCallback() {
-            override fun onStartConnect() {
-                Timber.tag(TAG).d("onStartConnect")
-                loadingDialog.show("Reconnecting...")
-            }
-
-            override fun onConnectFail(device: BleDevice?, exception: BleException?) {
-                loadingDialog.dismiss()
-                Timber.tag(TAG).d("onConnectFail: $exception")
-            }
-
-            override fun onConnectSuccess(device: BleDevice?, gatt: BluetoothGatt?, status: Int) {
-                loadingDialog.dismiss()
-                Timber.tag(TAG).d("onConnectSuccess: $device")
-            }
-
-            override fun onDisConnected(
-                isActiveDisConnected: Boolean,
-                device: BleDevice?,
-                gatt: BluetoothGatt?,
-                status: Int,
-            ) {
-                loadingDialog.dismiss()
-                Timber.tag(TAG).d("onDisConnected: $device")
-            }
-        }
-
-        BleManager.getInstance().connect(bleDevice, connectBleCallback)
-
-    }
-
     /*endregion*/
 
     companion object {
         const val TAG = "BLEDetailServiceActivity_TAG"
+        const val TAG_CHARACTERISTIC_READ = "CHARACTERISTIC_READ"
 
         const val TIME_LOADING = 10000L
+
+        const val STRING_UUID_HEART_RATE_CHAR = "00002A37-0000-1000-8000-00805F9B34FB"
+        const val STRING_UUID_SPO_2_CHAR = "00002A5C-0000-1000-8000-00805F9B34FB"
     }
 }

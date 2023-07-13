@@ -9,13 +9,24 @@ import kotlin.math.sin
 
 
 fun main() {
-//    println("Hello World!")
+    println("Hello World!\n\n")
 
-    val byteArray = "Hello World".toByteArray(Charsets.UTF_8)
-    val str = byteArray.toString(Charsets.UTF_8)
+    sampleByte()
+}
 
-    println("Byte Array: $byteArray")
-    println("String: $str")
+private fun sampleByte() {
+//    val byteArray = "Hello World".toByteArray(Charsets.UTF_8)
+//    val str = byteArray.toString(Charsets.UTF_8)
+//    println("Byte Array: $byteArray")
+//    println("String: $str")
+
+    val byteArray = byteArrayOf(0x48, 0x65, 0x6C, 0x6C, 0x6F)
+
+    byteArray.forEach { byte ->
+        println("BYTE: $byte")
+    }
+
+
 }
 
 private fun sampleZero() {
