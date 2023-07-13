@@ -14,8 +14,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dimens_12dp">
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_100dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/dimens_12dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/honkai_impact_3rd"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_photo_profile_1_1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,6 +38,8 @@
                 android:id="@+id/tv_name"
                 style="@style/textStart"
                 android:layout_width="match_parent"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_height="wrap_content"
                 android:text="Name"
                 android:textSize="@dimen/text_large" />
@@ -38,6 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="School"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textSize="@dimen/text_default" />
 
             <TextView
@@ -46,6 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hobby"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textSize="@dimen/text_default" />
 
         </LinearLayout>

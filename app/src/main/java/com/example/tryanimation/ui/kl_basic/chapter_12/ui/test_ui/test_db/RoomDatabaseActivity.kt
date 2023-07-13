@@ -38,6 +38,7 @@ class RoomDatabaseActivity : AppCompatActivity() {
                 putExtra("name", data.name)
                 putExtra("school", data.school)
                 putExtra("hobby", data.hobby)
+                putExtra("photo", data.photo)
                 putExtra("id", data.id)
             }
             startActivity(toEdit)

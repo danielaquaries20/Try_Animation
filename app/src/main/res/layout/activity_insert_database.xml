@@ -6,6 +6,21 @@
     android:orientation="vertical"
     tools:context=".ui.kl_basic.chapter_12.ui.test_ui.test_db.InsertDatabaseActivity">
 
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/value_16dp"
+        android:adjustViewBounds="true"
+        android:background="?selectableItemBackground"
+        android:foreground="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/honkai_impact_3rd"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder_photo_profile_1_1" />
+
     <EditText
         android:id="@+id/et_name"
         style="@style/etCapWords"

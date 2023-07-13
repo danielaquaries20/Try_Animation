@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tryanimation.databinding.ItemTryListDatabaseBinding
 import com.example.tryanimation.ui.kl_basic.chapter_12.data.test_data.room_database.TryFriendEntity
+import com.example.tryanimation.ui.kl_basic.chapter_12.ui.test_ui.test_helper.TestBitmapHelper
 
 class TryAdapterRvDatabase(private val items: List<TryFriendEntity>, val onClickItem: (TryFriendEntity) -> Unit) :
     RecyclerView.Adapter<TryAdapterRvDatabase.TryViewHolderRvDatabase>() {
@@ -19,6 +20,11 @@ class TryAdapterRvDatabase(private val items: List<TryFriendEntity>, val onClick
         holder.binding.tvName.text = items[position].name
         holder.binding.tvSchool.text = items[position].school
         holder.binding.tvHobby.text = items[position].hobby
+
+        val photoProfile =
+            TestBitmapHelper().decodeBase64(holder.binding.root.context, items[position].photo)
+
+        if (photoProfile != null) holder.binding.ivPhoto.setImageBitmap(photoProfile)
 
         holder.itemView.setOnClickListener { onClickItem(items[position]) }
     }
