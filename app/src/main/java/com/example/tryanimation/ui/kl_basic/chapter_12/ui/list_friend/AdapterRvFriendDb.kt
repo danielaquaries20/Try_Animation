@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tryanimation.databinding.ItemDbFriendBinding
 import com.example.tryanimation.ui.kl_basic.chapter_12.data.database.FriendEntity
+import com.example.tryanimation.ui.kl_basic.chapter_12.utils.MyBitmapHelper
 
 class AdapterRvFriendDb(private val items: List<FriendEntity>, val onClickItem : (FriendEntity) -> Unit) :
     RecyclerView.Adapter<AdapterRvFriendDb.ViewHolderFriendDb>() {
@@ -19,6 +20,9 @@ class AdapterRvFriendDb(private val items: List<FriendEntity>, val onClickItem :
         holder.binding.tvName.text = items[position].name
         holder.binding.tvSchool.text = items[position].school
         holder.binding.tvHobby.text = items[position].hobby
+
+        val bitmapPhoto = MyBitmapHelper().decodeBase64(holder.binding.root.context, items[position].photo)
+        if (bitmapPhoto != null) holder.binding.ivPhoto.setImageBitmap(bitmapPhoto)
 
         holder.itemView.setOnClickListener { onClickItem(items[position]) }
     }

@@ -8,6 +8,7 @@ data class FriendEntity(
     var name : String,
     var school : String,
     var hobby : String,
+    var photo : String? = null,
 ) {
     @PrimaryKey(autoGenerate = true)
     var id : Int = 0
