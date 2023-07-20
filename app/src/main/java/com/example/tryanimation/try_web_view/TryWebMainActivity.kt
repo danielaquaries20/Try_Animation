@@ -35,6 +35,16 @@ class TryWebMainActivity :
             startActivity(toWeb)
         }
 
+        binding.btnLocation.setOnClickListener {
+            val url = "https://mylocation.org/"
+            val toWeb = Intent(this, WebViewMainActivity::class.java).apply {
+                putExtra(WebViewMainActivity.URL_WEB_KEY, url)
+                putExtra(WebViewMainActivity.IS_LOCATION, true)
+            }
+            startActivity(toWeb)
+        }
+
+
 
     }
 }
