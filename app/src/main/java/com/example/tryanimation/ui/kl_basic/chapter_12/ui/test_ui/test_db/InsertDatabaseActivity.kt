@@ -8,15 +8,20 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.tryanimation.databinding.ActivityInsertDatabaseBinding
 import com.example.tryanimation.ui.kl_basic.chapter_12.data.test_data.room_database.TryFriendEntity
 import com.example.tryanimation.ui.kl_basic.chapter_12.data.test_data.room_database.TryMyDatabase
 import com.example.tryanimation.ui.kl_basic.chapter_12.ui.test_ui.test_helper.TestBitmapHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileInputStream
@@ -27,13 +32,16 @@ class InsertDatabaseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityInsertDatabaseBinding
 
+    private var isEdit = false
+    private var idFriend = 0
+
     private lateinit var myDatabase: TryMyDatabase
 
     private var dataFriend: TryFriendEntity? = null
 
     private lateinit var photoFile: File
 
-    private var photoProfile : String? = null
+    private var photoProfile: String? = null
 
     private var galleryLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -60,10 +68,24 @@ class InsertDatabaseActivity : AppCompatActivity() {
             }
         }
 
+    private var cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
+                binding.ivPhoto.setImageBitmap(takenImage)
+
+                photoProfile = TestBitmapHelper().encodeToBase64(takenImage)
+            }
+        }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInsertDatabaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        isEdit = intent.getBooleanExtra("isEdit", false)
+        idFriend = intent.getIntExtra("id", 0)
 
         myDatabase = TryMyDatabase.getInstance(this)
 
@@ -73,14 +95,7 @@ class InsertDatabaseActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.btnSave.setOnClickListener { saveData() }
-        binding.ivPhoto.setOnClickListener { openGallery() }
-
-        dataFriend = TryFriendEntity(intent.getStringExtra("name"),
-            intent.getStringExtra("school"),
-            intent.getStringExtra("hobby"),
-            intent.getStringExtra("photo")).apply {
-            id = intent.getIntExtra("id", 0)
-        }
+        binding.ivPhoto.setOnClickListener { showDialogPhoto() }
 
         photoFile = try {
             creteImageFile()
@@ -89,22 +104,32 @@ class InsertDatabaseActivity : AppCompatActivity() {
             return
         }
 
-        if (isEdit()) {
-            photoProfile = dataFriend?.photo
-            val photoBitmap = TestBitmapHelper().decodeBase64(this, photoProfile)
-            if (photoBitmap != null) binding.ivPhoto.setImageBitmap(photoBitmap)
-
-            binding.etName.setText(dataFriend?.name)
-            binding.etSchool.setText(dataFriend?.school)
-            binding.etHobby.setText(dataFriend?.hobby)
-            binding.btnDelete.visibility = View.VISIBLE
-            binding.btnDelete.setOnClickListener { deleteFriend() }
-        }
-
+        isEditState()
     }
 
-    private fun isEdit() : Boolean {
-        return dataFriend != null && dataFriend?.id != 0
+    private fun isEditState() {
+        if (isEdit) {
+            lifecycleScope.launch {
+                launch {
+                    myDatabase.tryFriendDao().getDataById(idFriend).collect {
+                        Log.d("CheckData", "DATA: $it")
+                        dataFriend = it
+                        photoProfile = it?.photo
+                        val photoBitmap =
+                            TestBitmapHelper().decodeBase64(this@InsertDatabaseActivity,
+                                photoProfile)
+                        if (photoBitmap != null) binding.ivPhoto.setImageBitmap(photoBitmap)
+
+                        binding.etName.setText(it?.name)
+                        binding.etSchool.setText(it?.school)
+                        binding.etHobby.setText(it?.hobby)
+                        binding.btnDelete.visibility = View.VISIBLE
+                        binding.btnDelete.setOnClickListener { deleteFriend() }
+                    }
+                }
+            }
+        }
+
     }
 
     private fun deleteFriend() {
@@ -132,6 +157,21 @@ class InsertDatabaseActivity : AppCompatActivity() {
         }
     }
 
+    private fun showDialogPhoto() {
+        val builder = AlertDialog.Builder(this)
+        val arrayChoose = arrayOf("Dari kamera", "Pilih di gallery")
+        builder.setTitle("Memasukkan photo")
+        builder.setItems(arrayChoose) { _, index ->
+            when (index) {
+                0 -> openCamera()
+                1 -> openGallery()
+            }
+        }
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
+    }
+
     private fun saveData() {
         val name = binding.etName.text.trim().toString()
         val school = binding.etSchool.text.trim().toString()
@@ -153,7 +193,7 @@ class InsertDatabaseActivity : AppCompatActivity() {
         }
 
 
-        if (isEdit()) {
+        if (isEdit) {
             if (dataFriend?.name == name && dataFriend?.school == school && dataFriend?.hobby == hobby) {
                 Toast.makeText(this, "Tidak ada perubahan data", Toast.LENGTH_SHORT).show()
             } else {
@@ -162,7 +202,8 @@ class InsertDatabaseActivity : AppCompatActivity() {
                 }
                 lifecycleScope.launch {
                     myDatabase.tryFriendDao().update(updatedFriend)
-                    Toast.makeText(this@InsertDatabaseActivity, "Updated", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@InsertDatabaseActivity, "Updated", Toast.LENGTH_SHORT)
+                        .show()
                     finish()
                 }
             }
@@ -187,6 +228,23 @@ class InsertDatabaseActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
+    private fun openCamera() {
+        val photoURI =
+            FileProvider.getUriForFile(this, "com.example.tryanimation.fileprovider", photoFile)
+
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+            putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+        }
+
+        try {
+            cameraLauncher.launch(cameraIntent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "Cannot use Camera", Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
+        }
+    }
+
 
     @Throws(IOException::class)
     private fun creteImageFile(): File {

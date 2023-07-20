@@ -1,6 +1,7 @@
 package com.example.tryanimation.ui.kl_basic.chapter_12.data.test_data.room_database
 
 import androidx.room.*
+import com.example.tryanimation.ui.kl_basic.chapter_12.data.database.FriendEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -18,4 +19,6 @@ interface TryFriendDao {
     @Delete
     suspend fun delete(friend: TryFriendEntity)
 
+    @Query("SELECT * FROM TryFriendEntity WHERE id = :id LIMIT 1")
+    fun getDataById(id: Int) : Flow<TryFriendEntity?>
 }

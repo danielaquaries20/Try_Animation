@@ -18,4 +18,7 @@ interface FriendDao {
     @Query("SELECT * FROM FriendEntity")
     fun getAll() : Flow<List<FriendEntity>>
 
+    @Query("SELECT * FROM FriendEntity WHERE id = :id LIMIT 1")
+    fun getDataById(id: Int) : Flow<FriendEntity?>
+
 }
