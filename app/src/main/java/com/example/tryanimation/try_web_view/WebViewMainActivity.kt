@@ -25,14 +25,12 @@ class WebViewMainActivity :
     private var fileUploadCallback: ValueCallback<Array<Uri>>? = null
 
     private var mRequest: PermissionRequest? = null
-
     val cameraPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) {
                 mRequest?.grant(mRequest?.resources)
             }
         }
-
 
     var mGeoLocationRequestOrigin: String? = null
     var mGeoLocationCallback: GeolocationPermissions.Callback? = null
@@ -147,6 +145,8 @@ class WebViewMainActivity :
             callback: GeolocationPermissions.Callback?,
         ) {
             super.onGeolocationPermissionsShowPrompt(origin, callback)
+//            callback!!.invoke(origin, true, true)
+
             if (ContextCompat.checkSelfPermission(
                     this@WebViewMainActivity,
                     Manifest.permission.ACCESS_FINE_LOCATION
