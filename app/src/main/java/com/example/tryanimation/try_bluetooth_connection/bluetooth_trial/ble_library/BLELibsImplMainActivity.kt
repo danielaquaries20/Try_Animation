@@ -2,16 +2,14 @@ package com.example.tryanimation.try_bluetooth_connection.bluetooth_trial.ble_li
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothGatt
-import android.bluetooth.BluetoothManager
+import android.bluetooth.*
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -36,9 +34,10 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class BLELibsImplMainActivity :
-    NoViewModelActivity<ActivityBluetoothConnectionBinding>(R.layout.activity_bluetooth_connection) {
+    NoViewModelActivity<ActivityBluetoothConnectionBinding>(R.layout.activity_bluetooth_connection), Runnable {
 
-    /*region Varible we need*/
+    /*region Variable we need*/
+    val handler = Handler(Looper.getMainLooper())
     private lateinit var bleManager: BleManager
     private var bluetoothAdapter: BluetoothAdapter? = null
 
@@ -49,6 +48,7 @@ class BLELibsImplMainActivity :
     private var isConnectGatt = false
 
     private val listBoundedDevice = ArrayList<BluetoothDevice?>()
+    private var countBoundedDevice = 0
     private val listScannedDevice = ArrayList<BluetoothDevice?>()
 
     @SuppressLint("MissingPermission")
@@ -67,10 +67,22 @@ class BLELibsImplMainActivity :
         CoreListAdapter<ItemBluetoothDetectedBinding, BluetoothDevice>(R.layout.item_bluetooth_detected).initItem(
             listScannedDevice) { _, data ->
             data?.createBond()
+            handler.post(this)
         }
+
     /*endregion*/
 
     /*region Lifecycle Activity*/
+    override fun run() {
+        if (countBoundedDevice == listBoundedDevice.size) {
+            handler.postDelayed(this, DELAY_GET_DEVICE)
+            getDevices()
+        } else {
+            countBoundedDevice = listBoundedDevice.size
+            handler.removeCallbacks(this)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -134,6 +146,7 @@ class BLELibsImplMainActivity :
         Timber.tag(TAG).d("INIT_REFRESH")
         binding.refreshData.setOnRefreshListener {
             getDevices()
+            countBoundedDevice = listBoundedDevice.size
             Handler(Looper.getMainLooper()).postDelayed({
                 binding.refreshData.isRefreshing = false
             }, MainBluetoothActivity.TIME_REFRESH)
@@ -167,11 +180,18 @@ class BLELibsImplMainActivity :
     private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
 
     private fun checkBluetooth() {
-        packageManager.takeIf { it.missingSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE) }
+        /*packageManager.takeIf { it.missingSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE) }
             ?.also {
                 tos("Device does not support Bluetooth therefore this application cannot run.")
                 return
-            }
+            }*/
+
+        if (packageManager.missingSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            tos("Device does not support Bluetooth therefore this application cannot run.")
+            finish()
+            return
+        }
+
 
         val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
         bluetoothAdapter = bluetoothManager.adapter
@@ -209,6 +229,7 @@ class BLELibsImplMainActivity :
                 if (result.resultCode == RESULT_OK) {
                     getDevices()
                     scanLeDevice()
+                    countBoundedDevice = listBoundedDevice.size
                 } else {
                     tos("This application cannot run because Bluetooth is not enabled, please enable your bluetooth")
                     finish()
@@ -217,6 +238,7 @@ class BLELibsImplMainActivity :
         } else {
             getDevices()
             scanLeDevice()
+            countBoundedDevice = listBoundedDevice.size
         }
 
         initRefresh()
@@ -340,5 +362,7 @@ class BLELibsImplMainActivity :
         const val CONNECT_DEVICE = "CONNECT_DEVICE"
 
         const val KEY_DEVICE = "device"
+        const val DELAY_GET_DEVICE = 2000L
     }
+
 }
