@@ -12,7 +12,10 @@ class TryWebMainActivity :
         super.onCreate(savedInstanceState)
 
         binding.btnFileChooser.setOnClickListener {
-            val url = "https://postimages.org/id/"
+//            val url = "https://postimages.org/id/"
+            val url = "https://pickerwheel.com/tools/random-image-generator/"
+//            val url = "https://store-visit-service.app.reprime.id/app/to"
+//            val url = "https://store-visit-service.app.reprime.id/app/?lat=-7.0642874&long=110.4164804"
             val toWeb = Intent(this, WebViewMainActivity::class.java).apply {
                 putExtra(WebViewMainActivity.URL_WEB_KEY, url)
             }

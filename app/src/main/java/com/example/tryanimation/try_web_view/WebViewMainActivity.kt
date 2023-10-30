@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.net.http.SslError
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.webkit.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,6 +17,7 @@ import com.crocodic.core.extension.checkLocationPermission
 import com.crocodic.core.extension.tos
 import com.example.tryanimation.R
 import com.example.tryanimation.databinding.ActivityWebViewMainBinding
+
 
 class WebViewMainActivity :
     NoViewModelActivity<ActivityWebViewMainBinding>(R.layout.activity_web_view_main) {
@@ -113,6 +115,8 @@ class WebViewMainActivity :
             fileUploadCallback = filePathCallback
 
             val chooserIntent = fileChooserParams?.createIntent()
+            chooserIntent?.type = "image/*"
+            chooserIntent?.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             try {
                 startActivityForResult(chooserIntent, FILE_CHOOSER_REQUEST_CODE)
             } catch (e: Exception) {
@@ -194,8 +198,24 @@ class WebViewMainActivity :
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == FILE_CHOOSER_REQUEST_CODE) {
             if (fileUploadCallback != null) {
-                val results = WebChromeClient.FileChooserParams.parseResult(resultCode, data)
-                fileUploadCallback?.onReceiveValue(results)
+                val clipData = data?.clipData
+                val uris = ArrayList<Uri>()
+                try {
+                    if (resultCode == RESULT_OK) {
+                        if (clipData != null ){
+                            for (i in 0 until clipData.itemCount) {
+                                val imageUri = clipData.getItemAt(i).uri
+                                uris.add(imageUri)
+                            }
+                        } else {
+                            val imageUri = data?.data
+                            imageUri?.let { uris.add(it) }
+                        }
+                    }
+                } catch (e:Exception) {
+                    e.printStackTrace()
+                }
+                fileUploadCallback?.onReceiveValue(uris.toTypedArray())
                 fileUploadCallback = null
             }
         }
